@@ -1,0 +1,75 @@
+# Visual Studio / .NET artifacts
+.vs/
+.vscode/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Build output
+[Bb]in/
+[Oo]bj/
+build/
+Debug/
+Release/
+x64/
+x86/
+
+# NuGet
+packages/
+*.nupkg
+.nuget/
+project.lock.json
+packages.config
+
+# Rider / JetBrains
+.idea/
+*.sln.iml
+_ReSharper*/
+*.DotSettings.user
+
+# Visual Studio project files
+*.csproj.user
+*.vcxproj.user
+*.dbmdl
+
+# Publish and profiling
+PublishProfiles/
+*.Publish.xml
+*.publishsettings
+*.psess
+*.vsp
+
+# Test results
+TestResults/
+*.trx
+*.coverage
+*.coveragexml
+
+# IIS Express config (user-local)
+.vs/config/applicationhost.config
+
+# Database files
+*.mdf
+*.ldf
+*.ndf
+*.sqlite
+*.db
+
+# Logs, caches, temp
+*.log
+*.cache
+*.tmp
+*.bak
+
+# Node / front-end
+node_modules/
+bower_components/
+
+# Misc
+Thumbs.db
+.DS_Store
+
+# Optional: user-specific IDE files
+*.ide.*
+*.suo
