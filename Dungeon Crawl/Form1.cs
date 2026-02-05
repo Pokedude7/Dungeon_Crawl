@@ -12,6 +12,7 @@ namespace Dungeon_Crawl
 {
     public partial class Form1 : Form
     {
+        //This is a test comment
         public Form1()
         {
             InitializeComponent();
