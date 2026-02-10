@@ -82,5 +82,9 @@
   <ItemGroup>
     <EmbeddedResource Include="PlaceholderCharacter_DungeonCrawl.png" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="InventoryScreenTemp_DungeonCrawl.png" />
+    <EmbeddedResource Include="InventorySquareTemp_DungeonCrawl.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

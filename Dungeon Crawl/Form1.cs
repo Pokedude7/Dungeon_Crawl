@@ -13,14 +13,17 @@ namespace Dungeon_Crawl
         string reopenMenu = null;
         //Character sprite image
         Image CS = Image.FromFile("../../PlaceholderCharacter_DungeonCrawl.png");
+        //Inventory square sprite
+        Image ISq = Image.FromFile("../../InventorySquareTemp_DungeonCrawl.png");
+        //Inventory screen sprite
+        Image ISc = Image.FromFile("../../InventoryScreenTemp_DungeonCrawl.png");
         bool inGame = false;
+        bool inventoryOpen = false;
         int pX = 100;
         int pY = 100;
 
-        bool movingUp = false;
-        bool movingDown = false;
-        bool movingLeft = false;
-        bool movingRight = false;
+        int upDownMove = 0;
+        int sideMove = 0;
 
 
         public Form1()
@@ -67,17 +70,27 @@ namespace Dungeon_Crawl
                     OpenPauseMenu();
                     break;
                 case Keys.W:
-                    movingUp = true;
+                    upDownMove = -5;
                     break;
                 case Keys.S:
-                    movingDown = true;
+                    upDownMove = 5;
                     break;
                 case Keys.A:
-                    movingLeft = true;
+                    sideMove = -5;
                     break;
                 case Keys.D:
-                    movingRight = true;
+                    sideMove = 5;
                     break;
+                case Keys.E:
+                    if (!inventoryOpen)
+                    {
+                        OpenInventory();
+                    }
+                    else if (inventoryOpen)
+                    {
+                        CloseInventory();
+                    }
+                        break;
             }
 
             Invalidate();
@@ -161,34 +174,25 @@ namespace Dungeon_Crawl
 
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
-            if (inGame == true)
+            if (inGame)
             {
                 //Draws the character sprite where the player is located on the screen
                 e.Graphics.DrawImage(CS, pX, pY);
+            }
+            else if (inventoryOpen)
+            {
+                e.Graphics.DrawImage(ISq, 800, 200);
+                e.Graphics.DrawImage(ISq, 800, 325);
+                e.Graphics.DrawImage(ISq, 800, 450);
+                e.Graphics.DrawImage(ISc, 625, 200);
             }
         }
 
         private void Movement_Tick(object sender, EventArgs e)
         {
-            if (movingUp)
-            {
-                pY -= 5;
-            }
-
-            if (movingDown)
-            {
-                pY += 5;
-            }
-
-            if (movingLeft)
-            {
-                pX -= 5;
-            }
-
-            if (movingRight)
-            {
-                pX += 5;
-            }
+            pY += upDownMove;
+            pX += sideMove;
+            Invalidate();
         }
 
         private void Form1_KeyUp(object sender, KeyEventArgs e)
@@ -196,18 +200,28 @@ namespace Dungeon_Crawl
             switch (e.KeyCode)
             {
                 case Keys.W:
-                    movingUp = false;
+                    upDownMove = 0;
                     break;
                 case Keys.S:
-                    movingDown = false;
+                    upDownMove = 0;
                     break;
                 case Keys.A:
-                    movingLeft = false;
+                    sideMove = 0;
                     break;
                 case Keys.D:
-                    movingRight = false;
+                    sideMove = 0;
                     break;
             }
+        }
+        private void OpenInventory()
+        {
+            inGame = false;
+            inventoryOpen = true;
+        }
+        private void CloseInventory()
+        {
+            inGame = true;
+            inventoryOpen = false;
         }
     }
 }
