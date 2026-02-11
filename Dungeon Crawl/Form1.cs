@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using System.Collections.Generic;
 
 namespace Dungeon_Crawl
 {
     public partial class Form1 : Form
     {
+        Random ran = new Random();
         char moveUp = 'W';
         char moveDown = 'S';
         char moveLeft = 'A';
@@ -21,9 +23,15 @@ namespace Dungeon_Crawl
         bool inventoryOpen = false;
         int pX = 100;
         int pY = 100;
+        int difficulty = 1;
 
         int upDownMove = 0;
         int sideMove = 0;
+
+        string[] equipedItems = new string[5];
+
+        List<Item> itemsOnScreen = new List<Item>();
+        
 
 
         public Form1()
@@ -82,6 +90,7 @@ namespace Dungeon_Crawl
                     sideMove = 5;
                     break;
                 case Keys.E:
+                    //Checks to see if the inventory is open or not when the E key is pressed
                     if (!inventoryOpen)
                     {
                         OpenInventory();
@@ -178,9 +187,12 @@ namespace Dungeon_Crawl
             {
                 //Draws the character sprite where the player is located on the screen
                 e.Graphics.DrawImage(CS, pX, pY);
+
+                
             }
             else if (inventoryOpen)
             {
+                //Draws the inventory screen
                 e.Graphics.DrawImage(ISq, 800, 200);
                 e.Graphics.DrawImage(ISq, 800, 325);
                 e.Graphics.DrawImage(ISq, 800, 450);
@@ -190,6 +202,7 @@ namespace Dungeon_Crawl
 
         private void Movement_Tick(object sender, EventArgs e)
         {
+            //Constantly updates the players position relative to if they are moving or not
             pY += upDownMove;
             pX += sideMove;
             Invalidate();
@@ -222,6 +235,45 @@ namespace Dungeon_Crawl
         {
             inGame = true;
             inventoryOpen = false;
+        }
+        private void SpawnItems()
+        {
+            //Spawns items at the start of new rooms for the player to pick up and adds them to the itemsOnScreen list
+            bool spawnItem = false;
+            int itemSpawned = 0;
+            for (int i = 0; i < difficulty; i++)
+            {
+                if (ran.Next(1,5) == 5)
+                {
+                    spawnItem = true;
+                }
+
+                if (spawnItem)
+                {
+                    itemSpawned = ran.Next(1, 6);
+
+                    if (itemSpawned == 1)
+                    {
+                        itemsOnScreen.Add(new Item("armor", ran.Next(difficulty - 1, difficulty + 1)));
+                    }
+                    else if (itemSpawned == 2)
+                    {
+                        itemsOnScreen.Add(new Item("weapon", ran.Next(difficulty - 1, difficulty + 1)));
+                    }
+                    else if (itemSpawned == 3)
+                    {
+                        itemsOnScreen.Add(new Item("staff", ran.Next(difficulty - 1, difficulty + 1)));
+                    }
+                    else if (itemSpawned == 4)
+                    {
+                        itemsOnScreen.Add(new Item("jewlery", ran.Next(difficulty - 1, difficulty + 1)));
+                    }
+                    else if (itemSpawned == 5)
+                    {
+                        itemsOnScreen.Add(new Item("money", ran.Next(difficulty - 1, difficulty + 1)));
+                    }
+                }
+            }
         }
     }
 }
