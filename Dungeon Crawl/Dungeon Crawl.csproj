@@ -53,6 +53,7 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Item.cs" />
+    <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
@@ -86,6 +87,9 @@
   <ItemGroup>
     <EmbeddedResource Include="InventoryScreenTemp_DungeonCrawl.png" />
     <EmbeddedResource Include="InventorySquareTemp_DungeonCrawl.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ItemTemp_DungeonCrawl.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

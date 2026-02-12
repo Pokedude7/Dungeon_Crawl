@@ -1,7 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
-using System.Collections.Generic;
 
 namespace Dungeon_Crawl
 {
@@ -19,6 +19,12 @@ namespace Dungeon_Crawl
         Image ISq = Image.FromFile("../../InventorySquareTemp_DungeonCrawl.png");
         //Inventory screen sprite
         Image ISc = Image.FromFile("../../InventoryScreenTemp_DungeonCrawl.png");
+        //Item sprites
+        Image armor = Image.FromFile("../../ItemTemp_DungeonCrawl.png");
+        Image weapon = Image.FromFile("../../ItemTemp_DungeonCrawl.png");
+        Image staff = Image.FromFile("../../ItemTemp_DungeonCrawl.png");
+        Image jewlery = Image.FromFile("../../ItemTemp_DungeonCrawl.png");
+        Image money = Image.FromFile("../../ItemTemp_DungeonCrawl.png");
         bool inGame = false;
         bool inventoryOpen = false;
         int pX = 100;
@@ -31,19 +37,19 @@ namespace Dungeon_Crawl
         string[] equipedItems = new string[5];
 
         List<Item> itemsOnScreen = new List<Item>();
-        
+        List<Item> inventoryItems = new List<Item>();
+
+        Player pc = new Player();
 
 
         public Form1()
         {
             InitializeComponent();
         }
-
         private void Form1_Load(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Maximized;
         }
-
         private void startButton_Click(object sender, EventArgs e)
         {
             //Sets the buttons to invisible and then calls the method to start the game
@@ -53,12 +59,11 @@ namespace Dungeon_Crawl
             inGame = true;
             StartGame();
         }
-
         private void StartGame()
         {
+            SpawnItems();
             Invalidate();
         }
-
         private void OpenPauseMenu()
         {
             //Sets the buttons to visible and then calls the method to open the pause menu
@@ -68,7 +73,6 @@ namespace Dungeon_Crawl
             settingsButton.Visible = true;
             quitButton.Visible = true;
         }
-
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
             switch (e.KeyCode)
@@ -99,28 +103,41 @@ namespace Dungeon_Crawl
                     {
                         CloseInventory();
                     }
-                        break;
+                    break;
             }
 
             Invalidate();
         }
-
         private void quitButton_Click(object sender, EventArgs e)
         {
             this.Close();
         }
-
         private void resumeButton_Click(object sender, EventArgs e)
         {
             //Sets the buttons to invisible and then calls the method to resume the game
-            inGame = true;
+            inventoryOpen = true;
+            StrLabel.Visible = true;
+            DefLabel.Visible = true;
+            MagicLabel.Visible = true;
+            ResLabel.Visible = true;
+            MonLabel.Visible = true;
+
+            if (!inventoryOpen)
+            {
+                inGame = true;
+                inventoryOpen = false;
+                StrLabel.Visible = false;
+                DefLabel.Visible = false;
+                MagicLabel.Visible = false;
+                ResLabel.Visible = false;
+                MonLabel.Visible = false;
+            }
             Movement.Enabled = true;
             quitButton.Visible = false;
             settingsButton.Visible = false;
             resumeButton.Visible = false;
             Invalidate();
         }
-
         private void settingsButton_Click(object sender, EventArgs e)
         {
             //Sets the settings menu and close button to visible and then sets the correct buttons to invisible based on which menu was open before settings
@@ -141,27 +158,22 @@ namespace Dungeon_Crawl
                 reopenMenu = "pause";
             }
         }
-
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
             moveUp = textBox1.Text[0];
         }
-
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
             moveDown = textBox2.Text[0];
         }
-
         private void textBox3_TextChanged(object sender, EventArgs e)
         {
             moveRight = textBox3.Text[0];
         }
-
         private void textBox4_TextChanged(object sender, EventArgs e)
         {
             moveLeft = textBox4.Text[0];
         }
-
         private void CloseButton_Click(object sender, EventArgs e)
         {
             //Sets the buttons and menus to invisible and then sets the correct buttons to visible based on which menu was open before settings
@@ -180,7 +192,6 @@ namespace Dungeon_Crawl
                 settingsButton.Visible = true;
             }
         }
-
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
             if (inGame)
@@ -188,18 +199,42 @@ namespace Dungeon_Crawl
                 //Draws the character sprite where the player is located on the screen
                 e.Graphics.DrawImage(CS, pX, pY);
 
-                
+                for (int i = 0; i < itemsOnScreen.Count; i++)
+                {
+                    if (itemsOnScreen[i].getType() == "armor")
+                    {
+                        e.Graphics.DrawImage(armor, itemsOnScreen[i].getXLoc(), itemsOnScreen[i].getYLoc());
+                    }
+                    else if (itemsOnScreen[i].getType() == "weapon")
+                    {
+                        e.Graphics.DrawImage(weapon, itemsOnScreen[i].getXLoc(), itemsOnScreen[i].getYLoc());
+                    }
+                    else if (itemsOnScreen[i].getType() == "staff")
+                    {
+                        e.Graphics.DrawImage(staff, itemsOnScreen[i].getXLoc(), itemsOnScreen[i].getYLoc());
+                    }
+                    else if (itemsOnScreen[i].getType() == "jewlery")
+                    {
+                        e.Graphics.DrawImage(jewlery, itemsOnScreen[i].getXLoc(), itemsOnScreen[i].getYLoc());
+                    }
+                    else if (itemsOnScreen[i].getType() == "money")
+                    {
+                        e.Graphics.DrawImage(money, itemsOnScreen[i].getXLoc(), itemsOnScreen[i].getYLoc());
+                    }
+                }
+
             }
-            else if (inventoryOpen)
-            {
+            else if (inventoryOpen && !resumeButton.Visible)
+            { 
                 //Draws the inventory screen
                 e.Graphics.DrawImage(ISq, 800, 200);
                 e.Graphics.DrawImage(ISq, 800, 325);
                 e.Graphics.DrawImage(ISq, 800, 450);
+                e.Graphics.DrawImage(ISq, 925, 262);
+                e.Graphics.DrawImage(ISq, 925, 387);
                 e.Graphics.DrawImage(ISc, 625, 200);
             }
         }
-
         private void Movement_Tick(object sender, EventArgs e)
         {
             //Constantly updates the players position relative to if they are moving or not
@@ -207,7 +242,6 @@ namespace Dungeon_Crawl
             pX += sideMove;
             Invalidate();
         }
-
         private void Form1_KeyUp(object sender, KeyEventArgs e)
         {
             switch (e.KeyCode)
@@ -230,11 +264,22 @@ namespace Dungeon_Crawl
         {
             inGame = false;
             inventoryOpen = true;
+            StrLabel.Visible = true;
+            DefLabel.Visible = true;
+            MagicLabel.Visible = true;
+            ResLabel.Visible = true;
+            MonLabel.Visible = true;
+
         }
         private void CloseInventory()
         {
             inGame = true;
             inventoryOpen = false;
+            StrLabel.Visible = false;
+            DefLabel.Visible = false;
+            MagicLabel.Visible = false;
+            ResLabel.Visible = false;
+            MonLabel.Visible = false;
         }
         private void SpawnItems()
         {
@@ -243,7 +288,7 @@ namespace Dungeon_Crawl
             int itemSpawned = 0;
             for (int i = 0; i < difficulty; i++)
             {
-                if (ran.Next(1,5) == 5)
+                if (ran.Next(1, 5) == 4)
                 {
                     spawnItem = true;
                 }

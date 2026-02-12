@@ -44,6 +44,11 @@
             this.label4 = new System.Windows.Forms.Label();
             this.CloseButton = new System.Windows.Forms.Button();
             this.Movement = new System.Windows.Forms.Timer(this.components);
+            this.StrLabel = new System.Windows.Forms.Label();
+            this.DefLabel = new System.Windows.Forms.Label();
+            this.MagicLabel = new System.Windows.Forms.Label();
+            this.ResLabel = new System.Windows.Forms.Label();
+            this.MonLabel = new System.Windows.Forms.Label();
             this.SettingsMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -94,7 +99,7 @@
             this.SettingsMenu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 45.25547F));
             this.SettingsMenu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 54.74453F));
             this.SettingsMenu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 58F));
-            this.SettingsMenu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 66F));
+            this.SettingsMenu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 67F));
             this.SettingsMenu.Controls.Add(this.textBox4, 3, 1);
             this.SettingsMenu.Controls.Add(this.label2, 0, 0);
             this.SettingsMenu.Controls.Add(this.textBox1, 0, 1);
@@ -114,7 +119,7 @@
             // 
             // textBox4
             // 
-            this.textBox4.Location = new System.Drawing.Point(196, 38);
+            this.textBox4.Location = new System.Drawing.Point(195, 38);
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(59, 22);
             this.textBox4.TabIndex = 6;
@@ -144,7 +149,7 @@
             // 
             this.textBox2.Location = new System.Drawing.Point(64, 38);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(68, 22);
+            this.textBox2.Size = new System.Drawing.Size(67, 22);
             this.textBox2.TabIndex = 2;
             this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
@@ -161,7 +166,7 @@
             // 
             // textBox3
             // 
-            this.textBox3.Location = new System.Drawing.Point(138, 38);
+            this.textBox3.Location = new System.Drawing.Point(137, 38);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(52, 22);
             this.textBox3.TabIndex = 4;
@@ -171,7 +176,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(138, 0);
+            this.label3.Location = new System.Drawing.Point(137, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(38, 32);
             this.label3.TabIndex = 3;
@@ -181,9 +186,9 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(196, 0);
+            this.label4.Location = new System.Drawing.Point(195, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(38, 32);
+            this.label4.Size = new System.Drawing.Size(62, 16);
             this.label4.TabIndex = 5;
             this.label4.Text = "Walk Left";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -205,12 +210,67 @@
             this.Movement.Interval = 10;
             this.Movement.Tick += new System.EventHandler(this.Movement_Tick);
             // 
+            // StrLabel
+            // 
+            this.StrLabel.AutoSize = true;
+            this.StrLabel.Location = new System.Drawing.Point(72, 60);
+            this.StrLabel.Name = "StrLabel";
+            this.StrLabel.Size = new System.Drawing.Size(44, 16);
+            this.StrLabel.TabIndex = 6;
+            this.StrLabel.Text = "label5";
+            this.StrLabel.Visible = false;
+            // 
+            // DefLabel
+            // 
+            this.DefLabel.AutoSize = true;
+            this.DefLabel.Location = new System.Drawing.Point(75, 90);
+            this.DefLabel.Name = "DefLabel";
+            this.DefLabel.Size = new System.Drawing.Size(44, 16);
+            this.DefLabel.TabIndex = 7;
+            this.DefLabel.Text = "label6";
+            this.DefLabel.Visible = false;
+            // 
+            // MagicLabel
+            // 
+            this.MagicLabel.AutoSize = true;
+            this.MagicLabel.Location = new System.Drawing.Point(75, 110);
+            this.MagicLabel.Name = "MagicLabel";
+            this.MagicLabel.Size = new System.Drawing.Size(44, 16);
+            this.MagicLabel.TabIndex = 8;
+            this.MagicLabel.Text = "label7";
+            this.MagicLabel.Visible = false;
+            // 
+            // ResLabel
+            // 
+            this.ResLabel.AutoSize = true;
+            this.ResLabel.Location = new System.Drawing.Point(78, 132);
+            this.ResLabel.Name = "ResLabel";
+            this.ResLabel.Size = new System.Drawing.Size(44, 16);
+            this.ResLabel.TabIndex = 9;
+            this.ResLabel.Text = "label8";
+            this.ResLabel.Visible = false;
+            // 
+            // MonLabel
+            // 
+            this.MonLabel.AutoSize = true;
+            this.MonLabel.Location = new System.Drawing.Point(82, 163);
+            this.MonLabel.Name = "MonLabel";
+            this.MonLabel.Size = new System.Drawing.Size(44, 16);
+            this.MonLabel.TabIndex = 10;
+            this.MonLabel.Text = "label9";
+            this.MonLabel.Visible = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.ControlBox = false;
+            this.Controls.Add(this.MonLabel);
+            this.Controls.Add(this.ResLabel);
+            this.Controls.Add(this.MagicLabel);
+            this.Controls.Add(this.DefLabel);
+            this.Controls.Add(this.StrLabel);
             this.Controls.Add(this.CloseButton);
             this.Controls.Add(this.SettingsMenu);
             this.Controls.Add(this.resumeButton);
@@ -229,6 +289,7 @@
             this.SettingsMenu.ResumeLayout(false);
             this.SettingsMenu.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -249,6 +310,11 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button CloseButton;
         private System.Windows.Forms.Timer Movement;
+        private System.Windows.Forms.Label StrLabel;
+        private System.Windows.Forms.Label DefLabel;
+        private System.Windows.Forms.Label MagicLabel;
+        private System.Windows.Forms.Label ResLabel;
+        private System.Windows.Forms.Label MonLabel;
     }
 }
 

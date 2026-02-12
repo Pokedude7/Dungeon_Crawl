@@ -1,25 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Dungeon_Crawl
 {
     internal class Item
     {
         Random ran = new Random();
-        string itemType = null;
-        string statIncreases = null;
-        int rarity = 0;
-        int amountIncrease = 0;
+        string itemType;
+        string statIncreases;
+        int rarity;
+        int amountIncrease;
         Point location;
 
         public Item(string itemType, int rarity)
         {
             if (itemType == "armor")
             {
+                setType(itemType);
                 statIncreases = "def";
                 if (rarity == 0)
                 {
@@ -36,6 +33,7 @@ namespace Dungeon_Crawl
             }
             else if (itemType == "weapon")
             {
+                setType(itemType);
                 statIncreases = "str";
                 if (rarity == 0)
                 {
@@ -52,6 +50,7 @@ namespace Dungeon_Crawl
             }
             else if (itemType == "staff")
             {
+                setType(itemType);
                 statIncreases = "magic";
                 if (rarity == 0)
                 {
@@ -68,6 +67,7 @@ namespace Dungeon_Crawl
             }
             else if (itemType == "jewlery")
             {
+                setType(itemType);
                 statIncreases = "resistance";
                 if (rarity == 0)
                 {
@@ -84,6 +84,7 @@ namespace Dungeon_Crawl
             }
             else if (itemType == "money")
             {
+                setType(itemType);
                 statIncreases = "mon";
                 statIncreases = "resistance";
                 if (rarity == 0)
@@ -101,7 +102,7 @@ namespace Dungeon_Crawl
 
             }
 
-                location = new Point(ran.Next(50, 1300), ran.Next(50, 1000));
+            location = new Point(ran.Next(50, 1300), ran.Next(50, 1000));
         }
 
         public void setRarity(int newRarity)
@@ -120,17 +121,21 @@ namespace Dungeon_Crawl
                 amountIncrease = ran.Next(5, 8);
             }
         }
+        public void setType(string newType)
+        {
+            itemType = newType;
+        }
         public string getStat()
         {
             return statIncreases;
         }
         public int getAmount()
         {
-            return amountIncrease; 
+            return amountIncrease;
         }
         public int getRarity()
         {
-            return rarity; 
+            return rarity;
         }
         public string getType()
         {
