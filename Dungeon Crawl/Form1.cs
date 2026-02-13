@@ -263,6 +263,11 @@ namespace Dungeon_Crawl
         private void OpenInventory()
         {
             inGame = false;
+            StrLabel.Text = "Str: " + pc.getStrength();
+            DefLabel.Text = "Def: " + pc.getDefense();
+            MagicLabel.Text = "Magic: " + pc.getMagic();
+            ResLabel.Text = "Res: " + pc.getResistance();
+            MonLabel.Text = "Money: " + pc.getMoney();
             inventoryOpen = true;
             StrLabel.Visible = true;
             DefLabel.Visible = true;
@@ -322,7 +327,6 @@ namespace Dungeon_Crawl
                 }
             }
         }
-
         private void ItemCheck_Tick(object sender, EventArgs e)
         {
             for (int i = 0; i < itemsOnScreen.Count; i++)
@@ -333,28 +337,62 @@ namespace Dungeon_Crawl
                     {
                         equipedItems[0] = itemsOnScreen[i];
                         itemsOnScreen.RemoveAt(i);
+                        setStats();
                     }
                     else if (itemsOnScreen[i].getType() == "weapon" && equipedItems[1] == null)
                     {
                         equipedItems[1] = itemsOnScreen[i];
                         itemsOnScreen.RemoveAt(i);
+                        setStats();
                     }
                     else if (itemsOnScreen[i].getType() == "staff" && equipedItems[2] == null)
                     {
                         equipedItems[2] = itemsOnScreen[i];
                         itemsOnScreen.RemoveAt(i);
+                        setStats();
                     }
                     else if (itemsOnScreen[i].getType() == "jewlery" && equipedItems[3] == null)
                     {
                         equipedItems[3] = itemsOnScreen[i]; 
                         itemsOnScreen.RemoveAt(i);
+                        setStats();
                     }
                     else if (itemsOnScreen[i].getType() == "money")
                     {
                         pc.addMoney(itemsOnScreen[i].getAmount());
                         itemsOnScreen.RemoveAt(i);
+                        setStats();
                     }
                     Invalidate();
+                }
+            }
+        }
+        private void setStats()
+        {
+            for (int i = 0; i < equipedItems.Length; i++)
+            {
+                if (equipedItems[i] == null)
+                {
+                    continue;
+                }
+                else
+                {
+                    if (i == 0)
+                    {
+                        pc.setDefense(equipedItems[i].getAmount());
+                    }
+                    else if (i == 1)
+                    {
+                        pc.setStrength(equipedItems[i].getAmount());
+                    }
+                    else if (i == 2)
+                    {
+                        pc.setMagic(equipedItems[i].getAmount());
+                    }
+                    else if (i == 3)
+                    {
+                        pc.setResistance(equipedItems[i].getAmount());
+                    }
                 }
             }
         }
