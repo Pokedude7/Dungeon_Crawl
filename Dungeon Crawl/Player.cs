@@ -85,5 +85,10 @@ namespace Dungeon_Crawl
             return money;
         }
 
+        public void addMoney(int money)
+        {
+            this.money += money;
+        }
+
     }
 }

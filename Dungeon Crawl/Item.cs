@@ -5,7 +5,7 @@ namespace Dungeon_Crawl
 {
     internal class Item
     {
-        Random ran = new Random();
+        private static Random ran = new Random();
         string itemType;
         string statIncreases;
         int rarity;
@@ -102,7 +102,7 @@ namespace Dungeon_Crawl
 
             }
 
-            location = new Point(ran.Next(50, 1300), ran.Next(50, 1000));
+            setLocation();
         }
 
         public void setRarity(int newRarity)
@@ -124,6 +124,10 @@ namespace Dungeon_Crawl
         public void setType(string newType)
         {
             itemType = newType;
+        }
+        public void setLocation()
+        {
+            location = new Point(ran.Next(50, 1000), ran.Next(50, 900));
         }
         public string getStat()
         {

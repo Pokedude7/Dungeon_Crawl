@@ -34,10 +34,9 @@ namespace Dungeon_Crawl
         int upDownMove = 0;
         int sideMove = 0;
 
-        string[] equipedItems = new string[5];
+        Item[] equipedItems = new Item[5]{null, null, null, null, null};
 
         List<Item> itemsOnScreen = new List<Item>();
-        List<Item> inventoryItems = new List<Item>();
 
         Player pc = new Player();
 
@@ -78,7 +77,6 @@ namespace Dungeon_Crawl
             switch (e.KeyCode)
             {
                 case Keys.Escape:
-                    Console.WriteLine("Escape key pressed");
                     OpenPauseMenu();
                     break;
                 case Keys.W:
@@ -95,11 +93,11 @@ namespace Dungeon_Crawl
                     break;
                 case Keys.E:
                     //Checks to see if the inventory is open or not when the E key is pressed
-                    if (!inventoryOpen)
+                    if (!inventoryOpen && !resumeButton.Visible)
                     {
                         OpenInventory();
                     }
-                    else if (inventoryOpen)
+                    else if (inventoryOpen && !resumeButton.Visible)
                     {
                         CloseInventory();
                     }
@@ -115,13 +113,6 @@ namespace Dungeon_Crawl
         private void resumeButton_Click(object sender, EventArgs e)
         {
             //Sets the buttons to invisible and then calls the method to resume the game
-            inventoryOpen = true;
-            StrLabel.Visible = true;
-            DefLabel.Visible = true;
-            MagicLabel.Visible = true;
-            ResLabel.Visible = true;
-            MonLabel.Visible = true;
-
             if (!inventoryOpen)
             {
                 inGame = true;
@@ -132,7 +123,16 @@ namespace Dungeon_Crawl
                 ResLabel.Visible = false;
                 MonLabel.Visible = false;
             }
-            Movement.Enabled = true;
+            else
+            {
+                inventoryOpen = true;
+                StrLabel.Visible = true;
+                DefLabel.Visible = true;
+                MagicLabel.Visible = true;
+                ResLabel.Visible = true;
+                MonLabel.Visible = true;
+            }
+                Movement.Enabled = true;
             quitButton.Visible = false;
             settingsButton.Visible = false;
             resumeButton.Visible = false;
@@ -286,16 +286,18 @@ namespace Dungeon_Crawl
             //Spawns items at the start of new rooms for the player to pick up and adds them to the itemsOnScreen list
             bool spawnItem = false;
             int itemSpawned = 0;
-            for (int i = 0; i < difficulty; i++)
+            for (int i = 0; i < difficulty+1; i++)
             {
                 if (ran.Next(1, 5) == 4)
                 {
                     spawnItem = true;
                 }
 
+                spawnItem = true;
+
                 if (spawnItem)
                 {
-                    itemSpawned = ran.Next(1, 6);
+                    itemSpawned = 1;//ran.Next(1, 6);
 
                     if (itemSpawned == 1)
                     {
@@ -317,6 +319,42 @@ namespace Dungeon_Crawl
                     {
                         itemsOnScreen.Add(new Item("money", ran.Next(difficulty - 1, difficulty + 1)));
                     }
+                }
+            }
+        }
+
+        private void ItemCheck_Tick(object sender, EventArgs e)
+        {
+            for (int i = 0; i < itemsOnScreen.Count; i++)
+            {
+                if (pX + 75 >= itemsOnScreen[i].getXLoc() && pX < itemsOnScreen[i].getXLoc() + 50 && pY + 75 > itemsOnScreen[i].getYLoc() && pY < itemsOnScreen[i].getYLoc() + 50)
+                {
+                    if (itemsOnScreen[i].getType() == "armor" && equipedItems[0] == null)
+                    {
+                        equipedItems[0] = itemsOnScreen[i];
+                        itemsOnScreen.RemoveAt(i);
+                    }
+                    else if (itemsOnScreen[i].getType() == "weapon" && equipedItems[1] == null)
+                    {
+                        equipedItems[1] = itemsOnScreen[i];
+                        itemsOnScreen.RemoveAt(i);
+                    }
+                    else if (itemsOnScreen[i].getType() == "staff" && equipedItems[2] == null)
+                    {
+                        equipedItems[2] = itemsOnScreen[i];
+                        itemsOnScreen.RemoveAt(i);
+                    }
+                    else if (itemsOnScreen[i].getType() == "jewlery" && equipedItems[3] == null)
+                    {
+                        equipedItems[3] = itemsOnScreen[i]; 
+                        itemsOnScreen.RemoveAt(i);
+                    }
+                    else if (itemsOnScreen[i].getType() == "money")
+                    {
+                        pc.addMoney(itemsOnScreen[i].getAmount());
+                        itemsOnScreen.RemoveAt(i);
+                    }
+                    Invalidate();
                 }
             }
         }
