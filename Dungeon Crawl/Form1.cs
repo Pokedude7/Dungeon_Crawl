@@ -20,11 +20,11 @@ namespace Dungeon_Crawl
         //Inventory screen sprite
         Image ISc = Image.FromFile("../../InventoryScreenTemp_DungeonCrawl.png");
         //Item sprites
-        Image armor = Image.FromFile("../../ItemTemp_DungeonCrawl.png");
-        Image weapon = Image.FromFile("../../ItemTemp_DungeonCrawl.png");
-        Image staff = Image.FromFile("../../ItemTemp_DungeonCrawl.png");
-        Image jewlery = Image.FromFile("../../ItemTemp_DungeonCrawl.png");
-        Image money = Image.FromFile("../../ItemTemp_DungeonCrawl.png");
+        Image armor = Image.FromFile("../../ArmorTemp_DungeonCrawl.png");
+        Image weapon = Image.FromFile("../../WeaponTemp_DungeonCrawl.png");
+        Image staff = Image.FromFile("../../StaffTemp_DungeonCrawl.png");
+        Image jewlery = Image.FromFile("../../JewleryTemp_DungeonCrawl.png");
+        Image money = Image.FromFile("../../MoneyTemp_DungeonCrawl.png");
         bool inGame = false;
         bool inventoryOpen = false;
         int pX = 100;
@@ -239,7 +239,28 @@ namespace Dungeon_Crawl
         {
             //Constantly updates the players position relative to if they are moving or not
             pY += upDownMove;
+
+            if (pY <= 50)
+            {
+                pY = 50;
+            }
+            
+            if (pY >= 739)
+            {
+                pY = 739;
+            }
             pX += sideMove;
+
+            if (pX <= 50)
+            {
+                pX = 50;
+            }
+
+            if (pX >= 1411)
+            {
+                pX = 1411;
+            }
+
             Invalidate();
         }
         private void Form1_KeyUp(object sender, KeyEventArgs e)
@@ -291,7 +312,7 @@ namespace Dungeon_Crawl
             //Spawns items at the start of new rooms for the player to pick up and adds them to the itemsOnScreen list
             bool spawnItem = false;
             int itemSpawned = 0;
-            for (int i = 0; i < difficulty+1; i++)
+            for (int i = 0; i < difficulty; i++)
             {
                 if (ran.Next(1, 5) == 4)
                 {
@@ -302,27 +323,27 @@ namespace Dungeon_Crawl
 
                 if (spawnItem)
                 {
-                    itemSpawned = 1;//ran.Next(1, 6);
+                    itemSpawned = ran.Next(1, 6);
 
                     if (itemSpawned == 1)
                     {
-                        itemsOnScreen.Add(new Item("armor", ran.Next(difficulty - 1, difficulty + 1)));
+                        itemsOnScreen.Add(new Item("armor", ran.Next(difficulty - 1, difficulty)));
                     }
                     else if (itemSpawned == 2)
                     {
-                        itemsOnScreen.Add(new Item("weapon", ran.Next(difficulty - 1, difficulty + 1)));
+                        itemsOnScreen.Add(new Item("weapon", ran.Next(difficulty - 1, difficulty)));
                     }
                     else if (itemSpawned == 3)
                     {
-                        itemsOnScreen.Add(new Item("staff", ran.Next(difficulty - 1, difficulty + 1)));
+                        itemsOnScreen.Add(new Item("staff", ran.Next(difficulty - 1, difficulty)));
                     }
                     else if (itemSpawned == 4)
                     {
-                        itemsOnScreen.Add(new Item("jewlery", ran.Next(difficulty - 1, difficulty + 1)));
+                        itemsOnScreen.Add(new Item("jewlery", ran.Next(difficulty - 1, difficulty)));
                     }
                     else if (itemSpawned == 5)
                     {
-                        itemsOnScreen.Add(new Item("money", ran.Next(difficulty - 1, difficulty + 1)));
+                        itemsOnScreen.Add(new Item("money", ran.Next(difficulty - 1, difficulty)));
                     }
                 }
             }
@@ -363,6 +384,23 @@ namespace Dungeon_Crawl
                         itemsOnScreen.RemoveAt(i);
                         setStats();
                     }
+                    else if (itemsOnScreen[i].getType() == "armor" && equipedItems[0] != null)
+                    {
+                        compareItems(equipedItems[0], itemsOnScreen[i]);
+                    }
+                    else if (itemsOnScreen[i].getType() == "weapon" && equipedItems[1] != null)
+                    {
+                        compareItems(equipedItems[1], itemsOnScreen[i]);
+                    }
+                    else if (itemsOnScreen[i].getType() == "staff" && equipedItems[2] != null)
+                    {
+                        compareItems(equipedItems[2], itemsOnScreen[i]);
+                    }
+                    else if (itemsOnScreen[i].getType() == "jewlery" && equipedItems[3] != null)
+                    {
+                        compareItems(equipedItems[3], itemsOnScreen[i]);
+                    }
+
                     Invalidate();
                 }
             }
@@ -392,6 +430,204 @@ namespace Dungeon_Crawl
                     else if (i == 3)
                     {
                         pc.setResistance(equipedItems[i].getAmount());
+                    }
+                }
+            }
+        }
+        private void compareItems(Item equiped, Item onGround)
+        {
+            string message = null;
+            DialogResult result;
+
+            inGame = false;
+            upDownMove = 0;
+            sideMove = 0;
+            ItemCheck.Enabled = false;
+            if (equiped.getType() == "armor")
+            {
+                if (equiped.getAmount() < onGround.getAmount())
+                {
+                    message = "Do you want to equip this item? It has better stats than your current item. \nWARNING: THIS CANNOT BE UNDON. ANY ITEM NOT EQUIPED WILL BE LOST FOREVER";
+                    result = MessageBox.Show(message, null, MessageBoxButtons.YesNo);
+                    if (result == DialogResult.Yes)
+                    {
+                        equipedItems[0] = onGround;
+                        itemsOnScreen.Remove(onGround);
+                        setStats();
+                        inGame = true;
+                        ItemCheck.Enabled = true;
+                        Invalidate();
+                    }
+                    else if (result == DialogResult.No)
+                    {
+                        itemsOnScreen.Remove(onGround);
+                        setStats();
+                        inGame = true;
+                        ItemCheck.Enabled = true;
+                        Invalidate();
+                    }
+                }
+                else if (equiped.getAmount() > onGround.getAmount())
+                {
+                    message = "Do you want to equip this item? It has worse stats than your current item. \nWARNING: THIS CANNOT BE UNDON. ANY ITEM NOT EQUIPED WILL BE LOST FOREVER";
+                    result = MessageBox.Show(message, null, MessageBoxButtons.YesNo);
+                    if (result == DialogResult.Yes)
+                    {
+                        equipedItems[0] = onGround;
+                        itemsOnScreen.Remove(onGround);
+                        setStats();
+                        inGame = true;
+                        ItemCheck.Enabled = true;
+                        Invalidate();
+                    }
+                    else if (result == DialogResult.No)
+                    {
+                        itemsOnScreen.Remove(onGround);
+                        setStats();
+                        inGame = true;
+                        ItemCheck.Enabled = true;
+                        Invalidate();
+                    }
+                }
+            }
+            else if (equiped.getType() == "weapon")
+            {
+                if (equiped.getAmount() < onGround.getAmount())
+                {
+                    message = "Do you want to equip this item? It has better stats than your current item. \nWARNING: THIS CANNOT BE UNDON. ANY ITEM NOT EQUIPED WILL BE LOST FOREVER";
+                    result = MessageBox.Show(message, null, MessageBoxButtons.YesNo);
+                    if (result == DialogResult.Yes)
+                    {
+                        equipedItems[1] = onGround;
+                        itemsOnScreen.Remove(onGround);
+                        setStats();
+                        inGame = true;
+                        ItemCheck.Enabled = true;
+                        Invalidate();
+                    }
+                    else if (result == DialogResult.No)
+                    {
+                        itemsOnScreen.Remove(onGround);
+                        setStats();
+                        inGame = true;
+                        ItemCheck.Enabled = true;
+                        Invalidate();
+                    }
+                }
+                else if (equiped.getAmount() > onGround.getAmount())
+                {
+                    message = "Do you want to equip this item? It has worse stats than your current item. \nWARNING: THIS CANNOT BE UNDON. ANY ITEM NOT EQUIPED WILL BE LOST FOREVER";
+                    result = MessageBox.Show(message, null, MessageBoxButtons.YesNo);
+                    if (result == DialogResult.Yes)
+                    {
+                        equipedItems[1] = onGround;
+                        itemsOnScreen.Remove(onGround);
+                        setStats();
+                        inGame = true;
+                        ItemCheck.Enabled = true;
+                        Invalidate();
+                    }
+                    else if (result == DialogResult.No)
+                    {
+                        itemsOnScreen.Remove(onGround);
+                        setStats();
+                        inGame = true;
+                        ItemCheck.Enabled = true;
+                        Invalidate();
+                    }
+                }
+            }
+            else if (equiped.getType() == "staff")
+            {
+                if (equiped.getAmount() < onGround.getAmount())
+                {
+                    message = "Do you want to equip this item? It has better stats than your current item. \nWARNING: THIS CANNOT BE UNDON. ANY ITEM NOT EQUIPED WILL BE LOST FOREVER";
+                    result = MessageBox.Show(message, null, MessageBoxButtons.YesNo);
+                    if (result == DialogResult.Yes)
+                    {
+                        equipedItems[1] = onGround;
+                        itemsOnScreen.Remove(onGround);
+                        setStats();
+                        inGame = true;
+                        ItemCheck.Enabled = true;
+                        Invalidate();
+                    }
+                    else if (result == DialogResult.No)
+                    {
+                        itemsOnScreen.Remove(onGround);
+                        setStats();
+                        inGame = true;
+                        ItemCheck.Enabled = true;
+                        Invalidate();
+                    }
+                }
+                else if (equiped.getAmount() > onGround.getAmount())
+                {
+                    message = "Do you want to equip this item? It has worse stats than your current item. \nWARNING: THIS CANNOT BE UNDON. ANY ITEM NOT EQUIPED WILL BE LOST FOREVER";
+                    result = MessageBox.Show(message, null, MessageBoxButtons.YesNo);
+                    if (result == DialogResult.Yes)
+                    {
+                        equipedItems[1] = onGround;
+                        itemsOnScreen.Remove(onGround);
+                        setStats();
+                        inGame = true;
+                        ItemCheck.Enabled = true;
+                        Invalidate();
+                    }
+                    else if (result == DialogResult.No)
+                    {
+                        itemsOnScreen.Remove(onGround);
+                        setStats();
+                        inGame = true;
+                        ItemCheck.Enabled = true;
+                        Invalidate();
+                    }
+                }
+            }
+            else if (equiped.getType() == "jewlery")
+            {
+                if (equiped.getAmount() < onGround.getAmount())
+                {
+                    message = "Do you want to equip this item? It has better stats than your current item. \nWARNING: THIS CANNOT BE UNDON. ANY ITEM NOT EQUIPED WILL BE LOST FOREVER";
+                    result = MessageBox.Show(message, null, MessageBoxButtons.YesNo);
+                    if (result == DialogResult.Yes)
+                    {
+                        equipedItems[1] = onGround;
+                        itemsOnScreen.Remove(onGround);
+                        setStats();
+                        inGame = true;
+                        ItemCheck.Enabled = true;
+                        Invalidate();
+                    }
+                    else if (result == DialogResult.No)
+                    {
+                        itemsOnScreen.Remove(onGround);
+                        setStats();
+                        inGame = true;
+                        ItemCheck.Enabled = true;
+                        Invalidate();
+                    }
+                }
+                else if (equiped.getAmount() > onGround.getAmount())
+                {
+                    message = "Do you want to equip this item? It has worse stats than your current item. \nWARNING: THIS CANNOT BE UNDON. ANY ITEM NOT EQUIPED WILL BE LOST FOREVER";
+                    result = MessageBox.Show(message, null, MessageBoxButtons.YesNo);
+                    if (result == DialogResult.Yes)
+                    {
+                        equipedItems[1] = onGround;
+                        itemsOnScreen.Remove(onGround);
+                        setStats();
+                        inGame = true;
+                        ItemCheck.Enabled = true;
+                        Invalidate();
+                    }
+                    else if (result == DialogResult.No)
+                    {
+                        itemsOnScreen.Remove(onGround);
+                        setStats();
+                        inGame = true;
+                        ItemCheck.Enabled = true;
+                        Invalidate();
                     }
                 }
             }

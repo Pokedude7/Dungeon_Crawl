@@ -91,5 +91,12 @@
   <ItemGroup>
     <EmbeddedResource Include="ItemTemp_DungeonCrawl.png" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ArmorTemp_DungeonCrawl.png" />
+    <EmbeddedResource Include="JewleryTemp_DungeonCrawl.png" />
+    <EmbeddedResource Include="MoneyTemp_DungeonCrawl.png" />
+    <EmbeddedResource Include="StaffTemp_DungeonCrawl.png" />
+    <EmbeddedResource Include="WeaponTemp_DungeonCrawl.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -24,11 +24,11 @@ namespace Dungeon_Crawl
                 }
                 else if (rarity == 1)
                 {
-                    amountIncrease = ran.Next(2, 5);
+                    amountIncrease = ran.Next(2, 3);
                 }
                 else if (rarity == 2)
                 {
-                    amountIncrease = ran.Next(5, 8);
+                    amountIncrease = ran.Next(3, 6);
                 }
             }
             else if (itemType == "weapon")
@@ -41,11 +41,11 @@ namespace Dungeon_Crawl
                 }
                 else if (rarity == 1)
                 {
-                    amountIncrease = ran.Next(2, 5);
+                    amountIncrease = ran.Next(2, 3);
                 }
                 else if (rarity == 2)
                 {
-                    amountIncrease = ran.Next(5, 8);
+                    amountIncrease = ran.Next(3, 6);
                 }
             }
             else if (itemType == "staff")
@@ -58,11 +58,11 @@ namespace Dungeon_Crawl
                 }
                 else if (rarity == 1)
                 {
-                    amountIncrease = ran.Next(2, 5);
+                    amountIncrease = ran.Next(2, 3);
                 }
                 else if (rarity == 2)
                 {
-                    amountIncrease = ran.Next(5, 8);
+                    amountIncrease = ran.Next(3, 6);
                 }
             }
             else if (itemType == "jewlery")
@@ -75,11 +75,11 @@ namespace Dungeon_Crawl
                 }
                 else if (rarity == 1)
                 {
-                    amountIncrease = ran.Next(2, 5);
+                    amountIncrease = ran.Next(2, 3);
                 }
                 else if (rarity == 2)
                 {
-                    amountIncrease = ran.Next(5, 8);
+                    amountIncrease = ran.Next(3, 6);
                 }
             }
             else if (itemType == "money")
@@ -127,7 +127,11 @@ namespace Dungeon_Crawl
         }
         public void setLocation()
         {
-            location = new Point(ran.Next(50, 1000), ran.Next(50, 900));
+            location = new Point(ran.Next(50, 1436), ran.Next(50, 764));
+        }
+        public void setLocation(Point newLocation)
+        {
+            location = newLocation;
         }
         public string getStat()
         {
