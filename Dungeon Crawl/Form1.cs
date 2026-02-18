@@ -34,7 +34,7 @@ namespace Dungeon_Crawl
         int upDownMove = 0;
         int sideMove = 0;
 
-        Item[] equipedItems = new Item[5]{null, null, null, null, null};
+        Item[] equipedItems = new Item[5] { null, null, null, null, null };
 
         List<Item> itemsOnScreen = new List<Item>();
 
@@ -48,6 +48,7 @@ namespace Dungeon_Crawl
         private void Form1_Load(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Maximized;
+            Console.WriteLine("Screen Size: " + Screen.PrimaryScreen.Bounds.Width + "," + Screen.PrimaryScreen.Bounds.Height);
         }
         private void startButton_Click(object sender, EventArgs e)
         {
@@ -60,12 +61,15 @@ namespace Dungeon_Crawl
         }
         private void StartGame()
         {
+            Cursor.Hide();
             SpawnItems();
             Invalidate();
         }
         private void OpenPauseMenu()
         {
             //Sets the buttons to visible and then calls the method to open the pause menu
+            Cursor.Position = new Point(768, 300);
+            Cursor.Show();
             inGame = false;
             Movement.Enabled = false;
             resumeButton.Visible = true;
@@ -74,36 +78,38 @@ namespace Dungeon_Crawl
         }
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
-            switch (e.KeyCode)
+            if (!quitButton.Visible)
             {
-                case Keys.Escape:
-                    OpenPauseMenu();
-                    break;
-                case Keys.W:
-                    upDownMove = -5;
-                    break;
-                case Keys.S:
-                    upDownMove = 5;
-                    break;
-                case Keys.A:
-                    sideMove = -5;
-                    break;
-                case Keys.D:
-                    sideMove = 5;
-                    break;
-                case Keys.E:
-                    //Checks to see if the inventory is open or not when the E key is pressed
-                    if (!inventoryOpen && !resumeButton.Visible)
-                    {
-                        OpenInventory();
-                    }
-                    else if (inventoryOpen && !resumeButton.Visible)
-                    {
-                        CloseInventory();
-                    }
-                    break;
+                switch (e.KeyCode)
+                {
+                    case Keys.Escape:
+                        OpenPauseMenu();
+                        break;
+                    case Keys.W:
+                        upDownMove = -5;
+                        break;
+                    case Keys.S:
+                        upDownMove = 5;
+                        break;
+                    case Keys.A:
+                        sideMove = -5;
+                        break;
+                    case Keys.D:
+                        sideMove = 5;
+                        break;
+                    case Keys.E:
+                        //Checks to see if the inventory is open or not when the E key is pressed
+                        if (!inventoryOpen && !resumeButton.Visible)
+                        {
+                            OpenInventory();
+                        }
+                        else if (inventoryOpen && !resumeButton.Visible)
+                        {
+                            CloseInventory();
+                        }
+                        break;
+                }
             }
-
             Invalidate();
         }
         private void quitButton_Click(object sender, EventArgs e)
@@ -113,6 +119,7 @@ namespace Dungeon_Crawl
         private void resumeButton_Click(object sender, EventArgs e)
         {
             //Sets the buttons to invisible and then calls the method to resume the game
+            Cursor.Hide();
             if (!inventoryOpen)
             {
                 inGame = true;
@@ -132,7 +139,7 @@ namespace Dungeon_Crawl
                 ResLabel.Visible = true;
                 MonLabel.Visible = true;
             }
-                Movement.Enabled = true;
+            Movement.Enabled = true;
             quitButton.Visible = false;
             settingsButton.Visible = false;
             resumeButton.Visible = false;
@@ -225,7 +232,7 @@ namespace Dungeon_Crawl
 
             }
             else if (inventoryOpen && !resumeButton.Visible)
-            { 
+            {
                 //Draws the inventory screen
                 e.Graphics.DrawImage(ISq, 800, 200);
                 e.Graphics.DrawImage(ISq, 800, 325);
@@ -233,6 +240,28 @@ namespace Dungeon_Crawl
                 e.Graphics.DrawImage(ISq, 925, 262);
                 e.Graphics.DrawImage(ISq, 925, 387);
                 e.Graphics.DrawImage(ISc, 625, 200);
+
+                if (equipedItems[0] != null)
+                {
+                    e.Graphics.DrawImage(armor, 825, 225);
+                }
+
+                if (equipedItems[1] != null)
+                {
+                    e.Graphics.DrawImage(weapon, 825, 350);
+                }
+
+                if (equipedItems[2] != null)
+                {
+                    e.Graphics.DrawImage(staff, 825, 475);
+                }
+
+                if (equipedItems[3] != null)
+                {
+                    e.Graphics.DrawImage(jewlery, 950, 287);
+                }
+
+                e.Graphics.DrawImage(money, 950, 412);
             }
         }
         private void Movement_Tick(object sender, EventArgs e)
@@ -240,25 +269,100 @@ namespace Dungeon_Crawl
             //Constantly updates the players position relative to if they are moving or not
             pY += upDownMove;
 
-            if (pY <= 50)
+            //Checks to see if the player is trying to move through the top wall and if they are it sets their position to be right next to the wall instead of going through it
+            if (pY <= 50 && pY >= 45 && (pX <= 668 || pX >= 793))
             {
                 pY = 50;
             }
-            
-            if (pY >= 739)
+
+            //Checks to see if the player is trying to move through the bottom wall and if they are it sets their position to be right next to the wall instead of going through it
+            if (pY >= 739 && pY <= 744 && (pX <= 668 || pX >= 793))
             {
                 pY = 739;
             }
+
+            //Checks to see if the player is trying to move through the left wall in the top corridor and if they are it sets their position to be right next to the wall instead of going through it
+            if (pX <= 45 && pY <= 332)
+            {
+                pY = 332;
+            }
+
+            //Checks to see if the player is trying to move through the right wall in the top corridor and if they are it sets their position to be right next to the wall instead of going through it
+            if (pX <= 45 && pY >= 457)
+            {
+                pY = 457;
+            }
+            //Checks to see if the player is trying to move through the left wall in the bottom corridor and if they are it sets their position to be right next to the wall instead of going through it
+            if (pX >= 1416 && pY <= 332)
+            {
+                pY = 332;
+            }
+
+            //Checks to see if the player is trying to move through the right wall in the bottom corridor and if they are it sets their position to be right next to the wall instead of going through it
+            if (pX >= 1416 && pY >= 457)
+            {
+                pY = 457;
+            }
+
+            //Checks to see if the player is trying to move off screen and if they are it sets their position to be right next to the edge of the screen instead of going through it
+            if (pY < 0)
+            {
+                pY = 789;
+                SpawnItems();
+            }
+
+            if (pY > 789)
+            {
+                pY = 789;
+            }
+
             pX += sideMove;
 
-            if (pX <= 50)
+            //Checks to see if the player is trying to move through the left wall and if they are it sets their position to be right next to the wall instead of going through it
+            if (pX <= 50 && pX >= 45 && (pY <= 332 || pY >= 457))
             {
                 pX = 50;
             }
 
-            if (pX >= 1411)
+            //Checks to see if the player is trying to move through the right wall and if they are it sets their position to be right next to the wall instead of going through it
+            if (pX >= 1411 && pX <= 1416 && (pY <= 332 || pY >= 457))
             {
                 pX = 1411;
+            }
+
+            //Checks to see if the player is trying to move through the top wall in the right corridor and if they are it sets their position to be right next to the wall instead of going through it
+            if (pY <= 45 && pX <= 668)
+            {
+                pX = 668;
+            }
+
+            //Checks to see if the player is trying to move through the bottom wall in the right corridor and if they are it sets their position to be right next to the wall instead of going through it
+            if (pY <= 45 && pX >= 793)
+            {
+                pX = 793;
+            }
+
+            //Checks to see if the player is trying to move through the top wall in the left corridor and if they are it sets their position to be right next to the wall instead of going through it
+            if (pY >= 744 && pX <= 668)
+            {
+                pX = 668;
+            }
+
+            //Checks to see if the player is trying to move through the bottom wall in the left corridor and if they are it sets their position to be right next to the wall instead of going through it
+            if (pY >= 744 && pX >= 793)
+            {
+                pX = 793;
+            }
+
+            //Checks to see if the player is trying to move off screen and if they are it sets their position to be right next to the edge of the screen instead of going through it
+            if (pX < 0)
+            {
+                pX = 0;
+            }
+
+            if (pX > 1461)
+            {
+                pX = 1461;
             }
 
             Invalidate();
@@ -312,14 +416,15 @@ namespace Dungeon_Crawl
             //Spawns items at the start of new rooms for the player to pick up and adds them to the itemsOnScreen list
             bool spawnItem = false;
             int itemSpawned = 0;
+
+            itemsOnScreen.Clear();
+
             for (int i = 0; i < difficulty; i++)
             {
-                if (ran.Next(1, 5) == 4)
+                if (ran.Next(1, 3) == 2)
                 {
                     spawnItem = true;
                 }
-
-                spawnItem = true;
 
                 if (spawnItem)
                 {
@@ -374,7 +479,7 @@ namespace Dungeon_Crawl
                     }
                     else if (itemsOnScreen[i].getType() == "jewlery" && equipedItems[3] == null)
                     {
-                        equipedItems[3] = itemsOnScreen[i]; 
+                        equipedItems[3] = itemsOnScreen[i];
                         itemsOnScreen.RemoveAt(i);
                         setStats();
                     }
@@ -439,6 +544,8 @@ namespace Dungeon_Crawl
             string message = null;
             DialogResult result;
 
+            Cursor.Position = new Point(768, 300);
+            Cursor.Show();
             inGame = false;
             upDownMove = 0;
             sideMove = 0;
@@ -467,9 +574,9 @@ namespace Dungeon_Crawl
                         Invalidate();
                     }
                 }
-                else if (equiped.getAmount() > onGround.getAmount())
+                else if (equiped.getAmount() >= onGround.getAmount())
                 {
-                    message = "Do you want to equip this item? It has worse stats than your current item. \nWARNING: THIS CANNOT BE UNDON. ANY ITEM NOT EQUIPED WILL BE LOST FOREVER";
+                    message = "Do you want to equip this item? It has the same or worse stats than your current item. \nWARNING: THIS CANNOT BE UNDON. ANY ITEM NOT EQUIPED WILL BE LOST FOREVER";
                     result = MessageBox.Show(message, null, MessageBoxButtons.YesNo);
                     if (result == DialogResult.Yes)
                     {
@@ -514,9 +621,9 @@ namespace Dungeon_Crawl
                         Invalidate();
                     }
                 }
-                else if (equiped.getAmount() > onGround.getAmount())
+                else if (equiped.getAmount() >= onGround.getAmount())
                 {
-                    message = "Do you want to equip this item? It has worse stats than your current item. \nWARNING: THIS CANNOT BE UNDON. ANY ITEM NOT EQUIPED WILL BE LOST FOREVER";
+                    message = "Do you want to equip this item? It has the same or worse stats than your current item. \nWARNING: THIS CANNOT BE UNDON. ANY ITEM NOT EQUIPED WILL BE LOST FOREVER";
                     result = MessageBox.Show(message, null, MessageBoxButtons.YesNo);
                     if (result == DialogResult.Yes)
                     {
@@ -561,9 +668,9 @@ namespace Dungeon_Crawl
                         Invalidate();
                     }
                 }
-                else if (equiped.getAmount() > onGround.getAmount())
+                else if (equiped.getAmount() >= onGround.getAmount())
                 {
-                    message = "Do you want to equip this item? It has worse stats than your current item. \nWARNING: THIS CANNOT BE UNDON. ANY ITEM NOT EQUIPED WILL BE LOST FOREVER";
+                    message = "Do you want to equip this item? It has the same or worse stats than your current item. \nWARNING: THIS CANNOT BE UNDON. ANY ITEM NOT EQUIPED WILL BE LOST FOREVER";
                     result = MessageBox.Show(message, null, MessageBoxButtons.YesNo);
                     if (result == DialogResult.Yes)
                     {
@@ -608,9 +715,9 @@ namespace Dungeon_Crawl
                         Invalidate();
                     }
                 }
-                else if (equiped.getAmount() > onGround.getAmount())
+                else if (equiped.getAmount() >= onGround.getAmount())
                 {
-                    message = "Do you want to equip this item? It has worse stats than your current item. \nWARNING: THIS CANNOT BE UNDON. ANY ITEM NOT EQUIPED WILL BE LOST FOREVER";
+                    message = "Do you want to equip this item? It has the same or worse stats than your current item. \nWARNING: THIS CANNOT BE UNDON. ANY ITEM NOT EQUIPED WILL BE LOST FOREVER";
                     result = MessageBox.Show(message, null, MessageBoxButtons.YesNo);
                     if (result == DialogResult.Yes)
                     {
@@ -631,6 +738,8 @@ namespace Dungeon_Crawl
                     }
                 }
             }
+
+            Cursor.Hide();
         }
     }
 }
