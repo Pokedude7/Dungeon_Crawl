@@ -110,15 +110,15 @@ namespace Dungeon_Crawl
             rarity = newRarity;
             if (rarity == 0)
             {
-                amountIncrease = ran.Next(1, 2);
+                amountIncrease = ran.Next(1, 3);
             }
             else if (rarity == 1)
             {
-                amountIncrease = ran.Next(2, 5);
+                amountIncrease = ran.Next(3, 6);
             }
             else if (rarity == 2)
             {
-                amountIncrease = ran.Next(5, 8);
+                amountIncrease = ran.Next(5, 9);
             }
         }
         public void setType(string newType)

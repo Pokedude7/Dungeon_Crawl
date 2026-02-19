@@ -30,6 +30,7 @@ namespace Dungeon_Crawl
         int pX = 100;
         int pY = 100;
         int difficulty = 1;
+        char enteredFrom = ' ';
 
         int upDownMove = 0;
         int sideMove = 0;
@@ -49,6 +50,11 @@ namespace Dungeon_Crawl
         {
             this.WindowState = FormWindowState.Maximized;
             Console.WriteLine("Screen Size: " + Screen.PrimaryScreen.Bounds.Width + "," + Screen.PrimaryScreen.Bounds.Height);
+            MonLabel.Location = new Point(1000, 462);
+            StrLabel.Location = new Point(670, 220);
+            DefLabel.Location = new Point(670, 270);
+            MagicLabel.Location = new Point(660, 320);
+            ResLabel.Location = new Point(670, 370);
         }
         private void startButton_Click(object sender, EventArgs e)
         {
@@ -57,6 +63,7 @@ namespace Dungeon_Crawl
             settingsButton.Visible = false;
             quitButton.Visible = false;
             inGame = true;
+            
             StartGame();
         }
         private void StartGame()
@@ -75,6 +82,11 @@ namespace Dungeon_Crawl
             resumeButton.Visible = true;
             settingsButton.Visible = true;
             quitButton.Visible = true;
+            StrLabel.Visible = false;
+            DefLabel.Visible = false;
+            MagicLabel.Visible = false;
+            ResLabel.Visible = false;
+            MonLabel.Visible = false;
         }
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
@@ -305,18 +317,29 @@ namespace Dungeon_Crawl
             }
 
             //Checks to see if the player is trying to move off screen and if they are it sets their position to be right next to the edge of the screen instead of going through it
-            if (pY < 0)
+            if (pY < 0 && enteredFrom != 'n')
             {
+                enteredFrom = 's';
                 pY = 789;
                 SpawnItems();
             }
+            else if (pY < 0)
+            {
+                pY = 0;
+            }
 
-            if (pY > 789)
+            if (pY > 789 && enteredFrom != 's')
+            {
+                enteredFrom = 'n';
+                pY = 0;
+                SpawnItems();
+            }
+            else if (pY > 789)
             {
                 pY = 789;
             }
 
-            pX += sideMove;
+                pX += sideMove;
 
             //Checks to see if the player is trying to move through the left wall and if they are it sets their position to be right next to the wall instead of going through it
             if (pX <= 50 && pX >= 45 && (pY <= 332 || pY >= 457))
@@ -355,12 +378,24 @@ namespace Dungeon_Crawl
             }
 
             //Checks to see if the player is trying to move off screen and if they are it sets their position to be right next to the edge of the screen instead of going through it
-            if (pX < 0)
+            if (pX < 0 && enteredFrom != 'w')
+            {
+                enteredFrom = 'e';
+                pX = 1461;
+                SpawnItems();
+            }
+            else if (pX < 0)
             {
                 pX = 0;
             }
 
-            if (pX > 1461)
+            if (pX > 1461 && enteredFrom != 'e')
+            {
+                enteredFrom = 'w';
+                pX = 0;
+                SpawnItems();
+            }
+            else if (pX > 1461)
             {
                 pX = 1461;
             }
@@ -392,7 +427,7 @@ namespace Dungeon_Crawl
             DefLabel.Text = "Def: " + pc.getDefense();
             MagicLabel.Text = "Magic: " + pc.getMagic();
             ResLabel.Text = "Res: " + pc.getResistance();
-            MonLabel.Text = "Money: " + pc.getMoney();
+            MonLabel.Text = Convert.ToString(pc.getMoney());
             inventoryOpen = true;
             StrLabel.Visible = true;
             DefLabel.Visible = true;
@@ -432,23 +467,23 @@ namespace Dungeon_Crawl
 
                     if (itemSpawned == 1)
                     {
-                        itemsOnScreen.Add(new Item("armor", ran.Next(difficulty - 1, difficulty)));
+                        itemsOnScreen.Add(new Item("armor", ran.Next(difficulty - 1, difficulty + 1)));
                     }
                     else if (itemSpawned == 2)
                     {
-                        itemsOnScreen.Add(new Item("weapon", ran.Next(difficulty - 1, difficulty)));
+                        itemsOnScreen.Add(new Item("weapon", ran.Next(difficulty - 1, difficulty + 1)));
                     }
                     else if (itemSpawned == 3)
                     {
-                        itemsOnScreen.Add(new Item("staff", ran.Next(difficulty - 1, difficulty)));
+                        itemsOnScreen.Add(new Item("staff", ran.Next(difficulty - 1, difficulty + 1)));
                     }
                     else if (itemSpawned == 4)
                     {
-                        itemsOnScreen.Add(new Item("jewlery", ran.Next(difficulty - 1, difficulty)));
+                        itemsOnScreen.Add(new Item("jewlery", ran.Next(difficulty - 1, difficulty + 1)));
                     }
                     else if (itemSpawned == 5)
                     {
-                        itemsOnScreen.Add(new Item("money", ran.Next(difficulty - 1, difficulty)));
+                        itemsOnScreen.Add(new Item("money", ran.Next(difficulty - 1, difficulty + 1)));
                     }
                 }
             }

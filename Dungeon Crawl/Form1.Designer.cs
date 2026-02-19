@@ -100,7 +100,7 @@
             this.SettingsMenu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 45.25547F));
             this.SettingsMenu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 54.74453F));
             this.SettingsMenu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 58F));
-            this.SettingsMenu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 68F));
+            this.SettingsMenu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 69F));
             this.SettingsMenu.Controls.Add(this.textBox4, 3, 1);
             this.SettingsMenu.Controls.Add(this.label2, 0, 0);
             this.SettingsMenu.Controls.Add(this.textBox1, 0, 1);
@@ -120,7 +120,7 @@
             // 
             // textBox4
             // 
-            this.textBox4.Location = new System.Drawing.Point(194, 38);
+            this.textBox4.Location = new System.Drawing.Point(193, 38);
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(59, 22);
             this.textBox4.TabIndex = 6;
@@ -150,7 +150,7 @@
             // 
             this.textBox2.Location = new System.Drawing.Point(63, 38);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(67, 22);
+            this.textBox2.Size = new System.Drawing.Size(66, 22);
             this.textBox2.TabIndex = 2;
             this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
@@ -160,14 +160,14 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(63, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(67, 32);
+            this.label1.Size = new System.Drawing.Size(59, 35);
             this.label1.TabIndex = 0;
             this.label1.Text = "Walk Backward";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // textBox3
             // 
-            this.textBox3.Location = new System.Drawing.Point(136, 38);
+            this.textBox3.Location = new System.Drawing.Point(135, 38);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(52, 22);
             this.textBox3.TabIndex = 4;
@@ -177,7 +177,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(136, 0);
+            this.label3.Location = new System.Drawing.Point(135, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(38, 32);
             this.label3.TabIndex = 3;
@@ -187,7 +187,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(194, 0);
+            this.label4.Location = new System.Drawing.Point(193, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(62, 16);
             this.label4.TabIndex = 5;
@@ -214,9 +214,12 @@
             // StrLabel
             // 
             this.StrLabel.AutoSize = true;
+            this.StrLabel.BackColor = System.Drawing.Color.Transparent;
+            this.StrLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.StrLabel.ForeColor = System.Drawing.Color.White;
             this.StrLabel.Location = new System.Drawing.Point(72, 60);
             this.StrLabel.Name = "StrLabel";
-            this.StrLabel.Size = new System.Drawing.Size(44, 16);
+            this.StrLabel.Size = new System.Drawing.Size(92, 32);
             this.StrLabel.TabIndex = 6;
             this.StrLabel.Text = "label5";
             this.StrLabel.Visible = false;
@@ -224,9 +227,12 @@
             // DefLabel
             // 
             this.DefLabel.AutoSize = true;
+            this.DefLabel.BackColor = System.Drawing.Color.Transparent;
+            this.DefLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DefLabel.ForeColor = System.Drawing.Color.White;
             this.DefLabel.Location = new System.Drawing.Point(75, 90);
             this.DefLabel.Name = "DefLabel";
-            this.DefLabel.Size = new System.Drawing.Size(44, 16);
+            this.DefLabel.Size = new System.Drawing.Size(92, 32);
             this.DefLabel.TabIndex = 7;
             this.DefLabel.Text = "label6";
             this.DefLabel.Visible = false;
@@ -234,9 +240,12 @@
             // MagicLabel
             // 
             this.MagicLabel.AutoSize = true;
+            this.MagicLabel.BackColor = System.Drawing.Color.Transparent;
+            this.MagicLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MagicLabel.ForeColor = System.Drawing.Color.White;
             this.MagicLabel.Location = new System.Drawing.Point(75, 110);
             this.MagicLabel.Name = "MagicLabel";
-            this.MagicLabel.Size = new System.Drawing.Size(44, 16);
+            this.MagicLabel.Size = new System.Drawing.Size(92, 32);
             this.MagicLabel.TabIndex = 8;
             this.MagicLabel.Text = "label7";
             this.MagicLabel.Visible = false;
@@ -244,9 +253,12 @@
             // ResLabel
             // 
             this.ResLabel.AutoSize = true;
+            this.ResLabel.BackColor = System.Drawing.Color.Transparent;
+            this.ResLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ResLabel.ForeColor = System.Drawing.Color.White;
             this.ResLabel.Location = new System.Drawing.Point(78, 132);
             this.ResLabel.Name = "ResLabel";
-            this.ResLabel.Size = new System.Drawing.Size(44, 16);
+            this.ResLabel.Size = new System.Drawing.Size(92, 32);
             this.ResLabel.TabIndex = 9;
             this.ResLabel.Text = "label8";
             this.ResLabel.Visible = false;
@@ -254,6 +266,7 @@
             // MonLabel
             // 
             this.MonLabel.AutoSize = true;
+            this.MonLabel.BackColor = System.Drawing.Color.Transparent;
             this.MonLabel.Location = new System.Drawing.Point(82, 163);
             this.MonLabel.Name = "MonLabel";
             this.MonLabel.Size = new System.Drawing.Size(44, 16);
