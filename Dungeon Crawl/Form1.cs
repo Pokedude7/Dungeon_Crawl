@@ -30,7 +30,7 @@ namespace Dungeon_Crawl
         int pX = 100;
         int pY = 100;
         int difficulty = 1;
-        char enteredFrom = ' ';
+        char enteredFrom = 's';
 
         int upDownMove = 0;
         int sideMove = 0;
@@ -40,6 +40,8 @@ namespace Dungeon_Crawl
         List<Item> itemsOnScreen = new List<Item>();
 
         Player pc = new Player();
+
+        int encountersInRoom = 0;
 
 
         public Form1()
@@ -320,23 +322,23 @@ namespace Dungeon_Crawl
             if (pY < 0 && enteredFrom != 'n')
             {
                 enteredFrom = 's';
-                pY = 789;
-                SpawnItems();
+                EnterRoom();
             }
             else if (pY < 0)
             {
                 pY = 0;
+                upDownMove = 0;
             }
 
             if (pY > 789 && enteredFrom != 's')
             {
                 enteredFrom = 'n';
-                pY = 0;
-                SpawnItems();
+                EnterRoom();
             }
             else if (pY > 789)
             {
                 pY = 789;
+                upDownMove = 0;
             }
 
                 pX += sideMove;
@@ -381,26 +383,31 @@ namespace Dungeon_Crawl
             if (pX < 0 && enteredFrom != 'w')
             {
                 enteredFrom = 'e';
-                pX = 1461;
-                SpawnItems();
+                EnterRoom();
             }
             else if (pX < 0)
             {
                 pX = 0;
+                sideMove = 0;
             }
 
             if (pX > 1461 && enteredFrom != 'e')
             {
                 enteredFrom = 'w';
-                pX = 0;
-                SpawnItems();
+                EnterRoom();
             }
             else if (pX > 1461)
             {
                 pX = 1461;
+                sideMove = 0;
             }
 
-            Invalidate();
+            if (sideMove != 0 || upDownMove != 0)
+            {
+                SpawnEncounter();
+            }
+
+                Invalidate();
         }
         private void Form1_KeyUp(object sender, KeyEventArgs e)
         {
@@ -775,6 +782,39 @@ namespace Dungeon_Crawl
             }
 
             Cursor.Hide();
+        }
+        private void EnterRoom()
+        {
+            if (enteredFrom == 'n')
+            {
+                pY = 50;
+            }
+            else if (enteredFrom == 's')
+            {
+                pY = 739;
+            }
+            else if (enteredFrom == 'e')
+            {
+                pX = 1411;
+            }
+            else if (enteredFrom == 'w')
+            {
+                pX = 50;
+            }
+            SpawnItems();
+            encountersInRoom = ran.Next(1, difficulty + 2);
+        }
+        private void SpawnEncounter()
+        {
+            int encounterChance = ran.Next(1, 101);
+            int enemySpawn = 1;//ran.Next(1, 4);
+            if (inGame && encountersInRoom != 0 && encounterChance == 1)
+            {
+                if (enemySpawn == 1)
+                {
+                    
+                }
+            }
         }
     }
 }
