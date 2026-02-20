@@ -15,6 +15,8 @@ namespace Dungeon_Crawl
         double health;
         double maxHealth;
         double money;
+        int level;
+        int exp;
 
         public Player()
         {
@@ -25,6 +27,8 @@ namespace Dungeon_Crawl
             health = 10;
             maxHealth = 10;
             money = 0;
+            level = 1;
+            exp = 0;
         }
 
         public void setStrength(double strength)
@@ -84,11 +88,31 @@ namespace Dungeon_Crawl
         {
             return money;
         }
+        public int getLevel()
+        {
+            return level;
+        }
 
         public void addMoney(int money)
         {
             this.money += money;
         }
-
+        public void addExp(int exp)
+        {
+            this.exp += exp;
+            if (exp >= 30 * level)
+            {
+                levelUp();
+            }
+        }
+        public void levelUp()
+        {
+            exp -= 30 * level;
+            level++;
+        }
+        public void TakeDamage(double damage)
+        {
+            health -= damage;
+        }
     }
 }

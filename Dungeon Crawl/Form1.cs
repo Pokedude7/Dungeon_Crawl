@@ -41,8 +41,12 @@ namespace Dungeon_Crawl
 
         Player pc = new Player();
 
-        int encountersInRoom = 0;
+        Enemy enemy;
 
+        int encountersInRoom = 0;
+        bool inFight = false;
+        bool turnOver = false;
+        int whosTurn = 0;
 
         public Form1()
         {
@@ -57,6 +61,9 @@ namespace Dungeon_Crawl
             DefLabel.Location = new Point(670, 270);
             MagicLabel.Location = new Point(660, 320);
             ResLabel.Location = new Point(670, 370);
+            attackButton.Visible = false;
+            magicButton.Visible = false;
+            runButton.Visible = false;
         }
         private void startButton_Click(object sender, EventArgs e)
         {
@@ -65,7 +72,7 @@ namespace Dungeon_Crawl
             settingsButton.Visible = false;
             quitButton.Visible = false;
             inGame = true;
-            
+
             StartGame();
         }
         private void StartGame()
@@ -76,7 +83,7 @@ namespace Dungeon_Crawl
         }
         private void OpenPauseMenu()
         {
-            //Sets the buttons to visible and then calls the method to open the pause menu
+            //Sets the buttons to visible and then opens the pause menu
             Cursor.Position = new Point(768, 300);
             Cursor.Show();
             inGame = false;
@@ -217,6 +224,9 @@ namespace Dungeon_Crawl
         {
             if (inGame)
             {
+                PCHealthLabel.Visible = false;
+                EnemyHealthLabel.Visible = false;
+
                 //Draws the character sprite where the player is located on the screen
                 e.Graphics.DrawImage(CS, pX, pY);
 
@@ -276,6 +286,13 @@ namespace Dungeon_Crawl
                 }
 
                 e.Graphics.DrawImage(money, 950, 412);
+            }
+            else if (inFight)
+            {
+                PCHealthLabel.Text = "PC Health: " + pc.getHealth() + "/" + pc.getMaxHealth();
+                EnemyHealthLabel.Text = "Enemy Health: " + enemy.getHealth() + "/" + enemy.getMaxHealth();
+                PCHealthLabel.Visible = true;
+                EnemyHealthLabel.Visible = true;
             }
         }
         private void Movement_Tick(object sender, EventArgs e)
@@ -341,7 +358,7 @@ namespace Dungeon_Crawl
                 upDownMove = 0;
             }
 
-                pX += sideMove;
+            pX += sideMove;
 
             //Checks to see if the player is trying to move through the left wall and if they are it sets their position to be right next to the wall instead of going through it
             if (pX <= 50 && pX >= 45 && (pY <= 332 || pY >= 457))
@@ -407,7 +424,7 @@ namespace Dungeon_Crawl
                 SpawnEncounter();
             }
 
-                Invalidate();
+            Invalidate();
         }
         private void Form1_KeyUp(object sender, KeyEventArgs e)
         {
@@ -806,14 +823,137 @@ namespace Dungeon_Crawl
         }
         private void SpawnEncounter()
         {
-            int encounterChance = ran.Next(1, 101);
+            int encounterChance = ran.Next(1, 50);
             int enemySpawn = 1;//ran.Next(1, 4);
-            if (inGame && encountersInRoom != 0 && encounterChance == 1)
+            if (encountersInRoom != 0 && encounterChance == 1)
             {
                 if (enemySpawn == 1)
                 {
-                    
+                    enemy = new Enemy("skeleton", ran.Next(difficulty, difficulty + 2));
+                    StartFight();
                 }
+            }
+        }
+        private void StartFight()
+        {
+            inFight = true;
+            whosTurn = 1;//ran.Next(1, 3);
+            turnOver = false;
+            encountersInRoom--;
+
+            PlayerButtonsVisible();
+            TakeTurn();
+            Invalidate();
+        }
+        private void PlayerButtonsVisible()
+        {
+            if (!turnOver)
+            {
+                inGame = false;
+                attackButton.Visible = true;
+                magicButton.Visible = true;
+                runButton.Visible = true;
+
+                Cursor.Show();
+            }
+            else
+            {
+                attackButton.Visible = false;
+                magicButton.Visible = false;
+                runButton.Visible = false;
+
+                Cursor.Hide();
+            }
+        }
+        private void EnemyTurn()
+        {
+            if (enemy.getEnemyType() == "skeleton")
+            {
+                if (enemy.getStr() - (1 / 2 * pc.getDefense()) <= 0)
+                {
+                    pc.TakeDamage(1);
+                }
+                else
+                {
+                    pc.TakeDamage((int)(enemy.getStr() - (1 / 2 * pc.getDefense())));
+                }
+            }
+
+            whosTurn = 1;
+            TakeTurn();
+        }
+        private void attackButton_Click(object sender, EventArgs e)
+        {
+            if (pc.getStrength() - (1 / 2 * enemy.getDef()) <= 0)
+            {
+                enemy.TakeDamage(1);
+            }
+            else
+            {
+                enemy.TakeDamage((int)pc.getStrength() - (1 / 2 * enemy.getDef()));
+            }
+            turnOver = true;
+            whosTurn = 2;
+            TakeTurn();
+        }
+        private void magicButton_Click(object sender, EventArgs e)
+        {
+            enemy.TakeDamage((int)pc.getMagic() - (1 / 2 * enemy.getRes()));
+            turnOver = true;
+            whosTurn = 2;
+            TakeTurn();
+        }
+        private void runButton_Click(object sender, EventArgs e)
+        {
+            if (pc.getLevel() > enemy.getLevel())
+            {
+                inFight = false;
+                turnOver = true;
+                PlayerButtonsVisible();
+            }
+            else
+            {
+                int n = enemy.getLevel() - pc.getLevel();
+
+                if (ran.Next(1, n + 3) == 1)
+                {
+                    inFight = false;
+                    turnOver = true;
+                    inGame = true;
+                    PlayerButtonsVisible();
+                }
+                else
+                {
+                    MessageBox.Show("You failed to run away");
+                    turnOver = true;
+                    whosTurn = 2;
+                }
+            }
+
+            TakeTurn();
+        }
+        private void ShutOff_Tick(object sender, EventArgs e)
+        {
+            if (!inGame)
+            {
+                Movement.Enabled = false;
+                ItemCheck.Enabled = false;
+            }
+            else
+            {
+                Movement.Enabled = true;
+                ItemCheck.Enabled = true;
+            }
+        }
+        private void TakeTurn()
+        {
+            PCHealthLabel.Text = "PC Health: " + pc.getHealth() + "/" + pc.getMaxHealth();
+            EnemyHealthLabel.Text = "Enemy Health: " + enemy.getHealth() + "/" + enemy.getMaxHealth();
+
+            if (whosTurn == 2 && inFight && turnOver)
+            {
+                EnemyTurn();
+                whosTurn = 1;
             }
         }
     }

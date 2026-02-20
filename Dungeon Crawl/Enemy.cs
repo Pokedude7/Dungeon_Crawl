@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Dungeon_Crawl
 {
@@ -26,12 +22,14 @@ namespace Dungeon_Crawl
             int randomItem = ran.Next(1, 4);
             if (enemyType == "skeleton")
             {
-                health = 10 * (1/2 * enemyLevel);
-                maxHealth = health;
-                strength = 2 * (1/2 * enemyLevel);
-                magic = 0;
-                defense = 1 * (1/2 * enemyLevel);
-                resistance = 1 * (1/2 * enemyLevel);
+                setLevel(enemyLevel);
+                setEnemyType(enemyType);
+                setHealth((int)(10 * (0.5 * enemyLevel)));
+                setMaxHealth((int)(10 * (0.5 * enemyLevel)));
+                setStr((int)(2 * (0.5 * enemyLevel)));
+                setMagic(0);
+                setDef((int)(1 * (0.5 * enemyLevel)));
+                setRes((int)(1 * (0.5 * enemyLevel)));
                 expReward = ran.Next(5 * enemyLevel, 10 * enemyLevel + 1);
                 moneyReward = ran.Next(1 * enemyLevel, 5 * enemyLevel + 1);
                 if (randomItem == 1)
@@ -49,74 +47,87 @@ namespace Dungeon_Crawl
             }
         }
 
-        public int GetHealth()
+        public int getHealth()
         {
             return health;
         }
-        public int GetStr()
+        public int getStr()
         {
             return strength;
         }
-        public int GetDef()
+        public int getDef()
         {
             return defense;
         }
-        public int GetMagic()
+        public int getMagic()
         {
             return magic;
         }
-        public int GetRes()
+        public int getRes()
         {
             return resistance;
         }
-        public int GetMaxHealth()
+        public int getMaxHealth()
         {
             return maxHealth;
         }
-        public string GetEnemyType()
+        public string getEnemyType()
         {
             return enemyType;
         }
-        public int GetLevel()
+        public int getLevel()
         {
             return enemyLevel;
         }
-        public int GetXPReward()
+        public int getXPReward()
         {
             return expReward;
         }
-        public int GetMonReward()
+        public int getMonReward()
         {
             return moneyReward;
         }
-        public Item GetItem()
+        public Item getItem()
         {
             return item;
         }
 
-        public void SetHelth(int health)
+        public void setEnemyType(string enemyType)
+        {
+            this.enemyType = enemyType;
+        }
+        public void setHealth(int health)
         {
             this.health = health;
         }
-        public void SetStr(int strength)
+        public void setStr(int strength)
         {
             this.strength = strength;
         }
-        public void SetDef(int defense)
+        public void setDef(int defense)
         {
             this.defense = defense;
         }
-        public void SetMagic(int magic)
+        public void setMagic(int magic)
         {
             this.magic = magic;
         }
-        public void SetRes(int resistance)
+        public void setRes(int resistance)
         {
             this.resistance = resistance;
         }
-        public void SetMaxHealth(int maxHealth)
+        public void setMaxHealth(int maxHealth)
         {
             this.maxHealth = maxHealth;
+        }
+        public void setLevel(int enemyLevel)
+        {
+            this.enemyLevel = enemyLevel;
+        }
+
+        public void TakeDamage(int damage)
+        {
+            health -= damage;
         }
     }
 }
