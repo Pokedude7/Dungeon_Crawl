@@ -19,7 +19,7 @@ namespace Dungeon_Crawl
 
         public Enemy(string enemyType, int enemyLevel)
         {
-            int randomItem = ran.Next(1, 4);
+            int randomItem = ran.Next(1, 5);
             if (enemyType == "skeleton")
             {
                 setLevel(enemyLevel);

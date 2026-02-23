@@ -46,7 +46,7 @@ namespace Dungeon_Crawl
         int encountersInRoom = 0;
         bool inFight = false;
         bool turnOver = false;
-        int whosTurn = 0;
+        int whoseturn = 0;
 
         public Form1()
         {
@@ -837,7 +837,7 @@ namespace Dungeon_Crawl
         private void StartFight()
         {
             inFight = true;
-            whosTurn = 1;//ran.Next(1, 3);
+            whoseturn = ran.Next(1, 3);
             turnOver = false;
             encountersInRoom--;
 
@@ -879,7 +879,7 @@ namespace Dungeon_Crawl
                 }
             }
 
-            whosTurn = 1;
+            whoseturn = 1;
             TakeTurn();
         }
         private void attackButton_Click(object sender, EventArgs e)
@@ -893,14 +893,14 @@ namespace Dungeon_Crawl
                 enemy.TakeDamage((int)pc.getStrength() - (1 / 2 * enemy.getDef()));
             }
             turnOver = true;
-            whosTurn = 2;
+            whoseturn = 2;
             TakeTurn();
         }
         private void magicButton_Click(object sender, EventArgs e)
         {
             enemy.TakeDamage((int)pc.getMagic() - (1 / 2 * enemy.getRes()));
             turnOver = true;
-            whosTurn = 2;
+            whoseturn = 2;
             TakeTurn();
         }
         private void runButton_Click(object sender, EventArgs e)
@@ -926,7 +926,7 @@ namespace Dungeon_Crawl
                 {
                     MessageBox.Show("You failed to run away");
                     turnOver = true;
-                    whosTurn = 2;
+                    whoseturn = 2;
                 }
             }
 
@@ -947,13 +947,33 @@ namespace Dungeon_Crawl
         }
         private void TakeTurn()
         {
+            if (whoseturn == 2)
+            {
+                turnOver = true;
+            }
+
             PCHealthLabel.Text = "PC Health: " + pc.getHealth() + "/" + pc.getMaxHealth();
             EnemyHealthLabel.Text = "Enemy Health: " + enemy.getHealth() + "/" + enemy.getMaxHealth();
 
-            if (whosTurn == 2 && inFight && turnOver)
+            if (whoseturn == 2 && inFight && turnOver && pc.getHealth() > 0 && enemy.getHealth() > 0)
             {
                 EnemyTurn();
-                whosTurn = 1;
+                whoseturn = 1;
+            }
+            else if (pc.getHealth() <= 0)
+            {
+                MessageBox.Show("You have died. Game Over.");
+                this.Close();
+            }
+            else if (enemy.getHealth() <= 0)
+            {
+                MessageBox.Show("You won! You gained " + enemy.getXPReward() + " exp and $" + enemy.getMonReward());
+                pc.addExp(enemy.getXPReward());
+                pc.addMoney(enemy.getMonReward());
+                inFight = false;
+                inGame = true;
+                turnOver = true;
+                PlayerButtonsVisible();
             }
         }
     }
