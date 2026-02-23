@@ -120,11 +120,11 @@ namespace Dungeon_Crawl
                         break;
                     case Keys.E:
                         //Checks to see if the inventory is open or not when the E key is pressed
-                        if (!inventoryOpen && !resumeButton.Visible)
+                        if (!inventoryOpen && !resumeButton.Visible && !inFight)
                         {
                             OpenInventory();
                         }
-                        else if (inventoryOpen && !resumeButton.Visible)
+                        else if (inventoryOpen && !resumeButton.Visible && !inFight)
                         {
                             CloseInventory();
                         }
@@ -829,8 +829,16 @@ namespace Dungeon_Crawl
             {
                 if (enemySpawn == 1)
                 {
-                    enemy = new Enemy("skeleton", ran.Next(difficulty, difficulty + 2));
-                    StartFight();
+                    if (pc.getLevel() == 1)
+                    {
+                        enemy = new Enemy("skeleton", pc.getLevel());
+                    }
+                    else
+                    {
+                        enemy = new Enemy("skeleton", ran.Next(pc.getLevel() - 1, pc.getLevel() + 1));
+                    }
+
+                        StartFight();
                 }
             }
         }
@@ -909,6 +917,7 @@ namespace Dungeon_Crawl
             {
                 inFight = false;
                 turnOver = true;
+                inGame = true;
                 PlayerButtonsVisible();
             }
             else
@@ -974,6 +983,12 @@ namespace Dungeon_Crawl
                 inGame = true;
                 turnOver = true;
                 PlayerButtonsVisible();
+                pc.checkLevelUp();
+            }
+
+            if (!inFight)
+            {
+                difficulty = pc.getLevel();
             }
         }
     }

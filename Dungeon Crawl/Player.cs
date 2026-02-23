@@ -107,12 +107,24 @@ namespace Dungeon_Crawl
         }
         public void levelUp()
         {
-            exp -= 30 * level;
+            exp -= 10 * level;
+            maxHealth += 5 * level;
+            health = maxHealth;
+            strength += 2 * level;
+            defense += 1 * level;
+            magic += 1 * level;
             level++;
         }
         public void TakeDamage(double damage)
         {
             health -= damage;
+        }
+        public void checkLevelUp()
+        {
+            if (exp >= 10 * level)
+            {
+                levelUp();
+            }
         }
     }
 }
