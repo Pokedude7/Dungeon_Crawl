@@ -9,9 +9,13 @@ namespace Dungeon_Crawl
     internal class Player
     {
         double strength;
+        double weaponAdd;
         double defense;
+        double armorAdd;
         double magic;
+        double staffAdd;
         double resistance;
+        double jewleryAdd;
         double health;
         double maxHealth;
         double money;
@@ -59,22 +63,38 @@ namespace Dungeon_Crawl
         {
             this.money = money;
         }
+        public void setArmorAdd(double armorAdd)
+        {
+            this.armorAdd = armorAdd;
+        }
+        public void setWeaponAdd(double weaponAdd)
+        {
+            this.weaponAdd = weaponAdd;
+        }
+        public void setStaffAdd(double staffAdd)
+        {
+            this.staffAdd = staffAdd;
+        }
+        public void setJewleryAdd(double jewleryAdd)
+        {
+            this.jewleryAdd = jewleryAdd;
+        }
 
         public double getStrength()
         {
-            return strength;
+            return strength + weaponAdd;
         }
         public double getDefense()
         {
-            return defense;
+            return defense + armorAdd;
         }
         public double getMagic()
         {
-            return magic;
+            return magic + staffAdd;
         }
         public double getResistance()
         {
-            return resistance;
+            return resistance + jewleryAdd;
         }
         public double getHealth()
         {

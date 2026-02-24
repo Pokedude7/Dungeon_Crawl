@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Reflection.Emit;
 using System.Windows.Forms;
 
 namespace Dungeon_Crawl
@@ -581,19 +582,19 @@ namespace Dungeon_Crawl
                 {
                     if (i == 0)
                     {
-                        pc.setDefense(equipedItems[i].getAmount());
+                        pc.setArmorAdd(equipedItems[i].getAmount());
                     }
                     else if (i == 1)
                     {
-                        pc.setStrength(equipedItems[i].getAmount());
+                        pc.setWeaponAdd(equipedItems[i].getAmount());
                     }
                     else if (i == 2)
                     {
-                        pc.setMagic(equipedItems[i].getAmount());
+                        pc.setStaffAdd(equipedItems[i].getAmount());
                     }
                     else if (i == 3)
                     {
-                        pc.setResistance(equipedItems[i].getAmount());
+                        pc.setJewleryAdd(equipedItems[i].getAmount());
                     }
                 }
             }
@@ -877,13 +878,13 @@ namespace Dungeon_Crawl
         {
             if (enemy.getEnemyType() == "skeleton")
             {
-                if (enemy.getStr() - (1 / 2 * pc.getDefense()) <= 0)
+                if ((enemy.getStr() - pc.getDefense()) <= 0)
                 {
                     pc.TakeDamage(1);
                 }
                 else
                 {
-                    pc.TakeDamage((int)(enemy.getStr() - (1 / 2 * pc.getDefense())));
+                    pc.TakeDamage(enemy.getStr() - pc.getDefense());
                 }
             }
 
@@ -892,13 +893,13 @@ namespace Dungeon_Crawl
         }
         private void attackButton_Click(object sender, EventArgs e)
         {
-            if (pc.getStrength() - (1 / 2 * enemy.getDef()) <= 0)
+            if (((int)pc.getStrength() - enemy.getDef()) <= 0)
             {
                 enemy.TakeDamage(1);
             }
             else
             {
-                enemy.TakeDamage((int)pc.getStrength() - (1 / 2 * enemy.getDef()));
+                enemy.TakeDamage((int)pc.getStrength() - enemy.getDef());
             }
             turnOver = true;
             whoseturn = 2;
