@@ -56,6 +56,9 @@
             this.PCHealthLabel = new System.Windows.Forms.Label();
             this.EnemyHealthLabel = new System.Windows.Forms.Label();
             this.ShutOff = new System.Windows.Forms.Timer(this.components);
+            this.HealthLabel = new System.Windows.Forms.Label();
+            this.XPLabel = new System.Windows.Forms.Label();
+            this.LevelLabel = new System.Windows.Forms.Label();
             this.SettingsMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -106,7 +109,7 @@
             this.SettingsMenu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 45.25547F));
             this.SettingsMenu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 54.74453F));
             this.SettingsMenu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 58F));
-            this.SettingsMenu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 71F));
+            this.SettingsMenu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 72F));
             this.SettingsMenu.Controls.Add(this.textBox4, 3, 1);
             this.SettingsMenu.Controls.Add(this.label2, 0, 0);
             this.SettingsMenu.Controls.Add(this.textBox1, 0, 1);
@@ -126,7 +129,7 @@
             // 
             // textBox4
             // 
-            this.textBox4.Location = new System.Drawing.Point(191, 38);
+            this.textBox4.Location = new System.Drawing.Point(190, 38);
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(59, 22);
             this.textBox4.TabIndex = 6;
@@ -147,14 +150,14 @@
             // 
             this.textBox1.Location = new System.Drawing.Point(3, 38);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(53, 22);
+            this.textBox1.Size = new System.Drawing.Size(52, 22);
             this.textBox1.TabIndex = 0;
             this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(62, 38);
+            this.textBox2.Location = new System.Drawing.Point(61, 38);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(65, 22);
             this.textBox2.TabIndex = 2;
@@ -164,7 +167,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(62, 0);
+            this.label1.Location = new System.Drawing.Point(61, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(59, 35);
             this.label1.TabIndex = 0;
@@ -173,7 +176,7 @@
             // 
             // textBox3
             // 
-            this.textBox3.Location = new System.Drawing.Point(133, 38);
+            this.textBox3.Location = new System.Drawing.Point(132, 38);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(52, 22);
             this.textBox3.TabIndex = 4;
@@ -183,7 +186,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(133, 0);
+            this.label3.Location = new System.Drawing.Point(132, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(38, 32);
             this.label3.TabIndex = 3;
@@ -193,7 +196,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(191, 0);
+            this.label4.Location = new System.Drawing.Point(190, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(62, 16);
             this.label4.TabIndex = 5;
@@ -342,12 +345,54 @@
             this.ShutOff.Interval = 10;
             this.ShutOff.Tick += new System.EventHandler(this.ShutOff_Tick);
             // 
+            // HealthLabel
+            // 
+            this.HealthLabel.AutoSize = true;
+            this.HealthLabel.BackColor = System.Drawing.Color.Transparent;
+            this.HealthLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.HealthLabel.ForeColor = System.Drawing.Color.White;
+            this.HealthLabel.Location = new System.Drawing.Point(79, 164);
+            this.HealthLabel.Name = "HealthLabel";
+            this.HealthLabel.Size = new System.Drawing.Size(92, 32);
+            this.HealthLabel.TabIndex = 16;
+            this.HealthLabel.Text = "label8";
+            this.HealthLabel.Visible = false;
+            // 
+            // XPLabel
+            // 
+            this.XPLabel.AutoSize = true;
+            this.XPLabel.BackColor = System.Drawing.Color.Transparent;
+            this.XPLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.XPLabel.ForeColor = System.Drawing.Color.White;
+            this.XPLabel.Location = new System.Drawing.Point(79, 198);
+            this.XPLabel.Name = "XPLabel";
+            this.XPLabel.Size = new System.Drawing.Size(92, 32);
+            this.XPLabel.TabIndex = 17;
+            this.XPLabel.Text = "label8";
+            this.XPLabel.Visible = false;
+            // 
+            // LevelLabel
+            // 
+            this.LevelLabel.AutoSize = true;
+            this.LevelLabel.BackColor = System.Drawing.Color.Transparent;
+            this.LevelLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LevelLabel.ForeColor = System.Drawing.Color.White;
+            this.LevelLabel.Location = new System.Drawing.Point(72, 230);
+            this.LevelLabel.Name = "LevelLabel";
+            this.LevelLabel.Size = new System.Drawing.Size(92, 32);
+            this.LevelLabel.TabIndex = 18;
+            this.LevelLabel.Text = "label8";
+            this.LevelLabel.Visible = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.ControlBox = false;
+            this.Controls.Add(this.LevelLabel);
+            this.Controls.Add(this.XPLabel);
+            this.Controls.Add(this.HealthLabel);
             this.Controls.Add(this.EnemyHealthLabel);
             this.Controls.Add(this.PCHealthLabel);
             this.Controls.Add(this.runButton);
@@ -409,6 +454,9 @@
         private System.Windows.Forms.Label PCHealthLabel;
         private System.Windows.Forms.Label EnemyHealthLabel;
         private System.Windows.Forms.Timer ShutOff;
+        private System.Windows.Forms.Label HealthLabel;
+        private System.Windows.Forms.Label XPLabel;
+        private System.Windows.Forms.Label LevelLabel;
     }
 }
 

@@ -26,10 +26,13 @@ namespace Dungeon_Crawl
         Image staff = Image.FromFile("../../StaffTemp_DungeonCrawl.png");
         Image jewlery = Image.FromFile("../../JewleryTemp_DungeonCrawl.png");
         Image money = Image.FromFile("../../MoneyTemp_DungeonCrawl.png");
+        Image wallsL = Image.FromFile("../../WallTestLSide_DungeonCrawl.png");
+        Image wallsR = Image.FromFile("../../WallTestRSide_DungeonCrawl.png");
+        Image skeleton = Image.FromFile("../../SkeletonTemp_DungeonCrawl.png");
         bool inGame = false;
         bool inventoryOpen = false;
-        int pX = 100;
-        int pY = 100;
+        int pX = 730;
+        int pY = 789;
         int difficulty = 1;
         char enteredFrom = 's';
 
@@ -62,6 +65,9 @@ namespace Dungeon_Crawl
             DefLabel.Location = new Point(670, 270);
             MagicLabel.Location = new Point(660, 320);
             ResLabel.Location = new Point(670, 370);
+            HealthLabel.Location = new Point(640, 420);
+            XPLabel.Location = new Point(640, 470);
+            LevelLabel.Location = new Point(670, 520);
             attackButton.Visible = false;
             magicButton.Visible = false;
             runButton.Visible = false;
@@ -228,6 +234,9 @@ namespace Dungeon_Crawl
                 PCHealthLabel.Visible = false;
                 EnemyHealthLabel.Visible = false;
 
+                e.Graphics.DrawImage(wallsL, 0, 0);
+                e.Graphics.DrawImage(wallsR, 768, 0);
+
                 //Draws the character sprite where the player is located on the screen
                 e.Graphics.DrawImage(CS, pX, pY);
 
@@ -292,6 +301,15 @@ namespace Dungeon_Crawl
             {
                 PCHealthLabel.Text = "PC Health: " + pc.getHealth() + "/" + pc.getMaxHealth();
                 EnemyHealthLabel.Text = "Enemy Health: " + enemy.getHealth() + "/" + enemy.getMaxHealth();
+                PCHealthLabel.Location = new Point(50, 200);
+                e.Graphics.DrawImage(CS, 55, 215);
+                EnemyHealthLabel.Location = new Point(50, 300);
+                if (enemy.getEnemyType() == "skeleton")
+                {
+                    e.Graphics.DrawImage(skeleton, 50, 315);
+                }
+
+
                 PCHealthLabel.Visible = true;
                 EnemyHealthLabel.Visible = true;
             }
@@ -453,13 +471,18 @@ namespace Dungeon_Crawl
             MagicLabel.Text = "Magic: " + pc.getMagic();
             ResLabel.Text = "Res: " + pc.getResistance();
             MonLabel.Text = Convert.ToString(pc.getMoney());
+            HealthLabel.Text = "HP " + pc.getHealth() + "/" + pc.getMaxHealth();
+            XPLabel.Text = "XP " + pc.getXP() + "/" + (10 * pc.getLevel());
+            LevelLabel.Text = "Lv. " + pc.getLevel();
             inventoryOpen = true;
             StrLabel.Visible = true;
             DefLabel.Visible = true;
             MagicLabel.Visible = true;
             ResLabel.Visible = true;
             MonLabel.Visible = true;
-
+            HealthLabel.Visible = true;
+            XPLabel.Visible = true;
+            LevelLabel.Visible = true;
         }
         private void CloseInventory()
         {
@@ -470,6 +493,9 @@ namespace Dungeon_Crawl
             MagicLabel.Visible = false;
             ResLabel.Visible = false;
             MonLabel.Visible = false;
+            HealthLabel.Visible = false;
+            XPLabel.Visible = false;
+            LevelLabel.Visible = false;
         }
         private void SpawnItems()
         {
@@ -481,7 +507,7 @@ namespace Dungeon_Crawl
 
             for (int i = 0; i < difficulty; i++)
             {
-                if (ran.Next(1, 3) == 2)
+                if (ran.Next(1, 3) == 1)
                 {
                     spawnItem = true;
                 }

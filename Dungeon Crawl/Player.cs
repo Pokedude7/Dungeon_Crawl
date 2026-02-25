@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Dungeon_Crawl
+﻿namespace Dungeon_Crawl
 {
     internal class Player
     {
@@ -111,6 +105,10 @@ namespace Dungeon_Crawl
         public int getLevel()
         {
             return level;
+        }
+        public int getXP()
+        {
+            return exp;
         }
 
         public void addMoney(int money)
