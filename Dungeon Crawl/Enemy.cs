@@ -45,6 +45,27 @@ namespace Dungeon_Crawl
                     item = new Item("jewlery", ran.Next(enemyLevel - 1, enemyLevel + 1));
                 }
             }
+            else if (enemyType == "goblin")
+            {
+                setLevel(enemyLevel);
+                setEnemyType(enemyType);
+                setHealth((int)(5 * (0.5 * enemyLevel)));
+                setMaxHealth((int)(5 * (0.5 * enemyLevel)));
+                setStr((int)(2 * (0.5 * enemyLevel)));
+                setMagic(0);
+                setDef((int)(1 * (0.5 * enemyLevel)));
+                setRes(0);
+                expReward = ran.Next(2 * enemyLevel, 6 * enemyLevel + 1);
+                moneyReward = ran.Next(2 * enemyLevel, 7 * enemyLevel + 1);
+                if (randomItem == 1)
+                {
+                    item = new Item("weapon", ran.Next(enemyLevel - 1, enemyLevel + 1));
+                }
+                else if (randomItem == 3)
+                {
+                    item = new Item("jewlery", ran.Next(enemyLevel - 1, enemyLevel + 1));
+                }
+            }
         }
 
         public int getHealth()

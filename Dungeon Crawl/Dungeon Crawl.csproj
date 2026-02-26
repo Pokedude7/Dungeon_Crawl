@@ -108,5 +108,16 @@
   <ItemGroup>
     <EmbeddedResource Include="SkeletonTemp_DungeonCrawl.png" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="PlaceHolderCharacterDown_DungeonCrawl.png" />
+    <EmbeddedResource Include="PlaceHolderCharacterRight_DungeonCrawl.png" />
+    <EmbeddedResource Include="PlaceHolderCharacterUp_DungeonCrawl.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="PlaceHolderCharacterLeft_DungeonCrawl.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="GoblinTemp_DungeonCrawl.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

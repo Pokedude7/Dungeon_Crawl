@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Reflection.Emit;
 using System.Windows.Forms;
 
 namespace Dungeon_Crawl
@@ -14,8 +13,12 @@ namespace Dungeon_Crawl
         char moveLeft = 'A';
         char moveRight = 'D';
         string reopenMenu = null;
-        //Character sprite image
+        //Character sprites
         Image CS = Image.FromFile("../../PlaceholderCharacter_DungeonCrawl.png");
+        Image CSU = Image.FromFile("../../PlaceHolderCharacterUp_DungeonCrawl.png");
+        Image CSD = Image.FromFile("../../PlaceHolderCharacterDown_DungeonCrawl.png");
+        Image CSL = Image.FromFile("../../PlaceHolderCharacterLeft_DungeonCrawl.png");
+        Image CSR = Image.FromFile("../../PlaceHolderCharacterRight_DungeonCrawl.png");
         //Inventory square sprite
         Image ISq = Image.FromFile("../../InventorySquareTemp_DungeonCrawl.png");
         //Inventory screen sprite
@@ -29,6 +32,7 @@ namespace Dungeon_Crawl
         Image wallsL = Image.FromFile("../../WallTestLSide_DungeonCrawl.png");
         Image wallsR = Image.FromFile("../../WallTestRSide_DungeonCrawl.png");
         Image skeleton = Image.FromFile("../../SkeletonTemp_DungeonCrawl.png");
+        Image goblin = Image.FromFile("../../GoblinTemp_DungeonCrawl.png");
         bool inGame = false;
         bool inventoryOpen = false;
         int pX = 730;
@@ -38,6 +42,11 @@ namespace Dungeon_Crawl
 
         int upDownMove = 0;
         int sideMove = 0;
+        bool WHeld = false;
+        bool SHeld = false;
+        bool AHeld = false;
+        bool DHeld = false;
+        char lastHeld = 'w';
 
         Item[] equipedItems = new Item[5] { null, null, null, null, null };
 
@@ -115,15 +124,23 @@ namespace Dungeon_Crawl
                         break;
                     case Keys.W:
                         upDownMove = -5;
+                        WHeld = true;
+                        lastHeld = 'w';
                         break;
                     case Keys.S:
                         upDownMove = 5;
+                        SHeld = true;
+                        lastHeld = 's';
                         break;
                     case Keys.A:
                         sideMove = -5;
+                        AHeld = true;
+                        lastHeld = 'a';
                         break;
                     case Keys.D:
                         sideMove = 5;
+                        DHeld = true;
+                        lastHeld = 'd';
                         break;
                     case Keys.E:
                         //Checks to see if the inventory is open or not when the E key is pressed
@@ -238,7 +255,38 @@ namespace Dungeon_Crawl
                 e.Graphics.DrawImage(wallsR, 768, 0);
 
                 //Draws the character sprite where the player is located on the screen
-                e.Graphics.DrawImage(CS, pX, pY);
+                if (DHeld)
+                {
+                    e.Graphics.DrawImage(CSR, pX, pY);
+                }
+                else if (AHeld)
+                {
+                    e.Graphics.DrawImage(CSL, pX, pY);
+                }
+                else if (SHeld)
+                {
+                    e.Graphics.DrawImage(CSD, pX, pY);
+                }
+                else if (WHeld)
+                {
+                    e.Graphics.DrawImage(CSU, pX, pY);
+                }
+                else if (lastHeld == 'd')
+                {
+                    e.Graphics.DrawImage(CSR, pX, pY);
+                }
+                else if (lastHeld == 'a')
+                {
+                    e.Graphics.DrawImage(CSL, pX, pY);
+                }
+                else if (lastHeld == 's')
+                {
+                    e.Graphics.DrawImage(CSD, pX, pY);
+                }
+                else if (lastHeld == 'w')
+                {
+                    e.Graphics.DrawImage(CSU, pX, pY);
+                }
 
                 for (int i = 0; i < itemsOnScreen.Count; i++)
                 {
@@ -307,6 +355,10 @@ namespace Dungeon_Crawl
                 if (enemy.getEnemyType() == "skeleton")
                 {
                     e.Graphics.DrawImage(skeleton, 50, 315);
+                }
+                else if (enemy.getEnemyType() == "goblin")
+                {
+                    e.Graphics.DrawImage(goblin, 50, 315);
                 }
 
 
@@ -451,15 +503,19 @@ namespace Dungeon_Crawl
             {
                 case Keys.W:
                     upDownMove = 0;
+                    WHeld = false;
                     break;
                 case Keys.S:
                     upDownMove = 0;
+                    SHeld = false;
                     break;
                 case Keys.A:
                     sideMove = 0;
+                    AHeld = false;
                     break;
                 case Keys.D:
                     sideMove = 0;
+                    DHeld = false;
                     break;
             }
         }
@@ -851,7 +907,7 @@ namespace Dungeon_Crawl
         private void SpawnEncounter()
         {
             int encounterChance = ran.Next(1, 50);
-            int enemySpawn = 1;//ran.Next(1, 4);
+            int enemySpawn = 2;// ran.Next(1, 4);
             if (encountersInRoom != 0 && encounterChance == 1)
             {
                 if (enemySpawn == 1)
@@ -865,7 +921,20 @@ namespace Dungeon_Crawl
                         enemy = new Enemy("skeleton", ran.Next(pc.getLevel() - 1, pc.getLevel() + 1));
                     }
 
-                        StartFight();
+                    StartFight();
+                }
+                else if (enemySpawn == 2)
+                {
+                    if (pc.getLevel() == 1)
+                    {
+                        enemy = new Enemy("goblin", pc.getLevel());
+                    }
+                    else
+                    {
+                        enemy = new Enemy("goblin", ran.Next(pc.getLevel() - 1, pc.getLevel() + 1));
+                    }
+
+                    StartFight();
                 }
             }
         }
@@ -903,6 +972,17 @@ namespace Dungeon_Crawl
         private void EnemyTurn()
         {
             if (enemy.getEnemyType() == "skeleton")
+            {
+                if ((enemy.getStr() - pc.getDefense()) <= 0)
+                {
+                    pc.TakeDamage(1);
+                }
+                else
+                {
+                    pc.TakeDamage(enemy.getStr() - pc.getDefense());
+                }
+            }
+            else if (enemy.getEnemyType() == "goblin")
             {
                 if ((enemy.getStr() - pc.getDefense()) <= 0)
                 {
