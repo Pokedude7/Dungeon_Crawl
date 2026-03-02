@@ -33,6 +33,7 @@ namespace Dungeon_Crawl
         Image wallsR = Image.FromFile("../../WallTestRSide_DungeonCrawl.png");
         Image skeleton = Image.FromFile("../../SkeletonTemp_DungeonCrawl.png");
         Image goblin = Image.FromFile("../../GoblinTemp_DungeonCrawl.png");
+        Image ogre = Image.FromFile("../../OgreTemp_DungeonCrawl.png");
         bool inGame = false;
         bool inventoryOpen = false;
         int pX = 730;
@@ -359,6 +360,10 @@ namespace Dungeon_Crawl
                 else if (enemy.getEnemyType() == "goblin")
                 {
                     e.Graphics.DrawImage(goblin, 50, 315);
+                }
+                else if (enemy.getEnemyType() == "ogre")
+                {
+                    e.Graphics.DrawImage(ogre, 50, 315);
                 }
 
 
@@ -907,7 +912,7 @@ namespace Dungeon_Crawl
         private void SpawnEncounter()
         {
             int encounterChance = ran.Next(1, 50);
-            int enemySpawn = 2;// ran.Next(1, 4);
+            int enemySpawn = ran.Next(1, 4);
             if (encountersInRoom != 0 && encounterChance == 1)
             {
                 if (enemySpawn == 1)
@@ -932,6 +937,19 @@ namespace Dungeon_Crawl
                     else
                     {
                         enemy = new Enemy("goblin", ran.Next(pc.getLevel() - 1, pc.getLevel() + 1));
+                    }
+
+                    StartFight();
+                }
+                else if (enemySpawn == 3)
+                {
+                    if (pc.getLevel() == 1)
+                    {
+                        enemy = new Enemy("ogre", pc.getLevel());
+                    }
+                    else
+                    {
+                        enemy = new Enemy("ogre", ran.Next(pc.getLevel() - 1, pc.getLevel() + 1));
                     }
 
                     StartFight();
@@ -983,6 +1001,17 @@ namespace Dungeon_Crawl
                 }
             }
             else if (enemy.getEnemyType() == "goblin")
+            {
+                if ((enemy.getStr() - pc.getDefense()) <= 0)
+                {
+                    pc.TakeDamage(1);
+                }
+                else
+                {
+                    pc.TakeDamage(enemy.getStr() - pc.getDefense());
+                }
+            }
+            else if (enemy.getEnemyType() == "ogre")
             {
                 if ((enemy.getStr() - pc.getDefense()) <= 0)
                 {
@@ -1074,7 +1103,6 @@ namespace Dungeon_Crawl
             if (whoseturn == 2 && inFight && turnOver && pc.getHealth() > 0 && enemy.getHealth() > 0)
             {
                 EnemyTurn();
-                whoseturn = 1;
             }
             else if (pc.getHealth() <= 0)
             {
@@ -1083,9 +1111,21 @@ namespace Dungeon_Crawl
             }
             else if (enemy.getHealth() <= 0)
             {
-                MessageBox.Show("You won! You gained " + enemy.getXPReward() + " exp and $" + enemy.getMonReward());
-                pc.addExp(enemy.getXPReward());
-                pc.addMoney(enemy.getMonReward());
+                if (ran.Next(1, 4) == 1)
+                {
+                    MessageBox.Show("You won! You gained " + enemy.getXPReward() + " exp and $" + enemy.getMonReward() + "\nYou also find a " + enemy.getItem().getType() + " on its corpse.");
+                    pc.addExp(enemy.getXPReward());
+                    pc.addMoney(enemy.getMonReward());
+                    enemy.getItem().setLocation(new Point(pX, pY));
+                    itemsOnScreen.Add(enemy.getItem());
+                }
+                else
+                {
+                    MessageBox.Show("You won! You gained " + enemy.getXPReward() + " exp and $" + enemy.getMonReward());
+                    pc.addExp(enemy.getXPReward());
+                    pc.addMoney(enemy.getMonReward());
+                }
+
                 inFight = false;
                 inGame = true;
                 turnOver = true;

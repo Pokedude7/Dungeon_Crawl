@@ -19,7 +19,7 @@ namespace Dungeon_Crawl
 
         public Enemy(string enemyType, int enemyLevel)
         {
-            int randomItem = ran.Next(1, 5);
+            int randomItem;
             if (enemyType == "skeleton")
             {
                 setLevel(enemyLevel);
@@ -32,17 +32,19 @@ namespace Dungeon_Crawl
                 setRes((int)(1 * (0.5 * enemyLevel)));
                 expReward = ran.Next(5 * enemyLevel, 10 * enemyLevel + 1);
                 moneyReward = ran.Next(1 * enemyLevel, 5 * enemyLevel + 1);
+
+                randomItem = ran.Next(1, 4);
                 if (randomItem == 1)
                 {
-                    item = new Item("weapon", ran.Next(enemyLevel - 1, enemyLevel + 1));
+                    item = new Item("weapon", enemyLevel);
                 }
                 else if (randomItem == 2)
                 {
-                    item = new Item("armor", ran.Next(enemyLevel - 1, enemyLevel + 1));
+                    item = new Item("armor", enemyLevel);
                 }
                 else if (randomItem == 3)
                 {
-                    item = new Item("jewlery", ran.Next(enemyLevel - 1, enemyLevel + 1));
+                    item = new Item("jewlery", enemyLevel);
                 }
             }
             else if (enemyType == "goblin")
@@ -57,14 +59,31 @@ namespace Dungeon_Crawl
                 setRes(0);
                 expReward = ran.Next(2 * enemyLevel, 6 * enemyLevel + 1);
                 moneyReward = ran.Next(2 * enemyLevel, 7 * enemyLevel + 1);
+
+                randomItem = ran.Next(1, 3);
                 if (randomItem == 1)
                 {
-                    item = new Item("weapon", ran.Next(enemyLevel - 1, enemyLevel + 1));
+                    item = new Item("weapon", enemyLevel);
                 }
-                else if (randomItem == 3)
+                else if (randomItem == 2)
                 {
-                    item = new Item("jewlery", ran.Next(enemyLevel - 1, enemyLevel + 1));
+                    item = new Item("jewlery", enemyLevel);
                 }
+            }
+            else if (enemyType == "ogre")
+            {
+                setLevel(enemyLevel);
+                setEnemyType(enemyType);
+                setHealth((int)(15 * (0.5 * enemyLevel)));
+                setMaxHealth((int)(15 * (0.5 * enemyLevel)));
+                setStr((int)(4 * (0.5 * enemyLevel)));
+                setMagic(0);
+                setDef(0);
+                setRes(0);
+                expReward = ran.Next(8 * enemyLevel, 16 * enemyLevel + 1);
+                moneyReward = ran.Next(8 * enemyLevel, 15 * enemyLevel + 1);
+
+                item = new Item("weapon", enemyLevel);
             }
         }
 
