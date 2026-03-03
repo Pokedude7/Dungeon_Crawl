@@ -34,6 +34,7 @@ namespace Dungeon_Crawl
         Image skeleton = Image.FromFile("../../SkeletonTemp_DungeonCrawl.png");
         Image goblin = Image.FromFile("../../GoblinTemp_DungeonCrawl.png");
         Image ogre = Image.FromFile("../../OgreTemp_DungeonCrawl.png");
+        Image titleText = Image.FromFile("../../TitleTextTemp_DungeonCrawl.png");
         bool inGame = false;
         bool inventoryOpen = false;
         int pX = 730;
@@ -78,6 +79,12 @@ namespace Dungeon_Crawl
             HealthLabel.Location = new Point(640, 420);
             XPLabel.Location = new Point(640, 470);
             LevelLabel.Location = new Point(670, 520);
+
+            startButton.Location = new Point(688, 300);
+            resumeButton.Location = new Point(688, 300);
+            settingsButton.Location = new Point(688, 360);
+            quitButton.Location = new Point(688, 420);
+
             attackButton.Visible = false;
             magicButton.Visible = false;
             runButton.Visible = false;
@@ -247,6 +254,11 @@ namespace Dungeon_Crawl
         }
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
+            if (startButton.Visible)
+            {
+                e.Graphics.DrawImage(titleText, 396, 100);
+            }
+
             if (inGame)
             {
                 PCHealthLabel.Visible = false;
@@ -533,7 +545,7 @@ namespace Dungeon_Crawl
             ResLabel.Text = "Res: " + pc.getResistance();
             MonLabel.Text = Convert.ToString(pc.getMoney());
             HealthLabel.Text = "HP " + pc.getHealth() + "/" + pc.getMaxHealth();
-            XPLabel.Text = "XP " + pc.getXP() + "/" + (10 * pc.getLevel());
+            XPLabel.Text = "XP " + pc.getXP() + "/" + (20 * pc.getLevel());
             LevelLabel.Text = "Lv. " + pc.getLevel();
             inventoryOpen = true;
             StrLabel.Visible = true;
@@ -563,10 +575,16 @@ namespace Dungeon_Crawl
             //Spawns items at the start of new rooms for the player to pick up and adds them to the itemsOnScreen list
             bool spawnItem = false;
             int itemSpawned = 0;
+            int amountOfItems = difficulty;
 
             itemsOnScreen.Clear();
 
-            for (int i = 0; i < difficulty; i++)
+            if (amountOfItems > 4)
+            {
+                amountOfItems = 4;
+            }
+
+            for (int i = 0; i < amountOfItems; i++)
             {
                 if (ran.Next(1, 3) == 1)
                 {
@@ -906,6 +924,9 @@ namespace Dungeon_Crawl
             {
                 pX = 50;
             }
+
+
+
             SpawnItems();
             encountersInRoom = ran.Next(1, difficulty + 2);
         }

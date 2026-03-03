@@ -90,9 +90,6 @@
     <EmbeddedResource Include="InventorySquareTemp_DungeonCrawl.png" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="ItemTemp_DungeonCrawl.png" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="ArmorTemp_DungeonCrawl.png" />
     <EmbeddedResource Include="JewleryTemp_DungeonCrawl.png" />
     <EmbeddedResource Include="MoneyTemp_DungeonCrawl.png" />
@@ -121,6 +118,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="OgreTemp_DungeonCrawl.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="TitleTextTemp_DungeonCrawl.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

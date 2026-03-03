@@ -125,7 +125,7 @@
         }
         public void levelUp()
         {
-            exp -= 10 * level;
+            exp -= 20 * level;
             maxHealth += 5 * level;
             health = maxHealth;
             strength += 2 * level;
@@ -139,7 +139,7 @@
         }
         public void checkLevelUp()
         {
-            if (exp >= 10 * level)
+            if (exp >= 20 * level)
             {
                 levelUp();
             }

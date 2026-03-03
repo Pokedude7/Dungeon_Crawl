@@ -66,7 +66,7 @@
             // 
             this.startButton.Location = new System.Drawing.Point(290, 132);
             this.startButton.Name = "startButton";
-            this.startButton.Size = new System.Drawing.Size(159, 54);
+            this.startButton.Size = new System.Drawing.Size(160, 54);
             this.startButton.TabIndex = 0;
             this.startButton.Text = "Start";
             this.startButton.UseVisualStyleBackColor = true;
@@ -76,7 +76,7 @@
             // 
             this.settingsButton.Location = new System.Drawing.Point(290, 192);
             this.settingsButton.Name = "settingsButton";
-            this.settingsButton.Size = new System.Drawing.Size(159, 54);
+            this.settingsButton.Size = new System.Drawing.Size(160, 54);
             this.settingsButton.TabIndex = 1;
             this.settingsButton.Text = "Settings";
             this.settingsButton.UseVisualStyleBackColor = true;
@@ -86,7 +86,7 @@
             // 
             this.quitButton.Location = new System.Drawing.Point(290, 252);
             this.quitButton.Name = "quitButton";
-            this.quitButton.Size = new System.Drawing.Size(159, 54);
+            this.quitButton.Size = new System.Drawing.Size(160, 54);
             this.quitButton.TabIndex = 2;
             this.quitButton.Text = "Quit";
             this.quitButton.UseVisualStyleBackColor = true;
@@ -96,7 +96,7 @@
             // 
             this.resumeButton.Location = new System.Drawing.Point(290, 132);
             this.resumeButton.Name = "resumeButton";
-            this.resumeButton.Size = new System.Drawing.Size(159, 54);
+            this.resumeButton.Size = new System.Drawing.Size(160, 54);
             this.resumeButton.TabIndex = 3;
             this.resumeButton.Text = "Resume";
             this.resumeButton.UseVisualStyleBackColor = true;
@@ -109,7 +109,7 @@
             this.SettingsMenu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 45.25547F));
             this.SettingsMenu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 54.74453F));
             this.SettingsMenu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 58F));
-            this.SettingsMenu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 72F));
+            this.SettingsMenu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 73F));
             this.SettingsMenu.Controls.Add(this.textBox4, 3, 1);
             this.SettingsMenu.Controls.Add(this.label2, 0, 0);
             this.SettingsMenu.Controls.Add(this.textBox1, 0, 1);
@@ -129,7 +129,7 @@
             // 
             // textBox4
             // 
-            this.textBox4.Location = new System.Drawing.Point(190, 38);
+            this.textBox4.Location = new System.Drawing.Point(189, 38);
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(59, 22);
             this.textBox4.TabIndex = 6;
@@ -159,7 +159,7 @@
             // 
             this.textBox2.Location = new System.Drawing.Point(61, 38);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(65, 22);
+            this.textBox2.Size = new System.Drawing.Size(64, 22);
             this.textBox2.TabIndex = 2;
             this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
@@ -176,7 +176,7 @@
             // 
             // textBox3
             // 
-            this.textBox3.Location = new System.Drawing.Point(132, 38);
+            this.textBox3.Location = new System.Drawing.Point(131, 38);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(52, 22);
             this.textBox3.TabIndex = 4;
@@ -186,7 +186,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(132, 0);
+            this.label3.Location = new System.Drawing.Point(131, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(38, 32);
             this.label3.TabIndex = 3;
@@ -196,7 +196,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(190, 0);
+            this.label4.Location = new System.Drawing.Point(189, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(62, 16);
             this.label4.TabIndex = 5;
@@ -293,7 +293,7 @@
             // 
             this.attackButton.Location = new System.Drawing.Point(513, 132);
             this.attackButton.Name = "attackButton";
-            this.attackButton.Size = new System.Drawing.Size(159, 54);
+            this.attackButton.Size = new System.Drawing.Size(160, 54);
             this.attackButton.TabIndex = 11;
             this.attackButton.Text = "Attack";
             this.attackButton.UseVisualStyleBackColor = true;
@@ -303,7 +303,7 @@
             // 
             this.magicButton.Location = new System.Drawing.Point(513, 192);
             this.magicButton.Name = "magicButton";
-            this.magicButton.Size = new System.Drawing.Size(159, 54);
+            this.magicButton.Size = new System.Drawing.Size(160, 54);
             this.magicButton.TabIndex = 12;
             this.magicButton.Text = "Magic";
             this.magicButton.UseVisualStyleBackColor = true;
@@ -313,7 +313,7 @@
             // 
             this.runButton.Location = new System.Drawing.Point(513, 252);
             this.runButton.Name = "runButton";
-            this.runButton.Size = new System.Drawing.Size(159, 54);
+            this.runButton.Size = new System.Drawing.Size(160, 54);
             this.runButton.TabIndex = 13;
             this.runButton.Text = "Run";
             this.runButton.UseVisualStyleBackColor = true;
