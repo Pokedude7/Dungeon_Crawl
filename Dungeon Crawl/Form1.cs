@@ -13,6 +13,8 @@ namespace Dungeon_Crawl
         char moveLeft = 'A';
         char moveRight = 'D';
         string reopenMenu = null;
+
+        //Images for the game
         //Character sprites
         Image CS = Image.FromFile("../../PlaceholderCharacter_DungeonCrawl.png");
         Image CSU = Image.FromFile("../../PlaceHolderCharacterUp_DungeonCrawl.png");
@@ -35,6 +37,8 @@ namespace Dungeon_Crawl
         Image goblin = Image.FromFile("../../GoblinTemp_DungeonCrawl.png");
         Image ogre = Image.FromFile("../../OgreTemp_DungeonCrawl.png");
         Image titleText = Image.FromFile("../../TitleTextTemp_DungeonCrawl.png");
+
+        //General Variables
         bool inGame = false;
         bool inventoryOpen = false;
         int pX = 730;
@@ -42,6 +46,7 @@ namespace Dungeon_Crawl
         int difficulty = 1;
         char enteredFrom = 's';
 
+        //Variables for movement
         int upDownMove = 0;
         int sideMove = 0;
         bool WHeld = false;
@@ -58,6 +63,7 @@ namespace Dungeon_Crawl
 
         Enemy enemy;
 
+        //Variables for encounters
         int encountersInRoom = 0;
         bool inFight = false;
         bool turnOver = false;
@@ -70,7 +76,8 @@ namespace Dungeon_Crawl
         private void Form1_Load(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Maximized;
-            Console.WriteLine("Screen Size: " + Screen.PrimaryScreen.Bounds.Width + "," + Screen.PrimaryScreen.Bounds.Height);
+
+            //Sets the location and visibility of all the buttons and labels on the screen
             MonLabel.Location = new Point(1000, 462);
             StrLabel.Location = new Point(670, 220);
             DefLabel.Location = new Point(670, 270);
@@ -171,7 +178,7 @@ namespace Dungeon_Crawl
         }
         private void resumeButton_Click(object sender, EventArgs e)
         {
-            //Sets the buttons to invisible and then calls the method to resume the game
+            //Sets the buttons to invisible and then calls the method to resume the game if the inventory wasn't open prior
             Cursor.Hide();
             if (!inventoryOpen)
             {
@@ -218,6 +225,8 @@ namespace Dungeon_Crawl
                 reopenMenu = "pause";
             }
         }
+
+        //Currently these functions do not work and will change during development of the alpha
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
             moveUp = textBox1.Text[0];
@@ -234,6 +243,7 @@ namespace Dungeon_Crawl
         {
             moveLeft = textBox4.Text[0];
         }
+
         private void CloseButton_Click(object sender, EventArgs e)
         {
             //Sets the buttons and menus to invisible and then sets the correct buttons to visible based on which menu was open before settings
@@ -256,6 +266,7 @@ namespace Dungeon_Crawl
         {
             if (startButton.Visible)
             {
+                //Draws the title text on the screen
                 e.Graphics.DrawImage(titleText, 396, 100);
             }
 
@@ -264,10 +275,11 @@ namespace Dungeon_Crawl
                 PCHealthLabel.Visible = false;
                 EnemyHealthLabel.Visible = false;
 
+                //Draws the walls around the edges of the screen
                 e.Graphics.DrawImage(wallsL, 0, 0);
                 e.Graphics.DrawImage(wallsR, 768, 0);
 
-                //Draws the character sprite where the player is located on the screen
+                //Draws the character sprite where the player is located on the screen and facing the correct direction
                 if (DHeld)
                 {
                     e.Graphics.DrawImage(CSR, pX, pY);
@@ -301,6 +313,7 @@ namespace Dungeon_Crawl
                     e.Graphics.DrawImage(CSU, pX, pY);
                 }
 
+                //Draws the various items on the screen from the itemsOnScreen list in their respective locations
                 for (int i = 0; i < itemsOnScreen.Count; i++)
                 {
                     if (itemsOnScreen[i].getType() == "armor")
@@ -360,6 +373,7 @@ namespace Dungeon_Crawl
             }
             else if (inFight)
             {
+                //Draws the fight screen and the text of the health labels
                 PCHealthLabel.Text = "PC Health: " + pc.getHealth() + "/" + pc.getMaxHealth();
                 EnemyHealthLabel.Text = "Enemy Health: " + enemy.getHealth() + "/" + enemy.getMaxHealth();
                 PCHealthLabel.Location = new Point(50, 200);
@@ -377,7 +391,6 @@ namespace Dungeon_Crawl
                 {
                     e.Graphics.DrawImage(ogre, 50, 315);
                 }
-
 
                 PCHealthLabel.Visible = true;
                 EnemyHealthLabel.Visible = true;
@@ -423,7 +436,7 @@ namespace Dungeon_Crawl
                 pY = 457;
             }
 
-            //Checks to see if the player is trying to move off screen and if they are it sets their position to be right next to the edge of the screen instead of going through it
+            //Allows the player to enter the next room through the north corridor if they didn't enter through it
             if (pY < 0 && enteredFrom != 'n')
             {
                 enteredFrom = 's';
@@ -435,6 +448,7 @@ namespace Dungeon_Crawl
                 upDownMove = 0;
             }
 
+            //Allows the player to enter the next room through the south corridor if they didn't enter through it
             if (pY > 789 && enteredFrom != 's')
             {
                 enteredFrom = 'n';
@@ -484,7 +498,7 @@ namespace Dungeon_Crawl
                 pX = 793;
             }
 
-            //Checks to see if the player is trying to move off screen and if they are it sets their position to be right next to the edge of the screen instead of going through it
+            //Allows the player to enter the next room through the west corridor if they didn't enter through it
             if (pX < 0 && enteredFrom != 'w')
             {
                 enteredFrom = 'e';
@@ -496,6 +510,7 @@ namespace Dungeon_Crawl
                 sideMove = 0;
             }
 
+            //Allows the player to enter the next room through the east corridor if they didn't enter through it
             if (pX > 1461 && enteredFrom != 'e')
             {
                 enteredFrom = 'w';
@@ -538,6 +553,7 @@ namespace Dungeon_Crawl
         }
         private void OpenInventory()
         {
+            //Sets the lables inside the inventory to the correct information, displays the labels and opens the inventory
             inGame = false;
             StrLabel.Text = "Str: " + pc.getStrength();
             DefLabel.Text = "Def: " + pc.getDefense();
@@ -559,6 +575,7 @@ namespace Dungeon_Crawl
         }
         private void CloseInventory()
         {
+            //Hides the labels in the inventory and then closes the inventory and returns to the game
             inGame = true;
             inventoryOpen = false;
             StrLabel.Visible = false;
@@ -620,6 +637,11 @@ namespace Dungeon_Crawl
         }
         private void ItemCheck_Tick(object sender, EventArgs e)
         {
+            //Checks to see if the player is on top of one of the items on the screen.
+            //If so, it then checks if the player already has that type of item
+            //If they don't have that type of item it equips it and adds the stats to the player
+            //If they do have that type of item it compares the stats of the two items and asks the player if they want to equip the new item or not.
+            //If they choose to equip the new item it replaces the old item and adds the stats to the player.
             for (int i = 0; i < itemsOnScreen.Count; i++)
             {
                 if (pX + 75 >= itemsOnScreen[i].getXLoc() && pX < itemsOnScreen[i].getXLoc() + 50 && pY + 75 > itemsOnScreen[i].getYLoc() && pY < itemsOnScreen[i].getYLoc() + 50)
@@ -677,6 +699,7 @@ namespace Dungeon_Crawl
         }
         private void setStats()
         {
+            //Sets the players stats based on the stats of the items they have equiped
             for (int i = 0; i < equipedItems.Length; i++)
             {
                 if (equipedItems[i] == null)
@@ -706,6 +729,7 @@ namespace Dungeon_Crawl
         }
         private void compareItems(Item equiped, Item onGround)
         {
+            //Compares the stats of the item on the ground to the item equiped and shows a message box dependant on if the item is better or not
             string message = null;
             DialogResult result;
 
@@ -908,6 +932,8 @@ namespace Dungeon_Crawl
         }
         private void EnterRoom()
         {
+            //Sets the players position to the right spot in the new room based on which direction they entered from
+            //Then spawns the items in the room and sets the number of encounters in the room
             if (enteredFrom == 'n')
             {
                 pY = 50;
@@ -925,13 +951,13 @@ namespace Dungeon_Crawl
                 pX = 50;
             }
 
-
-
             SpawnItems();
             encountersInRoom = ran.Next(1, difficulty + 2);
         }
         private void SpawnEncounter()
         {
+            //Spawns an encounter if there are encounters left in the room
+            //Then, it randomly decides which enemy to spawn and starts the fight
             int encounterChance = ran.Next(1, 50);
             int enemySpawn = ran.Next(1, 4);
             if (encountersInRoom != 0 && encounterChance == 1)
@@ -979,6 +1005,7 @@ namespace Dungeon_Crawl
         }
         private void StartFight()
         {
+            //Starts a fight by setting the correct variables, making the player buttons visible and starts the first turn
             inFight = true;
             whoseturn = ran.Next(1, 3);
             turnOver = false;
@@ -990,7 +1017,8 @@ namespace Dungeon_Crawl
         }
         private void PlayerButtonsVisible()
         {
-            if (!turnOver)
+            //Sets the player buttons to be visible or hidden based on if the player is in a fight or not and shows or hides the cursor based on that as well
+            if (inFight)
             {
                 inGame = false;
                 attackButton.Visible = true;
