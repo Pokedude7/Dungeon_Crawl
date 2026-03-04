@@ -1038,6 +1038,8 @@ namespace Dungeon_Crawl
         }
         private void EnemyTurn()
         {
+            //Calculates the damage the enemy does to the player based on the enemies strength and the players defense
+            //Then applies that damage to the player
             if (enemy.getEnemyType() == "skeleton")
             {
                 if ((enemy.getStr() - pc.getDefense()) <= 0)
@@ -1077,6 +1079,7 @@ namespace Dungeon_Crawl
         }
         private void attackButton_Click(object sender, EventArgs e)
         {
+            //Calculates the damage the player does to the enemy based on the players strength and the enemys defense
             if (((int)pc.getStrength() - enemy.getDef()) <= 0)
             {
                 enemy.TakeDamage(1);
@@ -1091,13 +1094,25 @@ namespace Dungeon_Crawl
         }
         private void magicButton_Click(object sender, EventArgs e)
         {
+            //Calculates the damage the player does to the enemy based on the players magic and the enemys resistance
             enemy.TakeDamage((int)pc.getMagic() - (1 / 2 * enemy.getRes()));
+            if (((int)pc.getMagic() - enemy.getRes()) <= 0)
+            {
+                enemy.TakeDamage(1);
+            }
+            else
+            {
+                enemy.TakeDamage((int)pc.getMagic() - (1 / 2 * enemy.getRes()));
+            }
             turnOver = true;
             whoseturn = 2;
             TakeTurn();
         }
         private void runButton_Click(object sender, EventArgs e)
         {
+            //Calculates the chance the player has to run away based on the players level and the enemys level.
+            //If the player is higher level than the enemy they automatically get away.
+            //If not, they have a chance to get away based on how much lower level they are than the enemy.
             if (pc.getLevel() > enemy.getLevel())
             {
                 inFight = false;
@@ -1128,6 +1143,7 @@ namespace Dungeon_Crawl
         }
         private void ShutOff_Tick(object sender, EventArgs e)
         {
+            //Shuts off the different timers based on if the player is currently in the game or not
             if (!inGame)
             {
                 Movement.Enabled = false;
@@ -1141,6 +1157,9 @@ namespace Dungeon_Crawl
         }
         private void TakeTurn()
         {
+            //Sets the health labels and checks to see whos turn it is
+            //If its the enemys turn it runs the EnemyTurn function
+            //Then it checks if either the player or the enemy has died. If so, it ends the fight and give the player the rewards if thye won
             if (whoseturn == 2)
             {
                 turnOver = true;
