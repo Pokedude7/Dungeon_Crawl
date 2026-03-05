@@ -127,6 +127,9 @@ namespace Dungeon_Crawl
             MagicLabel.Visible = false;
             ResLabel.Visible = false;
             MonLabel.Visible = false;
+            HealthLabel.Visible = false;
+            XPLabel.Visible = false;
+            LevelLabel.Visible = false;
         }
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
@@ -189,6 +192,9 @@ namespace Dungeon_Crawl
                 MagicLabel.Visible = false;
                 ResLabel.Visible = false;
                 MonLabel.Visible = false;
+                HealthLabel.Visible = false;
+                XPLabel.Visible = false;
+                LevelLabel.Visible = false;
             }
             else
             {
@@ -198,6 +204,9 @@ namespace Dungeon_Crawl
                 MagicLabel.Visible = true;
                 ResLabel.Visible = true;
                 MonLabel.Visible = true;
+                HealthLabel.Visible = true;
+                XPLabel.Visible = true;
+                LevelLabel.Visible = true;
             }
             Movement.Enabled = true;
             quitButton.Visible = false;
@@ -614,23 +623,23 @@ namespace Dungeon_Crawl
 
                     if (itemSpawned == 1)
                     {
-                        itemsOnScreen.Add(new Item("armor", ran.Next(difficulty - 1, difficulty + 1)));
+                        itemsOnScreen.Add(new Castle_Armor("plate", ran.Next(difficulty - 1, difficulty + 1)));
                     }
                     else if (itemSpawned == 2)
                     {
-                        itemsOnScreen.Add(new Item("weapon", ran.Next(difficulty - 1, difficulty + 1)));
+                        itemsOnScreen.Add(new Castle_Weapon("sword", ran.Next(difficulty - 1, difficulty + 1)));
                     }
                     else if (itemSpawned == 3)
                     {
-                        itemsOnScreen.Add(new Item("staff", ran.Next(difficulty - 1, difficulty + 1)));
+                        itemsOnScreen.Add(new Castle_Staff("novice", ran.Next(difficulty - 1, difficulty + 1)));
                     }
                     else if (itemSpawned == 4)
                     {
-                        itemsOnScreen.Add(new Item("jewlery", ran.Next(difficulty - 1, difficulty + 1)));
+                        itemsOnScreen.Add(new Castle_Jewlery("amulet", ran.Next(difficulty - 1, difficulty + 1)));
                     }
                     else if (itemSpawned == 5)
                     {
-                        itemsOnScreen.Add(new Item("money", ran.Next(difficulty - 1, difficulty + 1)));
+                        itemsOnScreen.Add(new Money(ran.Next(difficulty - 1, difficulty + 1)));
                     }
                 }
             }
