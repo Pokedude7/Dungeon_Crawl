@@ -36,15 +36,15 @@ namespace Dungeon_Crawl
                 randomItem = ran.Next(1, 4);
                 if (randomItem == 1)
                 {
-                    item = new Item("weapon", enemyLevel);
+                    item = new Castle_Weapon("sword", enemyLevel);
                 }
                 else if (randomItem == 2)
                 {
-                    item = new Item("armor", enemyLevel);
+                    item = new Castle_Armor("plate", enemyLevel);
                 }
                 else if (randomItem == 3)
                 {
-                    item = new Item("jewlery", enemyLevel);
+                    item = new Castle_Jewlery("amulet", enemyLevel);
                 }
             }
             else if (enemyType == "goblin")
@@ -63,11 +63,11 @@ namespace Dungeon_Crawl
                 randomItem = ran.Next(1, 3);
                 if (randomItem == 1)
                 {
-                    item = new Item("weapon", enemyLevel);
+                    item = new Castle_Weapon("sword", enemyLevel);
                 }
                 else if (randomItem == 2)
                 {
-                    item = new Item("jewlery", enemyLevel);
+                    item = new Castle_Jewlery("amulet", enemyLevel);
                 }
             }
             else if (enemyType == "ogre")
@@ -83,7 +83,7 @@ namespace Dungeon_Crawl
                 expReward = ran.Next(8 * enemyLevel, 16 * enemyLevel + 1);
                 moneyReward = ran.Next(8 * enemyLevel, 15 * enemyLevel + 1);
 
-                item = new Item("weapon", enemyLevel);
+                item = new Castle_Weapon("sword", enemyLevel);
             }
         }
 
