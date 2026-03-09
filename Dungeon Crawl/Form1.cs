@@ -127,6 +127,9 @@ namespace Dungeon_Crawl
             MagicLabel.Visible = false;
             ResLabel.Visible = false;
             MonLabel.Visible = false;
+            HealthLabel.Visible = false;
+            XPLabel.Visible = false;
+            LevelLabel.Visible = false;
         }
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
@@ -189,6 +192,9 @@ namespace Dungeon_Crawl
                 MagicLabel.Visible = false;
                 ResLabel.Visible = false;
                 MonLabel.Visible = false;
+                HealthLabel.Visible = false;
+                XPLabel.Visible = false;
+                LevelLabel.Visible = false;
             }
             else
             {
@@ -198,6 +204,9 @@ namespace Dungeon_Crawl
                 MagicLabel.Visible = true;
                 ResLabel.Visible = true;
                 MonLabel.Visible = true;
+                HealthLabel.Visible = true;
+                XPLabel.Visible = true;
+                LevelLabel.Visible = true;
             }
             Movement.Enabled = true;
             quitButton.Visible = false;
@@ -608,29 +617,31 @@ namespace Dungeon_Crawl
                     spawnItem = true;
                 }
 
+                spawnItem = true;
+
                 if (spawnItem)
                 {
                     itemSpawned = ran.Next(1, 6);
 
                     if (itemSpawned == 1)
                     {
-                        itemsOnScreen.Add(new Item("armor", ran.Next(difficulty - 1, difficulty + 1)));
+                        itemsOnScreen.Add(new Castle_Armor("plate", new Point(ran.Next(50, 1436), ran.Next(50, 764)), ran.Next(difficulty - 1, difficulty + 1)));
                     }
                     else if (itemSpawned == 2)
                     {
-                        itemsOnScreen.Add(new Item("weapon", ran.Next(difficulty - 1, difficulty + 1)));
+                        itemsOnScreen.Add(new Castle_Weapon("sword", new Point(ran.Next(50, 1436), ran.Next(50, 764)), ran.Next(difficulty - 1, difficulty + 1)));
                     }
                     else if (itemSpawned == 3)
                     {
-                        itemsOnScreen.Add(new Item("staff", ran.Next(difficulty - 1, difficulty + 1)));
+                        itemsOnScreen.Add(new Castle_Staff("novice", new Point(ran.Next(50, 1436), ran.Next(50, 764)), ran.Next(difficulty - 1, difficulty + 1)));
                     }
                     else if (itemSpawned == 4)
                     {
-                        itemsOnScreen.Add(new Item("jewlery", ran.Next(difficulty - 1, difficulty + 1)));
+                        itemsOnScreen.Add(new Castle_Jewlery("amulet", new Point(ran.Next(50, 1436), ran.Next(50, 764)), ran.Next(difficulty - 1, difficulty + 1)));
                     }
                     else if (itemSpawned == 5)
                     {
-                        itemsOnScreen.Add(new Item("money", ran.Next(difficulty - 1, difficulty + 1)));
+                        itemsOnScreen.Add(new Money(ran.Next(difficulty - 1, difficulty + 1), new Point(ran.Next(50, 1436), ran.Next(50, 764))));
                     }
                 }
             }
@@ -966,11 +977,11 @@ namespace Dungeon_Crawl
                 {
                     if (pc.getLevel() == 1)
                     {
-                        enemy = new Enemy("skeleton", pc.getLevel());
+                        enemy = new Skeleton(pc.getLevel());
                     }
                     else
                     {
-                        enemy = new Enemy("skeleton", ran.Next(pc.getLevel() - 1, pc.getLevel() + 1));
+                        enemy = new Skeleton(ran.Next((int)pc.getLevel() - 1, (int)pc.getLevel() + 1));
                     }
 
                     StartFight();
@@ -979,11 +990,11 @@ namespace Dungeon_Crawl
                 {
                     if (pc.getLevel() == 1)
                     {
-                        enemy = new Enemy("goblin", pc.getLevel());
+                        enemy = new Goblin(pc.getLevel());
                     }
                     else
                     {
-                        enemy = new Enemy("goblin", ran.Next(pc.getLevel() - 1, pc.getLevel() + 1));
+                        enemy = new Goblin(ran.Next((int)pc.getLevel() - 1, (int)pc.getLevel() + 1));
                     }
 
                     StartFight();
@@ -992,11 +1003,11 @@ namespace Dungeon_Crawl
                 {
                     if (pc.getLevel() == 1)
                     {
-                        enemy = new Enemy("ogre", pc.getLevel());
+                        enemy = new Ogre(pc.getLevel());
                     }
                     else
                     {
-                        enemy = new Enemy("ogre", ran.Next(pc.getLevel() - 1, pc.getLevel() + 1));
+                        enemy = new Ogre(ran.Next((int)pc.getLevel() - 1, (int)pc.getLevel() + 1));
                     }
 
                     StartFight();
@@ -1040,38 +1051,13 @@ namespace Dungeon_Crawl
         {
             //Calculates the damage the enemy does to the player based on the enemies strength and the players defense
             //Then applies that damage to the player
-            if (enemy.getEnemyType() == "skeleton")
+            if ((enemy.getStrength() - pc.getDefense()) <= 0)
             {
-                if ((enemy.getStr() - pc.getDefense()) <= 0)
-                {
-                    pc.TakeDamage(1);
-                }
-                else
-                {
-                    pc.TakeDamage(enemy.getStr() - pc.getDefense());
-                }
+                pc.TakeDamage(1);
             }
-            else if (enemy.getEnemyType() == "goblin")
+            else
             {
-                if ((enemy.getStr() - pc.getDefense()) <= 0)
-                {
-                    pc.TakeDamage(1);
-                }
-                else
-                {
-                    pc.TakeDamage(enemy.getStr() - pc.getDefense());
-                }
-            }
-            else if (enemy.getEnemyType() == "ogre")
-            {
-                if ((enemy.getStr() - pc.getDefense()) <= 0)
-                {
-                    pc.TakeDamage(1);
-                }
-                else
-                {
-                    pc.TakeDamage(enemy.getStr() - pc.getDefense());
-                }
+                pc.TakeDamage(enemy.getStrength() - pc.getDefense());
             }
 
             whoseturn = 1;
@@ -1080,13 +1066,13 @@ namespace Dungeon_Crawl
         private void attackButton_Click(object sender, EventArgs e)
         {
             //Calculates the damage the player does to the enemy based on the players strength and the enemys defense
-            if (((int)pc.getStrength() - enemy.getDef()) <= 0)
+            if (((int)pc.getStrength() - enemy.getDefense()) <= 0)
             {
                 enemy.TakeDamage(1);
             }
             else
             {
-                enemy.TakeDamage((int)pc.getStrength() - enemy.getDef());
+                enemy.TakeDamage((int)pc.getStrength() - enemy.getDefense());
             }
             turnOver = true;
             whoseturn = 2;
@@ -1095,14 +1081,14 @@ namespace Dungeon_Crawl
         private void magicButton_Click(object sender, EventArgs e)
         {
             //Calculates the damage the player does to the enemy based on the players magic and the enemys resistance
-            enemy.TakeDamage((int)pc.getMagic() - (1 / 2 * enemy.getRes()));
-            if (((int)pc.getMagic() - enemy.getRes()) <= 0)
+            enemy.TakeDamage((int)pc.getMagic() - (1 / 2 * enemy.getResistance()));
+            if (((int)pc.getMagic() - enemy.getResistance()) <= 0)
             {
                 enemy.TakeDamage(1);
             }
             else
             {
-                enemy.TakeDamage((int)pc.getMagic() - (1 / 2 * enemy.getRes()));
+                enemy.TakeDamage((int)pc.getMagic() - (1 / 2 * enemy.getResistance()));
             }
             turnOver = true;
             whoseturn = 2;
@@ -1122,7 +1108,7 @@ namespace Dungeon_Crawl
             }
             else
             {
-                int n = enemy.getLevel() - pc.getLevel();
+                int n = (int)enemy.getLevel() - (int)pc.getLevel();
 
                 if (ran.Next(1, n + 3) == 1)
                 {
@@ -1174,6 +1160,7 @@ namespace Dungeon_Crawl
             }
             else if (pc.getHealth() <= 0)
             {
+                inGame = false;
                 MessageBox.Show("You have died. Game Over.");
                 this.Close();
             }
@@ -1181,17 +1168,17 @@ namespace Dungeon_Crawl
             {
                 if (ran.Next(1, 4) == 1)
                 {
-                    MessageBox.Show("You won! You gained " + enemy.getXPReward() + " exp and $" + enemy.getMonReward() + "\nYou also find a " + enemy.getItem().getType() + " on its corpse.");
-                    pc.addExp(enemy.getXPReward());
-                    pc.addMoney(enemy.getMonReward());
+                    MessageBox.Show("You won! You gained " + enemy.getXP() + " exp and $" + enemy.getMoney() + "\nYou also find a " + enemy.getItem().getType() + " on its corpse.");
+                    pc.addExp(enemy.getXP());
+                    pc.addMoney(enemy.getMoney());
                     enemy.getItem().setLocation(new Point(pX, pY));
                     itemsOnScreen.Add(enemy.getItem());
                 }
                 else
                 {
-                    MessageBox.Show("You won! You gained " + enemy.getXPReward() + " exp and $" + enemy.getMonReward());
-                    pc.addExp(enemy.getXPReward());
-                    pc.addMoney(enemy.getMonReward());
+                    MessageBox.Show("You won! You gained " + enemy.getXP() + " exp and $" + enemy.getMoney());
+                    pc.addExp(enemy.getXP());
+                    pc.addMoney(enemy.getMoney());
                 }
 
                 inFight = false;
@@ -1203,7 +1190,7 @@ namespace Dungeon_Crawl
 
             if (!inFight)
             {
-                difficulty = pc.getLevel();
+                difficulty = (int)pc.getLevel();
             }
         }
     }

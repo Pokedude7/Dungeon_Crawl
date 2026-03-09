@@ -46,6 +46,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Armor.cs" />
+    <Compile Include="Castle_Jewlery.cs" />
+    <Compile Include="Castle_Armor.cs" />
+    <Compile Include="Castle_Staff.cs" />
+    <Compile Include="Castle_Weapon.cs" />
     <Compile Include="Enemy.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -53,10 +58,18 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Goblin.cs" />
     <Compile Include="Item.cs" />
+    <Compile Include="Jewlery.cs" />
+    <Compile Include="Money.cs" />
+    <Compile Include="Ogre.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Skeleton.cs" />
+    <Compile Include="Staff.cs" />
+    <Compile Include="Stats.cs" />
+    <Compile Include="Weapon.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>

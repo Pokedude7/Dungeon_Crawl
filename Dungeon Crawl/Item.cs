@@ -5,104 +5,15 @@ namespace Dungeon_Crawl
 {
     internal class Item
     {
-        private static Random ran = new Random();
-        string itemType;
-        string statIncreases;
-        int rarity;
-        int amountIncrease;
-        Point location;
-
-        public Item(string itemType, int rarity)
+        protected Random ran;
+        protected string itemType;
+        protected string statIncreases;
+        protected int rarity;
+        protected int amountIncrease;
+        protected Point location;
+        protected Image image;
+        public Item()
         {
-            if (itemType == "armor")
-            {
-                setType(itemType);
-                statIncreases = "def";
-                if (rarity == 0)
-                {
-                    amountIncrease = ran.Next(1, 2);
-                }
-                else if (rarity == 1)
-                {
-                    amountIncrease = ran.Next(2, 3);
-                }
-                else if (rarity == 2)
-                {
-                    amountIncrease = ran.Next(3, 6);
-                }
-            }
-            else if (itemType == "weapon")
-            {
-                setType(itemType);
-                statIncreases = "str";
-                if (rarity == 0)
-                {
-                    amountIncrease = ran.Next(1, 2);
-                }
-                else if (rarity == 1)
-                {
-                    amountIncrease = ran.Next(2, 3);
-                }
-                else if (rarity == 2)
-                {
-                    amountIncrease = ran.Next(3, 6);
-                }
-            }
-            else if (itemType == "staff")
-            {
-                setType(itemType);
-                statIncreases = "magic";
-                if (rarity == 0)
-                {
-                    amountIncrease = ran.Next(1, 2);
-                }
-                else if (rarity == 1)
-                {
-                    amountIncrease = ran.Next(2, 3);
-                }
-                else if (rarity == 2)
-                {
-                    amountIncrease = ran.Next(3, 6);
-                }
-            }
-            else if (itemType == "jewlery")
-            {
-                setType(itemType);
-                statIncreases = "resistance";
-                if (rarity == 0)
-                {
-                    amountIncrease = ran.Next(1, 2);
-                }
-                else if (rarity == 1)
-                {
-                    amountIncrease = ran.Next(2, 3);
-                }
-                else if (rarity == 2)
-                {
-                    amountIncrease = ran.Next(3, 6);
-                }
-            }
-            else if (itemType == "money")
-            {
-                setType(itemType);
-                statIncreases = "mon";
-                statIncreases = "resistance";
-                if (rarity == 0)
-                {
-                    amountIncrease = ran.Next(1, 5);
-                }
-                else if (rarity == 1)
-                {
-                    amountIncrease = ran.Next(5, 10);
-                }
-                else if (rarity == 2)
-                {
-                    amountIncrease = ran.Next(10, 20);
-                }
-
-            }
-
-            setLocation();
         }
 
         public void setRarity(int newRarity)
@@ -133,6 +44,7 @@ namespace Dungeon_Crawl
         {
             location = newLocation;
         }
+
         public string getStat()
         {
             return statIncreases;

@@ -1,20 +1,11 @@
 ﻿namespace Dungeon_Crawl
 {
-    internal class Player
+    internal class Player:Stats
     {
-        double strength;
         double weaponAdd;
-        double defense;
         double armorAdd;
-        double magic;
         double staffAdd;
-        double resistance;
         double jewleryAdd;
-        double health;
-        double maxHealth;
-        double money;
-        int level;
-        int exp;
 
         public Player()
         {
@@ -29,34 +20,6 @@
             exp = 0;
         }
 
-        public void setStrength(double strength)
-        {
-            this.strength = strength;
-        }
-        public void setDefense(double defense)
-        {
-            this.defense = defense;
-        }
-        public void setMagic(double magic)
-        {
-            this.magic = magic;
-        }
-        public void setResistance(double resistance)
-        {
-            this.resistance = resistance;
-        }
-        public void setHealth(double health)
-        {
-            this.health = health;
-        }
-        public void setMaxHealth(double maxHealth)
-        {
-            this.maxHealth = maxHealth;
-        }
-        public void setMoney(double money)
-        {
-            this.money = money;
-        }
         public void setArmorAdd(double armorAdd)
         {
             this.armorAdd = armorAdd;
@@ -74,48 +37,28 @@
             this.jewleryAdd = jewleryAdd;
         }
 
-        public double getStrength()
+        public override double getStrength()
         {
             return strength + weaponAdd;
         }
-        public double getDefense()
+        public override double getDefense()
         {
             return defense + armorAdd;
         }
-        public double getMagic()
+        public override double getMagic()
         {
             return magic + staffAdd;
         }
-        public double getResistance()
+        public override double getResistance()
         {
             return resistance + jewleryAdd;
         }
-        public double getHealth()
-        {
-            return health;
-        }
-        public double getMaxHealth()
-        {
-            return maxHealth;
-        }
-        public double getMoney()
-        {
-            return money;
-        }
-        public int getLevel()
-        {
-            return level;
-        }
-        public int getXP()
-        {
-            return exp;
-        }
 
-        public void addMoney(int money)
+        public void addMoney(double money)
         {
             this.money += money;
         }
-        public void addExp(int exp)
+        public void addExp(double exp)
         {
             this.exp += exp;
             if (exp >= 30 * level)
@@ -132,10 +75,6 @@
             defense += 1 * level;
             magic += 1 * level;
             level++;
-        }
-        public void TakeDamage(double damage)
-        {
-            health -= damage;
         }
         public void checkLevelUp()
         {
