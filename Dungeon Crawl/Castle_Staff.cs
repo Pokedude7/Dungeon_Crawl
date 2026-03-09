@@ -9,8 +9,9 @@ namespace Dungeon_Crawl
 {
     internal class Castle_Staff:Staff
     {
-        public Castle_Staff(string staffType, int rarity)
+        public Castle_Staff(string staffType, Point point, int rarity)
         {
+            ran = new Random();
             this.staffType = staffType;
             if (staffType == "novice")
             {
@@ -29,6 +30,8 @@ namespace Dungeon_Crawl
             {
                 amountIncrease = ran.Next(3, 6);
             }
+
+            setLocation(point);
         }
     }
 }

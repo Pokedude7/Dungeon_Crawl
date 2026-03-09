@@ -9,8 +9,9 @@ namespace Dungeon_Crawl
 {
     internal class Castle_Weapon:Weapon
     {
-        public Castle_Weapon(string weaponType, int rarity)
+        public Castle_Weapon(string weaponType, Point point, int rarity)
         {
+            ran = new Random();
             this.weaponType = weaponType;
             if(weaponType == "sword")
             {
@@ -29,6 +30,8 @@ namespace Dungeon_Crawl
             {
                 amountIncrease = ran.Next(3, 6);
             }
+
+            setLocation(point);
         }
     }
 }

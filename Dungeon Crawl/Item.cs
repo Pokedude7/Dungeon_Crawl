@@ -5,7 +5,7 @@ namespace Dungeon_Crawl
 {
     internal class Item
     {
-        protected Random ran = new Random();
+        protected Random ran;
         protected string itemType;
         protected string statIncreases;
         protected int rarity;
@@ -14,7 +14,6 @@ namespace Dungeon_Crawl
         protected Image image;
         public Item()
         {
-            setLocation();
         }
 
         public void setRarity(int newRarity)

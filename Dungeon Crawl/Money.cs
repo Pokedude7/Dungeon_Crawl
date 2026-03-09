@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO.Ports;
 using System.Linq;
 using System.Text;
@@ -9,8 +10,9 @@ namespace Dungeon_Crawl
 {
     internal class Money:Item
     {
-        public Money(int rarity)
+        public Money(int rarity, Point point)
         {
+            ran = new Random();
             itemType = "money";
             statIncreases = "mon";
             if (rarity == 0)
@@ -25,6 +27,8 @@ namespace Dungeon_Crawl
             {
                 amountIncrease = ran.Next(10, 20);
             }
+
+            setLocation(point);
         }
     }
 }

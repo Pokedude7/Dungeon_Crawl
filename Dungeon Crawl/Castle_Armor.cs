@@ -9,8 +9,9 @@ namespace Dungeon_Crawl
 {
     internal class Castle_Armor:Armor
     {
-        public Castle_Armor(string armorType, int rarity)
+        public Castle_Armor(string armorType, Point point, int rarity)
         {
+            ran = new Random();
             this.armorType = armorType;
             if (armorType == "plate")
             {
@@ -29,6 +30,8 @@ namespace Dungeon_Crawl
             {
                 amountIncrease = ran.Next(3, 6);
             }
+
+            setLocation(point);
         }
     }
 }

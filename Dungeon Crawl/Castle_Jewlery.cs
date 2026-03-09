@@ -10,8 +10,9 @@ namespace Dungeon_Crawl
 {
     internal class Castle_Jewlery:Jewlery
     {
-        public Castle_Jewlery(string jewleryType, int rarity)
+        public Castle_Jewlery(string jewleryType, Point point, int rarity)
         {
+            ran = new Random();
             this.jewleryType = jewleryType;
             if (jewleryType == "amulet")
             {
@@ -30,6 +31,8 @@ namespace Dungeon_Crawl
             {
                 amountIncrease = ran.Next(3, 6);
             }
+
+            setLocation(point);
         }
     }
 }
