@@ -171,6 +171,9 @@ namespace Dungeon_Crawl
                             CloseInventory();
                         }
                         break;
+                    case Keys.Q:
+                        ItemCheck();
+                        break;
                 }
             }
             Invalidate();
@@ -646,13 +649,8 @@ namespace Dungeon_Crawl
                 }
             }
         }
-        private void ItemCheck_Tick(object sender, EventArgs e)
+        private void ItemCheck()
         {
-            //Checks to see if the player is on top of one of the items on the screen.
-            //If so, it then checks if the player already has that type of item
-            //If they don't have that type of item it equips it and adds the stats to the player
-            //If they do have that type of item it compares the stats of the two items and asks the player if they want to equip the new item or not.
-            //If they choose to equip the new item it replaces the old item and adds the stats to the player.
             for (int i = 0; i < itemsOnScreen.Count; i++)
             {
                 if (pX + 75 >= itemsOnScreen[i].getXLoc() && pX < itemsOnScreen[i].getXLoc() + 50 && pY + 75 > itemsOnScreen[i].getYLoc() && pY < itemsOnScreen[i].getYLoc() + 50)
@@ -749,193 +747,88 @@ namespace Dungeon_Crawl
             inGame = false;
             upDownMove = 0;
             sideMove = 0;
-            ItemCheck.Enabled = false;
             if (equiped.getType() == "armor")
             {
-                if (equiped.getAmount() < onGround.getAmount())
+                message = "Do you want to equip this item?\nCurrent: +" + equipedItems[0].getAmount() + " --> New: +" + onGround.getAmount() + "\nWARNING: THIS CANNOT BE UNDON. ANY ITEM NOT EQUIPED WILL BE LOST FOREVER";
+                result = MessageBox.Show(message, null, MessageBoxButtons.YesNo);
+
+                if (result == DialogResult.Yes)
                 {
-                    message = "Do you want to equip this item? It has better stats than your current item. \nWARNING: THIS CANNOT BE UNDON. ANY ITEM NOT EQUIPED WILL BE LOST FOREVER";
-                    result = MessageBox.Show(message, null, MessageBoxButtons.YesNo);
-                    if (result == DialogResult.Yes)
-                    {
-                        equipedItems[0] = onGround;
-                        itemsOnScreen.Remove(onGround);
-                        setStats();
-                        inGame = true;
-                        ItemCheck.Enabled = true;
-                        Invalidate();
-                    }
-                    else if (result == DialogResult.No)
-                    {
-                        itemsOnScreen.Remove(onGround);
-                        setStats();
-                        inGame = true;
-                        ItemCheck.Enabled = true;
-                        Invalidate();
-                    }
+                    equipedItems[0] = onGround;
+                    itemsOnScreen.Remove(onGround);
+                    setStats();
+                    inGame = true;
+                    Invalidate();
                 }
-                else if (equiped.getAmount() >= onGround.getAmount())
+                else
                 {
-                    message = "Do you want to equip this item? It has the same or worse stats than your current item. \nWARNING: THIS CANNOT BE UNDON. ANY ITEM NOT EQUIPED WILL BE LOST FOREVER";
-                    result = MessageBox.Show(message, null, MessageBoxButtons.YesNo);
-                    if (result == DialogResult.Yes)
-                    {
-                        equipedItems[0] = onGround;
-                        itemsOnScreen.Remove(onGround);
-                        setStats();
-                        inGame = true;
-                        ItemCheck.Enabled = true;
-                        Invalidate();
-                    }
-                    else if (result == DialogResult.No)
-                    {
-                        itemsOnScreen.Remove(onGround);
-                        setStats();
-                        inGame = true;
-                        ItemCheck.Enabled = true;
-                        Invalidate();
-                    }
+                    itemsOnScreen.Remove(onGround);
+                    setStats();
+                    inGame = true;
+                    Invalidate();
                 }
             }
             else if (equiped.getType() == "weapon")
             {
-                if (equiped.getAmount() < onGround.getAmount())
+                message = "Do you want to equip this item?\nCurrent: +" + equipedItems[1].getAmount() + " --> New: +" + onGround.getAmount() + "\nWARNING: THIS CANNOT BE UNDON. ANY ITEM NOT EQUIPED WILL BE LOST FOREVER";
+                result = MessageBox.Show(message, null, MessageBoxButtons.YesNo);
+
+                if (result == DialogResult.Yes)
                 {
-                    message = "Do you want to equip this item? It has better stats than your current item. \nWARNING: THIS CANNOT BE UNDON. ANY ITEM NOT EQUIPED WILL BE LOST FOREVER";
-                    result = MessageBox.Show(message, null, MessageBoxButtons.YesNo);
-                    if (result == DialogResult.Yes)
-                    {
-                        equipedItems[1] = onGround;
-                        itemsOnScreen.Remove(onGround);
-                        setStats();
-                        inGame = true;
-                        ItemCheck.Enabled = true;
-                        Invalidate();
-                    }
-                    else if (result == DialogResult.No)
-                    {
-                        itemsOnScreen.Remove(onGround);
-                        setStats();
-                        inGame = true;
-                        ItemCheck.Enabled = true;
-                        Invalidate();
-                    }
+                    equipedItems[1] = onGround;
+                    itemsOnScreen.Remove(onGround);
+                    setStats();
+                    inGame = true;
+                    Invalidate();
                 }
-                else if (equiped.getAmount() >= onGround.getAmount())
+                else
                 {
-                    message = "Do you want to equip this item? It has the same or worse stats than your current item. \nWARNING: THIS CANNOT BE UNDON. ANY ITEM NOT EQUIPED WILL BE LOST FOREVER";
-                    result = MessageBox.Show(message, null, MessageBoxButtons.YesNo);
-                    if (result == DialogResult.Yes)
-                    {
-                        equipedItems[1] = onGround;
-                        itemsOnScreen.Remove(onGround);
-                        setStats();
-                        inGame = true;
-                        ItemCheck.Enabled = true;
-                        Invalidate();
-                    }
-                    else if (result == DialogResult.No)
-                    {
-                        itemsOnScreen.Remove(onGround);
-                        setStats();
-                        inGame = true;
-                        ItemCheck.Enabled = true;
-                        Invalidate();
-                    }
+                    itemsOnScreen.Remove(onGround);
+                    setStats();
+                    inGame = true;
+                    Invalidate();
                 }
             }
             else if (equiped.getType() == "staff")
             {
-                if (equiped.getAmount() < onGround.getAmount())
+                message = "Do you want to equip this item?\nCurrent: +" + equipedItems[2].getAmount() + " --> New: +" + onGround.getAmount() + "\nWARNING: THIS CANNOT BE UNDON. ANY ITEM NOT EQUIPED WILL BE LOST FOREVER";
+                result = MessageBox.Show(message, null, MessageBoxButtons.YesNo);
+
+                if (result == DialogResult.Yes)
                 {
-                    message = "Do you want to equip this item? It has better stats than your current item. \nWARNING: THIS CANNOT BE UNDON. ANY ITEM NOT EQUIPED WILL BE LOST FOREVER";
-                    result = MessageBox.Show(message, null, MessageBoxButtons.YesNo);
-                    if (result == DialogResult.Yes)
-                    {
-                        equipedItems[1] = onGround;
-                        itemsOnScreen.Remove(onGround);
-                        setStats();
-                        inGame = true;
-                        ItemCheck.Enabled = true;
-                        Invalidate();
-                    }
-                    else if (result == DialogResult.No)
-                    {
-                        itemsOnScreen.Remove(onGround);
-                        setStats();
-                        inGame = true;
-                        ItemCheck.Enabled = true;
-                        Invalidate();
-                    }
+                    equipedItems[2] = onGround;
+                    itemsOnScreen.Remove(onGround);
+                    setStats();
+                    inGame = true;
+                    Invalidate();
                 }
-                else if (equiped.getAmount() >= onGround.getAmount())
+                else
                 {
-                    message = "Do you want to equip this item? It has the same or worse stats than your current item. \nWARNING: THIS CANNOT BE UNDON. ANY ITEM NOT EQUIPED WILL BE LOST FOREVER";
-                    result = MessageBox.Show(message, null, MessageBoxButtons.YesNo);
-                    if (result == DialogResult.Yes)
-                    {
-                        equipedItems[1] = onGround;
-                        itemsOnScreen.Remove(onGround);
-                        setStats();
-                        inGame = true;
-                        ItemCheck.Enabled = true;
-                        Invalidate();
-                    }
-                    else if (result == DialogResult.No)
-                    {
-                        itemsOnScreen.Remove(onGround);
-                        setStats();
-                        inGame = true;
-                        ItemCheck.Enabled = true;
-                        Invalidate();
-                    }
+                    itemsOnScreen.Remove(onGround);
+                    setStats();
+                    inGame = true;
+                    Invalidate();
                 }
             }
             else if (equiped.getType() == "jewlery")
             {
-                if (equiped.getAmount() < onGround.getAmount())
+                message = "Do you want to equip this item?\nCurrent: +" + equipedItems[3].getAmount() + " --> New: +" + onGround.getAmount() + "\nWARNING: THIS CANNOT BE UNDON. ANY ITEM NOT EQUIPED WILL BE LOST FOREVER";
+                result = MessageBox.Show(message, null, MessageBoxButtons.YesNo);
+
+                if (result == DialogResult.Yes)
                 {
-                    message = "Do you want to equip this item? It has better stats than your current item. \nWARNING: THIS CANNOT BE UNDON. ANY ITEM NOT EQUIPED WILL BE LOST FOREVER";
-                    result = MessageBox.Show(message, null, MessageBoxButtons.YesNo);
-                    if (result == DialogResult.Yes)
-                    {
-                        equipedItems[1] = onGround;
-                        itemsOnScreen.Remove(onGround);
-                        setStats();
-                        inGame = true;
-                        ItemCheck.Enabled = true;
-                        Invalidate();
-                    }
-                    else if (result == DialogResult.No)
-                    {
-                        itemsOnScreen.Remove(onGround);
-                        setStats();
-                        inGame = true;
-                        ItemCheck.Enabled = true;
-                        Invalidate();
-                    }
+                    equipedItems[3] = onGround;
+                    itemsOnScreen.Remove(onGround);
+                    setStats();
+                    inGame = true;
+                    Invalidate();
                 }
-                else if (equiped.getAmount() >= onGround.getAmount())
+                else
                 {
-                    message = "Do you want to equip this item? It has the same or worse stats than your current item. \nWARNING: THIS CANNOT BE UNDON. ANY ITEM NOT EQUIPED WILL BE LOST FOREVER";
-                    result = MessageBox.Show(message, null, MessageBoxButtons.YesNo);
-                    if (result == DialogResult.Yes)
-                    {
-                        equipedItems[1] = onGround;
-                        itemsOnScreen.Remove(onGround);
-                        setStats();
-                        inGame = true;
-                        ItemCheck.Enabled = true;
-                        Invalidate();
-                    }
-                    else if (result == DialogResult.No)
-                    {
-                        itemsOnScreen.Remove(onGround);
-                        setStats();
-                        inGame = true;
-                        ItemCheck.Enabled = true;
-                        Invalidate();
-                    }
+                    itemsOnScreen.Remove(onGround);
+                    setStats();
+                    inGame = true;
+                    Invalidate();
                 }
             }
 
@@ -1133,12 +1026,10 @@ namespace Dungeon_Crawl
             if (!inGame)
             {
                 Movement.Enabled = false;
-                ItemCheck.Enabled = false;
             }
             else
             {
                 Movement.Enabled = true;
-                ItemCheck.Enabled = true;
             }
         }
         private void TakeTurn()
@@ -1173,6 +1064,7 @@ namespace Dungeon_Crawl
                     pc.addMoney(enemy.getMoney());
                     enemy.getItem().setLocation(new Point(pX, pY));
                     itemsOnScreen.Add(enemy.getItem());
+                    ItemCheck();
                 }
                 else
                 {
