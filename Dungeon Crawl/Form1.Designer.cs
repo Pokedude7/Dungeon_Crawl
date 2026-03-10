@@ -49,7 +49,6 @@
             this.MagicLabel = new System.Windows.Forms.Label();
             this.ResLabel = new System.Windows.Forms.Label();
             this.MonLabel = new System.Windows.Forms.Label();
-            this.ItemCheck = new System.Windows.Forms.Timer(this.components);
             this.attackButton = new System.Windows.Forms.Button();
             this.magicButton = new System.Windows.Forms.Button();
             this.runButton = new System.Windows.Forms.Button();
@@ -109,7 +108,7 @@
             this.SettingsMenu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 45.25547F));
             this.SettingsMenu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 54.74453F));
             this.SettingsMenu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 58F));
-            this.SettingsMenu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 73F));
+            this.SettingsMenu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 74F));
             this.SettingsMenu.Controls.Add(this.textBox4, 3, 1);
             this.SettingsMenu.Controls.Add(this.label2, 0, 0);
             this.SettingsMenu.Controls.Add(this.textBox1, 0, 1);
@@ -129,7 +128,7 @@
             // 
             // textBox4
             // 
-            this.textBox4.Location = new System.Drawing.Point(189, 38);
+            this.textBox4.Location = new System.Drawing.Point(188, 38);
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(59, 22);
             this.textBox4.TabIndex = 6;
@@ -150,14 +149,14 @@
             // 
             this.textBox1.Location = new System.Drawing.Point(3, 38);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(52, 22);
+            this.textBox1.Size = new System.Drawing.Size(51, 22);
             this.textBox1.TabIndex = 0;
             this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(61, 38);
+            this.textBox2.Location = new System.Drawing.Point(60, 38);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(64, 22);
             this.textBox2.TabIndex = 2;
@@ -167,7 +166,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(61, 0);
+            this.label1.Location = new System.Drawing.Point(60, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(59, 35);
             this.label1.TabIndex = 0;
@@ -176,7 +175,7 @@
             // 
             // textBox3
             // 
-            this.textBox3.Location = new System.Drawing.Point(131, 38);
+            this.textBox3.Location = new System.Drawing.Point(130, 38);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(52, 22);
             this.textBox3.TabIndex = 4;
@@ -186,7 +185,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(131, 0);
+            this.label3.Location = new System.Drawing.Point(130, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(38, 32);
             this.label3.TabIndex = 3;
@@ -196,7 +195,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(189, 0);
+            this.label4.Location = new System.Drawing.Point(188, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(62, 16);
             this.label4.TabIndex = 5;
@@ -282,12 +281,6 @@
             this.MonLabel.TabIndex = 10;
             this.MonLabel.Text = "label9";
             this.MonLabel.Visible = false;
-            // 
-            // ItemCheck
-            // 
-            this.ItemCheck.Enabled = true;
-            this.ItemCheck.Interval = 10;
-            this.ItemCheck.Tick += new System.EventHandler(this.ItemCheck_Tick);
             // 
             // attackButton
             // 
@@ -447,7 +440,6 @@
         private System.Windows.Forms.Label MagicLabel;
         private System.Windows.Forms.Label ResLabel;
         private System.Windows.Forms.Label MonLabel;
-        private System.Windows.Forms.Timer ItemCheck;
         private System.Windows.Forms.Button attackButton;
         private System.Windows.Forms.Button magicButton;
         private System.Windows.Forms.Button runButton;
