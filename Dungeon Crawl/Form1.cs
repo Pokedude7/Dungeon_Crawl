@@ -172,7 +172,10 @@ namespace Dungeon_Crawl
                         }
                         break;
                     case Keys.Q:
-                        ItemCheck();
+                        if (inGame)
+                        {
+                            ItemCheck();
+                        }
                         break;
                 }
             }
