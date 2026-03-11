@@ -34,12 +34,8 @@
             this.quitButton = new System.Windows.Forms.Button();
             this.resumeButton = new System.Windows.Forms.Button();
             this.SettingsMenu = new System.Windows.Forms.TableLayoutPanel();
-            this.textBox4 = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.CloseButton = new System.Windows.Forms.Button();
@@ -108,13 +104,9 @@
             this.SettingsMenu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 45.25547F));
             this.SettingsMenu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 54.74453F));
             this.SettingsMenu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 58F));
-            this.SettingsMenu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 74F));
-            this.SettingsMenu.Controls.Add(this.textBox4, 3, 1);
+            this.SettingsMenu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 75F));
             this.SettingsMenu.Controls.Add(this.label2, 0, 0);
-            this.SettingsMenu.Controls.Add(this.textBox1, 0, 1);
-            this.SettingsMenu.Controls.Add(this.textBox2, 1, 1);
             this.SettingsMenu.Controls.Add(this.label1, 1, 0);
-            this.SettingsMenu.Controls.Add(this.textBox3, 2, 1);
             this.SettingsMenu.Controls.Add(this.label3, 2, 0);
             this.SettingsMenu.Controls.Add(this.label4, 3, 0);
             this.SettingsMenu.Location = new System.Drawing.Point(239, 192);
@@ -126,15 +118,6 @@
             this.SettingsMenu.TabIndex = 4;
             this.SettingsMenu.Visible = false;
             // 
-            // textBox4
-            // 
-            this.textBox4.Location = new System.Drawing.Point(188, 38);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(59, 22);
-            this.textBox4.TabIndex = 6;
-            this.textBox4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.textBox4.TextChanged += new System.EventHandler(this.textBox4_TextChanged);
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -144,24 +127,6 @@
             this.label2.TabIndex = 1;
             this.label2.Text = "Walk Forward";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(3, 38);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(51, 22);
-            this.textBox1.TabIndex = 0;
-            this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(60, 38);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(64, 22);
-            this.textBox2.TabIndex = 2;
-            this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             // 
             // label1
             // 
@@ -173,19 +138,10 @@
             this.label1.Text = "Walk Backward";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // textBox3
-            // 
-            this.textBox3.Location = new System.Drawing.Point(130, 38);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(52, 22);
-            this.textBox3.TabIndex = 4;
-            this.textBox3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.textBox3.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
-            // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(130, 0);
+            this.label3.Location = new System.Drawing.Point(129, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(38, 32);
             this.label3.TabIndex = 3;
@@ -195,7 +151,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(188, 0);
+            this.label4.Location = new System.Drawing.Point(187, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(62, 16);
             this.label4.TabIndex = 5;
@@ -427,10 +383,6 @@
         private System.Windows.Forms.TableLayoutPanel SettingsMenu;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button CloseButton;

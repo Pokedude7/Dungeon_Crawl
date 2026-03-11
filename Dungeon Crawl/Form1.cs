@@ -8,10 +8,6 @@ namespace Dungeon_Crawl
     public partial class Form1 : Form
     {
         Random ran = new Random();
-        char moveUp = 'W';
-        char moveDown = 'S';
-        char moveLeft = 'A';
-        char moveRight = 'D';
         string reopenMenu = null;
 
         //Images for the game
@@ -59,7 +55,7 @@ namespace Dungeon_Crawl
 
         List<Item> itemsOnScreen = new List<Item>();
 
-        Player pc = new Player();
+        Player pc;
 
         Enemy enemy;
 
@@ -96,19 +92,39 @@ namespace Dungeon_Crawl
             magicButton.Visible = false;
             runButton.Visible = false;
         }
+        private void HomeScreen()
+        {
+            startButton.Visible = true;
+            settingsButton.Visible = true;
+            quitButton.Visible = true;
+
+            Invalidate();
+        }
         private void startButton_Click(object sender, EventArgs e)
         {
             //Sets the buttons to invisible and then calls the method to start the game
             startButton.Visible = false;
             settingsButton.Visible = false;
             quitButton.Visible = false;
-            inGame = true;
 
             StartGame();
         }
         private void StartGame()
         {
-            Cursor.Hide();
+            pc = new Player();
+            enemy = null;
+            equipedItems = new Item[5] { null, null, null, null, null };
+            lastHeld = 'w';
+            sideMove = 0;
+            upDownMove = 0;
+            inGame = true;
+            inFight = false;
+            inventoryOpen = false;
+            pX = 730;
+            pY = 789;
+            difficulty = 1;
+            enteredFrom = 's';
+            PlayerButtonsVisible();
             SpawnItems();
             Invalidate();
         }
@@ -138,7 +154,10 @@ namespace Dungeon_Crawl
                 switch (e.KeyCode)
                 {
                     case Keys.Escape:
-                        OpenPauseMenu();
+                        if (!inFight)
+                        {
+                            OpenPauseMenu();
+                        }
                         break;
                     case Keys.W:
                         upDownMove = -5;
@@ -183,7 +202,15 @@ namespace Dungeon_Crawl
         }
         private void quitButton_Click(object sender, EventArgs e)
         {
-            this.Close();
+            if (resumeButton.Visible)
+            {
+                HideAll();
+                HomeScreen();
+            }
+            else
+            {
+                this.Close();
+            }
         }
         private void resumeButton_Click(object sender, EventArgs e)
         {
@@ -240,25 +267,6 @@ namespace Dungeon_Crawl
                 reopenMenu = "pause";
             }
         }
-
-        //Currently these functions do not work and will change during development of the alpha
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-            moveUp = textBox1.Text[0];
-        }
-        private void textBox2_TextChanged(object sender, EventArgs e)
-        {
-            moveDown = textBox2.Text[0];
-        }
-        private void textBox3_TextChanged(object sender, EventArgs e)
-        {
-            moveRight = textBox3.Text[0];
-        }
-        private void textBox4_TextChanged(object sender, EventArgs e)
-        {
-            moveLeft = textBox4.Text[0];
-        }
-
         private void CloseButton_Click(object sender, EventArgs e)
         {
             //Sets the buttons and menus to invisible and then sets the correct buttons to visible based on which menu was open before settings
@@ -750,6 +758,7 @@ namespace Dungeon_Crawl
             inGame = false;
             upDownMove = 0;
             sideMove = 0;
+            Invalidate();
             if (equiped.getType() == "armor")
             {
                 message = "Do you want to equip this item?\nCurrent: +" + equipedItems[0].getAmount() + " --> New: +" + onGround.getAmount() + "\nWARNING: THIS CANNOT BE UNDON. ANY ITEM NOT EQUIPED WILL BE LOST FOREVER";
@@ -1055,8 +1064,8 @@ namespace Dungeon_Crawl
             else if (pc.getHealth() <= 0)
             {
                 inGame = false;
-                MessageBox.Show("You have died. Game Over.");
-                this.Close();
+                inFight = false;
+                PlayerDied();
             }
             else if (enemy.getHealth() <= 0)
             {
@@ -1087,6 +1096,45 @@ namespace Dungeon_Crawl
             {
                 difficulty = (int)pc.getLevel();
             }
+        }
+        private void PlayerDied()
+        {
+            HideAll();
+            Invalidate();
+            string message = "You Died.\nHere are your stats:\nLevel: " + pc.getLevel() + "\nStrength: " + pc.getStrength() + "\nDefense: " + pc.getDefense() + "\nMagic: " + pc.getMagic() + "\nResistance: " + pc.getResistance() + "\nMoney: " + pc.getMoney() + "\n\nWould you like to restart?";
+            DialogResult result = MessageBox.Show(message, null, MessageBoxButtons.YesNo);
+
+            if (result == DialogResult.Yes)
+            {
+                StartGame();
+            }
+            else
+            {
+                HomeScreen();
+            }
+
+            Invalidate();
+        }
+        private void HideAll()
+        {
+            //Hides all the buttons and labels on the screen
+            attackButton.Visible = false;
+            magicButton.Visible = false;
+            runButton.Visible = false;
+            StrLabel.Visible = false;
+            DefLabel.Visible = false;
+            MagicLabel.Visible = false;
+            ResLabel.Visible = false;
+            MonLabel.Visible = false;
+            HealthLabel.Visible = false;
+            XPLabel.Visible = false;
+            LevelLabel.Visible = false;
+            PCHealthLabel.Visible = false;
+            EnemyHealthLabel.Visible = false;
+            resumeButton.Visible = false;
+            settingsButton.Visible = false;
+            quitButton.Visible = false;
+            startButton.Visible = false;
         }
     }
 }
