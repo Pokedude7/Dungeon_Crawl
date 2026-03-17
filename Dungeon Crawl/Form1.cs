@@ -12,35 +12,61 @@ namespace Dungeon_Crawl
 
         //Images for the game
         //Character sprites
-        Image CS = Image.FromFile("../../PlaceholderCharacter_DungeonCrawl.png");
-        Image CSU = Image.FromFile("../../PlaceHolderCharacterUp_DungeonCrawl.png");
-        Image CSD = Image.FromFile("../../PlaceHolderCharacterDown_DungeonCrawl.png");
-        Image CSL = Image.FromFile("../../PlaceHolderCharacterLeft_DungeonCrawl.png");
-        Image CSR = Image.FromFile("../../PlaceHolderCharacterRight_DungeonCrawl.png");
+        readonly Image CS = Image.FromFile("../../PlaceholderCharacter_DungeonCrawl.png");
+        readonly Image CSU = Image.FromFile("../../PlaceHolderCharacterUp_DungeonCrawl.png");
+        readonly Image CSD = Image.FromFile("../../PlaceHolderCharacterDown_DungeonCrawl.png");
+        readonly Image CSL = Image.FromFile("../../PlaceHolderCharacterLeft_DungeonCrawl.png");
+        readonly Image CSR = Image.FromFile("../../PlaceHolderCharacterRight_DungeonCrawl.png");
         //Inventory square sprite
-        Image ISq = Image.FromFile("../../InventorySquareTemp_DungeonCrawl.png");
+        readonly Image ISq = Image.FromFile("../../InventorySquareTemp_DungeonCrawl.png");
         //Inventory screen sprite
-        Image ISc = Image.FromFile("../../InventoryScreenTemp_DungeonCrawl.png");
+        readonly Image ISc = Image.FromFile("../../InventoryScreenTemp_DungeonCrawl.png");
         //Item sprites
-        Image armor = Image.FromFile("../../ArmorTemp_DungeonCrawl.png");
-        Image weapon = Image.FromFile("../../WeaponTemp_DungeonCrawl.png");
-        Image staff = Image.FromFile("../../StaffTemp_DungeonCrawl.png");
-        Image jewlery = Image.FromFile("../../JewleryTemp_DungeonCrawl.png");
-        Image money = Image.FromFile("../../MoneyTemp_DungeonCrawl.png");
-        Image wallsL = Image.FromFile("../../WallTestLSide_DungeonCrawl.png");
-        Image wallsR = Image.FromFile("../../WallTestRSide_DungeonCrawl.png");
-        Image skeleton = Image.FromFile("../../SkeletonTemp_DungeonCrawl.png");
-        Image goblin = Image.FromFile("../../GoblinTemp_DungeonCrawl.png");
-        Image ogre = Image.FromFile("../../OgreTemp_DungeonCrawl.png");
-        Image titleText = Image.FromFile("../../TitleTextTemp_DungeonCrawl.png");
+        readonly Image armor = Image.FromFile("../../ArmorTemp_DungeonCrawl.png");
+        readonly Image weapon = Image.FromFile("../../WeaponTemp_DungeonCrawl.png");
+        readonly Image staff = Image.FromFile("../../StaffTemp_DungeonCrawl.png");
+        readonly Image jewlery = Image.FromFile("../../JewleryTemp_DungeonCrawl.png");
+        readonly Image money = Image.FromFile("../../MoneyTemp_DungeonCrawl.png");
+        readonly Image wallsL = Image.FromFile("../../WallTestLSide_DungeonCrawl.png");
+        readonly Image wallsR = Image.FromFile("../../WallTestRSide_DungeonCrawl.png");
+        readonly Image skeleton = Image.FromFile("../../SkeletonTemp_DungeonCrawl.png");
+        readonly Image goblin = Image.FromFile("../../GoblinTemp_DungeonCrawl.png");
+        readonly Image ogre = Image.FromFile("../../OgreTemp_DungeonCrawl.png");
+        readonly Image titleText = Image.FromFile("../../TitleTextTemp_DungeonCrawl.png");
+        //Button sprites
+        readonly Image startB = Image.FromFile("../../StartButton_DungeonCrawl.png");
+        readonly Image startH = Image.FromFile("../../StartButtonHighlighted_DungeonCrawl.png");
+        readonly Image settingsB = Image.FromFile("../../SettingsButton_DungeonCrawl.png");
+        readonly Image settingsH = Image.FromFile("../../SettingsButtonHighlighted_DungeonCrawl.png");
+        readonly Image quitB = Image.FromFile("../../QuitButton_DungeonCrawl.png");
+        readonly Image quitH = Image.FromFile("../../QuitButtonHighlighted_DungeonCrawl.png");
+        readonly Image resumeB = Image.FromFile("../../ResumeButton_DungeonCrawl.png");
+        readonly Image resumeH = Image.FromFile("../../ResumeButtonHighlighted_DungeonCrawl.png");
+        readonly Image attackB = Image.FromFile("../../AttackButton_DungeonCrawl.png");
+        readonly Image attackH = Image.FromFile("../../AttackButtonHighlighted_DungeonCrawl.png");
+        readonly Image magicB = Image.FromFile("../../MagicButton_DungeonCrawl.png");
+        readonly Image magicH = Image.FromFile("../../MagicButtonHighlighted_DungeonCrawl.png");
+        readonly Image runB = Image.FromFile("../../RunButton_DungeonCrawl.png");
+        readonly Image runH = Image.FromFile("../../RunButtonHighlighted_DungeonCrawl.png");
 
         //General Variables
         bool inGame = false;
         bool inventoryOpen = false;
+        bool startScreen = true;
+        bool pauseScreen = false;
         int pX = 730;
         int pY = 789;
         int difficulty = 1;
         char enteredFrom = 's';
+
+        //Mouse Variables
+        bool startHover = false;
+        bool settingsHover = false;
+        bool quitHover = false;
+        bool resumeHover = false;
+        bool attackHover = false;
+        bool magicHover = false;
+        bool runHover = false;
 
         //Variables for movement
         int upDownMove = 0;
@@ -82,32 +108,12 @@ namespace Dungeon_Crawl
             HealthLabel.Location = new Point(640, 420);
             XPLabel.Location = new Point(640, 470);
             LevelLabel.Location = new Point(670, 520);
-
-            startButton.Location = new Point(688, 300);
-            resumeButton.Location = new Point(688, 300);
-            settingsButton.Location = new Point(688, 360);
-            quitButton.Location = new Point(688, 420);
-
-            attackButton.Visible = false;
-            magicButton.Visible = false;
-            runButton.Visible = false;
         }
         private void HomeScreen()
         {
-            startButton.Visible = true;
-            settingsButton.Visible = true;
-            quitButton.Visible = true;
+            startScreen = true;
 
             Invalidate();
-        }
-        private void startButton_Click(object sender, EventArgs e)
-        {
-            //Sets the buttons to invisible and then calls the method to start the game
-            startButton.Visible = false;
-            settingsButton.Visible = false;
-            quitButton.Visible = false;
-
-            StartGame();
         }
         private void StartGame()
         {
@@ -120,6 +126,7 @@ namespace Dungeon_Crawl
             inGame = true;
             inFight = false;
             inventoryOpen = false;
+            startScreen = false;
             pX = 730;
             pY = 789;
             difficulty = 1;
@@ -135,9 +142,6 @@ namespace Dungeon_Crawl
             Cursor.Show();
             inGame = false;
             Movement.Enabled = false;
-            resumeButton.Visible = true;
-            settingsButton.Visible = true;
-            quitButton.Visible = true;
             StrLabel.Visible = false;
             DefLabel.Visible = false;
             MagicLabel.Visible = false;
@@ -146,10 +150,11 @@ namespace Dungeon_Crawl
             HealthLabel.Visible = false;
             XPLabel.Visible = false;
             LevelLabel.Visible = false;
+            pauseScreen = true;
         }
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
-            if (!quitButton.Visible)
+            if (!startScreen && !pauseScreen)
             {
                 switch (e.KeyCode)
                 {
@@ -181,11 +186,11 @@ namespace Dungeon_Crawl
                         break;
                     case Keys.E:
                         //Checks to see if the inventory is open or not when the E key is pressed
-                        if (!inventoryOpen && !resumeButton.Visible && !inFight)
+                        if (!inventoryOpen && !pauseScreen && !inFight)
                         {
                             OpenInventory();
                         }
-                        else if (inventoryOpen && !resumeButton.Visible && !inFight)
+                        else if (inventoryOpen && !pauseScreen && !inFight)
                         {
                             CloseInventory();
                         }
@@ -200,9 +205,9 @@ namespace Dungeon_Crawl
             }
             Invalidate();
         }
-        private void quitButton_Click(object sender, EventArgs e)
+        private void quitButtonClick()
         {
-            if (resumeButton.Visible)
+            if (pauseScreen)
             {
                 HideAll();
                 HomeScreen();
@@ -212,9 +217,10 @@ namespace Dungeon_Crawl
                 this.Close();
             }
         }
-        private void resumeButton_Click(object sender, EventArgs e)
+        private void resumeButtonClick()
         {
             //Sets the buttons to invisible and then calls the method to resume the game if the inventory wasn't open prior
+
             Cursor.Hide();
             if (!inventoryOpen)
             {
@@ -242,58 +248,107 @@ namespace Dungeon_Crawl
                 LevelLabel.Visible = true;
             }
             Movement.Enabled = true;
-            quitButton.Visible = false;
-            settingsButton.Visible = false;
-            resumeButton.Visible = false;
+            pauseScreen = false;
             Invalidate();
         }
-        private void settingsButton_Click(object sender, EventArgs e)
+        private void OpenSettingsMenu()
         {
             //Sets the settings menu and close button to visible and then sets the correct buttons to invisible based on which menu was open before settings
             SettingsMenu.Visible = true;
             CloseButton.Visible = true;
-            if (startButton.Visible == true)
+            if (startScreen)
             {
-                startButton.Visible = false;
-                quitButton.Visible = false;
-                settingsButton.Visible = false;
+                startScreen = false;
                 reopenMenu = "start";
             }
-            else if (resumeButton.Visible == true)
+            else if (pauseScreen)
             {
-                resumeButton.Visible = false;
-                quitButton.Visible = false;
-                settingsButton.Visible = false;
+                pauseScreen = false;
                 reopenMenu = "pause";
             }
         }
-        private void CloseButton_Click(object sender, EventArgs e)
+        private void CloseSettingsMenu()
         {
             //Sets the buttons and menus to invisible and then sets the correct buttons to visible based on which menu was open before settings
             CloseButton.Visible = false;
             SettingsMenu.Visible = false;
             if (reopenMenu == "start")
             {
-                startButton.Visible = true;
-                quitButton.Visible = true;
-                settingsButton.Visible = true;
+                startScreen = true;
             }
             else if (reopenMenu == "pause")
             {
-                resumeButton.Visible = true;
-                quitButton.Visible = true;
-                settingsButton.Visible = true;
+                pauseScreen = true;
             }
+        }
+        private void CloseButton_Click(object sender, EventArgs e)
+        {
+            CloseSettingsMenu();
         }
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
-            if (startButton.Visible)
+            if (startScreen)
             {
                 //Draws the title text on the screen
                 e.Graphics.DrawImage(titleText, 396, 100);
-            }
 
-            if (inGame)
+                if (startHover)
+                {
+                    e.Graphics.DrawImage(startH, 468, 300);
+                }
+                else
+                {
+                    e.Graphics.DrawImage(startB, 468, 300);
+                }
+
+                if (settingsHover)
+                {
+                    e.Graphics.DrawImage(settingsH, 468, 450);
+                }
+                else
+                {
+                    e.Graphics.DrawImage(settingsB, 468, 450);
+                }
+
+                if (quitHover)
+                {
+                    e.Graphics.DrawImage(quitH, 468, 600);
+                }
+                else
+                {
+                    e.Graphics.DrawImage(quitB, 468, 600);
+                }
+            }
+            else if (pauseScreen)
+            {
+                if (resumeHover)
+                {
+                    e.Graphics.DrawImage(resumeH, 468, 300);
+                }
+                else
+                {
+                    e.Graphics.DrawImage(resumeB, 468, 300);
+                }
+
+                if (settingsHover)
+                {
+                    e.Graphics.DrawImage(settingsH, 468, 450);
+                }
+                else
+                {
+                    e.Graphics.DrawImage(settingsB, 468, 450);
+                }
+
+                if (quitHover)
+                {
+                    e.Graphics.DrawImage(quitH, 468, 600);
+                }
+                else
+                {
+                    e.Graphics.DrawImage(quitB, 468, 600);
+                }
+            }
+            else if (inGame)
             {
                 PCHealthLabel.Visible = false;
                 EnemyHealthLabel.Visible = false;
@@ -362,7 +417,7 @@ namespace Dungeon_Crawl
                 }
 
             }
-            else if (inventoryOpen && !resumeButton.Visible)
+            else if (inventoryOpen && !pauseScreen)
             {
                 //Draws the inventory screen
                 e.Graphics.DrawImage(ISq, 800, 200);
@@ -399,24 +454,51 @@ namespace Dungeon_Crawl
                 //Draws the fight screen and the text of the health labels
                 PCHealthLabel.Text = "PC Health: " + pc.getHealth() + "/" + pc.getMaxHealth();
                 EnemyHealthLabel.Text = "Enemy Health: " + enemy.getHealth() + "/" + enemy.getMaxHealth();
-                PCHealthLabel.Location = new Point(50, 200);
-                e.Graphics.DrawImage(CS, 55, 215);
-                EnemyHealthLabel.Location = new Point(50, 300);
+                PCHealthLabel.Location = new Point(911, 205);
+                e.Graphics.DrawImage(CS, 911, 113);
+                EnemyHealthLabel.Location = new Point(550, 205);
                 if (enemy.getEnemyType() == "skeleton")
                 {
-                    e.Graphics.DrawImage(skeleton, 50, 315);
+                    e.Graphics.DrawImage(skeleton, 550, 100);
                 }
                 else if (enemy.getEnemyType() == "goblin")
                 {
-                    e.Graphics.DrawImage(goblin, 50, 315);
+                    e.Graphics.DrawImage(goblin, 550, 100);
                 }
                 else if (enemy.getEnemyType() == "ogre")
                 {
-                    e.Graphics.DrawImage(ogre, 50, 315);
+                    e.Graphics.DrawImage(ogre, 550, 100);
                 }
 
                 PCHealthLabel.Visible = true;
                 EnemyHealthLabel.Visible = true;
+
+                if (attackHover)
+                {
+                    e.Graphics.DrawImage(attackH, 468, 300);
+                }
+                else
+                {
+                    e.Graphics.DrawImage(attackB, 468, 300);
+                }
+
+                if (magicHover)
+                {
+                    e.Graphics.DrawImage(magicH, 468, 450);
+                }
+                else
+                {
+                    e.Graphics.DrawImage(magicB, 468, 450);
+                }
+
+                if (runHover)
+                {
+                    e.Graphics.DrawImage(runH, 468, 600);
+                }
+                else
+                {
+                    e.Graphics.DrawImage(runB, 468, 600);
+                }
             }
         }
         private void Movement_Tick(object sender, EventArgs e)
@@ -937,18 +1019,10 @@ namespace Dungeon_Crawl
             if (inFight)
             {
                 inGame = false;
-                attackButton.Visible = true;
-                magicButton.Visible = true;
-                runButton.Visible = true;
-
                 Cursor.Show();
             }
             else
             {
-                attackButton.Visible = false;
-                magicButton.Visible = false;
-                runButton.Visible = false;
-
                 Cursor.Hide();
             }
         }
@@ -968,7 +1042,7 @@ namespace Dungeon_Crawl
             whoseturn = 1;
             TakeTurn();
         }
-        private void attackButton_Click(object sender, EventArgs e)
+        private void attackButtonClick()
         {
             //Calculates the damage the player does to the enemy based on the players strength and the enemys defense
             if (((int)pc.getStrength() - enemy.getDefense()) <= 0)
@@ -983,7 +1057,7 @@ namespace Dungeon_Crawl
             whoseturn = 2;
             TakeTurn();
         }
-        private void magicButton_Click(object sender, EventArgs e)
+        private void magicButtonClick()
         {
             //Calculates the damage the player does to the enemy based on the players magic and the enemys resistance
             enemy.TakeDamage((int)pc.getMagic() - (1 / 2 * enemy.getResistance()));
@@ -999,7 +1073,7 @@ namespace Dungeon_Crawl
             whoseturn = 2;
             TakeTurn();
         }
-        private void runButton_Click(object sender, EventArgs e)
+        private void runButtonClick()
         {
             //Calculates the chance the player has to run away based on the players level and the enemys level.
             //If the player is higher level than the enemy they automatically get away.
@@ -1118,9 +1192,6 @@ namespace Dungeon_Crawl
         private void HideAll()
         {
             //Hides all the buttons and labels on the screen
-            attackButton.Visible = false;
-            magicButton.Visible = false;
-            runButton.Visible = false;
             StrLabel.Visible = false;
             DefLabel.Visible = false;
             MagicLabel.Visible = false;
@@ -1131,10 +1202,140 @@ namespace Dungeon_Crawl
             LevelLabel.Visible = false;
             PCHealthLabel.Visible = false;
             EnemyHealthLabel.Visible = false;
-            resumeButton.Visible = false;
-            settingsButton.Visible = false;
-            quitButton.Visible = false;
-            startButton.Visible = false;
+            startScreen = false;
+            pauseScreen = false;
+            inFight = false;
+        }
+        private void Form1_MouseMove(object sender, MouseEventArgs e)
+        {
+            startHover = false;
+            resumeHover = false;
+            attackHover = false;
+            settingsHover = false;
+            magicHover = false;
+            quitHover = false;
+            runHover = false;
+
+            if (startScreen)
+            {
+                if (e.Location.Y >= 300 && e.Location.Y <= 400 && e.Location.X >= 468 && e.Location.X <= 1068)
+                {
+                    startHover = true;
+                }
+                else
+                {
+                    startHover = false;
+                }
+
+                if (e.Location.Y >= 450 && e.Location.Y <= 550 && e.Location.X >= 468 && e.Location.X <= 1068)
+                {
+                    settingsHover = true;
+                }
+                else
+                {
+                    settingsHover = false;
+                }
+
+                if (e.Location.Y >= 600 && e.Location.Y <= 700 && e.Location.X >= 468 && e.Location.X <= 1068)
+                {
+                    quitHover = true;
+                }
+                else
+                {
+                    quitHover = false;
+                }
+            }
+            else if (pauseScreen)
+            {
+                if (e.Location.Y >= 300 && e.Location.Y <= 400 && e.Location.X >= 468 && e.Location.X <= 1068)
+                {
+                    resumeHover = true;
+                }
+                else
+                {
+                    resumeHover = false;
+                }
+
+                if (e.Location.Y >= 450 && e.Location.Y <= 550 && e.Location.X >= 468 && e.Location.X <= 1068)
+                {
+                    settingsHover = true;
+                }
+                else
+                {
+                    settingsHover = false;
+                }
+
+                if (e.Location.Y >= 600 && e.Location.Y <= 700 && e.Location.X >= 468 && e.Location.X <= 1068)
+                {
+                    quitHover = true;
+                }
+                else
+                {
+                    quitHover = false;
+                }
+            }
+            else if (inFight)
+            {
+                if (e.Location.Y >= 300 && e.Location.Y <= 400 && e.Location.X >= 468 && e.Location.X <= 1068)
+                {
+                    attackHover = true;
+                }
+                else
+                {
+                    attackHover = false;
+                }
+
+                if (e.Location.Y >= 450 && e.Location.Y <= 550 && e.Location.X >= 468 && e.Location.X <= 1068)
+                {
+                    magicHover = true;
+                }
+                else
+                {
+                    magicHover = false;
+                }
+
+                if (e.Location.Y >= 600 && e.Location.Y <= 700 && e.Location.X >= 468 && e.Location.X <= 1068)
+                {
+                    runHover = true;
+                }
+                else
+                {
+                    runHover = false;
+                }
+            }
+
+            Invalidate();
+        }
+        private void Form1_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (resumeHover)
+            {
+                resumeButtonClick();
+            }
+            else if (startHover)
+            {
+                StartGame();
+            }
+            else if (settingsHover)
+            {
+                OpenSettingsMenu();
+            }
+            else if (quitHover)
+            {
+                quitButtonClick();
+            }
+            else if (attackHover)
+            {
+                attackButtonClick();
+            }
+            else if (magicHover)
+            {
+                magicButtonClick();
+            }
+            else if (runHover)
+            {
+                runButtonClick();
+            }
         }
     }
 }

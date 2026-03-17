@@ -29,145 +29,26 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.startButton = new System.Windows.Forms.Button();
-            this.settingsButton = new System.Windows.Forms.Button();
-            this.quitButton = new System.Windows.Forms.Button();
-            this.resumeButton = new System.Windows.Forms.Button();
-            this.SettingsMenu = new System.Windows.Forms.TableLayoutPanel();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.CloseButton = new System.Windows.Forms.Button();
             this.Movement = new System.Windows.Forms.Timer(this.components);
             this.StrLabel = new System.Windows.Forms.Label();
             this.DefLabel = new System.Windows.Forms.Label();
             this.MagicLabel = new System.Windows.Forms.Label();
             this.ResLabel = new System.Windows.Forms.Label();
             this.MonLabel = new System.Windows.Forms.Label();
-            this.attackButton = new System.Windows.Forms.Button();
-            this.magicButton = new System.Windows.Forms.Button();
-            this.runButton = new System.Windows.Forms.Button();
             this.PCHealthLabel = new System.Windows.Forms.Label();
             this.EnemyHealthLabel = new System.Windows.Forms.Label();
             this.ShutOff = new System.Windows.Forms.Timer(this.components);
             this.HealthLabel = new System.Windows.Forms.Label();
             this.XPLabel = new System.Windows.Forms.Label();
             this.LevelLabel = new System.Windows.Forms.Label();
+            this.CloseButton = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.SettingsMenu = new System.Windows.Forms.TableLayoutPanel();
             this.SettingsMenu.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // startButton
-            // 
-            this.startButton.Location = new System.Drawing.Point(290, 132);
-            this.startButton.Name = "startButton";
-            this.startButton.Size = new System.Drawing.Size(160, 54);
-            this.startButton.TabIndex = 0;
-            this.startButton.Text = "Start";
-            this.startButton.UseVisualStyleBackColor = true;
-            this.startButton.Click += new System.EventHandler(this.startButton_Click);
-            // 
-            // settingsButton
-            // 
-            this.settingsButton.Location = new System.Drawing.Point(290, 192);
-            this.settingsButton.Name = "settingsButton";
-            this.settingsButton.Size = new System.Drawing.Size(160, 54);
-            this.settingsButton.TabIndex = 1;
-            this.settingsButton.Text = "Settings";
-            this.settingsButton.UseVisualStyleBackColor = true;
-            this.settingsButton.Click += new System.EventHandler(this.settingsButton_Click);
-            // 
-            // quitButton
-            // 
-            this.quitButton.Location = new System.Drawing.Point(290, 252);
-            this.quitButton.Name = "quitButton";
-            this.quitButton.Size = new System.Drawing.Size(160, 54);
-            this.quitButton.TabIndex = 2;
-            this.quitButton.Text = "Quit";
-            this.quitButton.UseVisualStyleBackColor = true;
-            this.quitButton.Click += new System.EventHandler(this.quitButton_Click);
-            // 
-            // resumeButton
-            // 
-            this.resumeButton.Location = new System.Drawing.Point(290, 132);
-            this.resumeButton.Name = "resumeButton";
-            this.resumeButton.Size = new System.Drawing.Size(160, 54);
-            this.resumeButton.TabIndex = 3;
-            this.resumeButton.Text = "Resume";
-            this.resumeButton.UseVisualStyleBackColor = true;
-            this.resumeButton.Visible = false;
-            this.resumeButton.Click += new System.EventHandler(this.resumeButton_Click);
-            // 
-            // SettingsMenu
-            // 
-            this.SettingsMenu.ColumnCount = 4;
-            this.SettingsMenu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 45.25547F));
-            this.SettingsMenu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 54.74453F));
-            this.SettingsMenu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 58F));
-            this.SettingsMenu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 75F));
-            this.SettingsMenu.Controls.Add(this.label2, 0, 0);
-            this.SettingsMenu.Controls.Add(this.label1, 1, 0);
-            this.SettingsMenu.Controls.Add(this.label3, 2, 0);
-            this.SettingsMenu.Controls.Add(this.label4, 3, 0);
-            this.SettingsMenu.Location = new System.Drawing.Point(239, 192);
-            this.SettingsMenu.Name = "SettingsMenu";
-            this.SettingsMenu.RowCount = 2;
-            this.SettingsMenu.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.SettingsMenu.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.SettingsMenu.Size = new System.Drawing.Size(260, 71);
-            this.SettingsMenu.TabIndex = 4;
-            this.SettingsMenu.Visible = false;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(3, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(48, 35);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Walk Forward";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(60, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(59, 35);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Walk Backward";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(129, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(38, 32);
-            this.label3.TabIndex = 3;
-            this.label3.Text = "Walk Right";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(187, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(62, 16);
-            this.label4.TabIndex = 5;
-            this.label4.Text = "Walk Left";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // CloseButton
-            // 
-            this.CloseButton.Location = new System.Drawing.Point(330, 258);
-            this.CloseButton.Name = "CloseButton";
-            this.CloseButton.Size = new System.Drawing.Size(75, 23);
-            this.CloseButton.TabIndex = 5;
-            this.CloseButton.Text = "Close";
-            this.CloseButton.UseVisualStyleBackColor = true;
-            this.CloseButton.Visible = false;
-            this.CloseButton.Click += new System.EventHandler(this.CloseButton_Click);
             // 
             // Movement
             // 
@@ -238,36 +119,6 @@
             this.MonLabel.Text = "label9";
             this.MonLabel.Visible = false;
             // 
-            // attackButton
-            // 
-            this.attackButton.Location = new System.Drawing.Point(513, 132);
-            this.attackButton.Name = "attackButton";
-            this.attackButton.Size = new System.Drawing.Size(160, 54);
-            this.attackButton.TabIndex = 11;
-            this.attackButton.Text = "Attack";
-            this.attackButton.UseVisualStyleBackColor = true;
-            this.attackButton.Click += new System.EventHandler(this.attackButton_Click);
-            // 
-            // magicButton
-            // 
-            this.magicButton.Location = new System.Drawing.Point(513, 192);
-            this.magicButton.Name = "magicButton";
-            this.magicButton.Size = new System.Drawing.Size(160, 54);
-            this.magicButton.TabIndex = 12;
-            this.magicButton.Text = "Magic";
-            this.magicButton.UseVisualStyleBackColor = true;
-            this.magicButton.Click += new System.EventHandler(this.magicButton_Click);
-            // 
-            // runButton
-            // 
-            this.runButton.Location = new System.Drawing.Point(513, 252);
-            this.runButton.Name = "runButton";
-            this.runButton.Size = new System.Drawing.Size(160, 54);
-            this.runButton.TabIndex = 13;
-            this.runButton.Text = "Run";
-            this.runButton.UseVisualStyleBackColor = true;
-            this.runButton.Click += new System.EventHandler(this.runButton_Click);
-            // 
             // PCHealthLabel
             // 
             this.PCHealthLabel.AutoSize = true;
@@ -333,6 +184,77 @@
             this.LevelLabel.Text = "label8";
             this.LevelLabel.Visible = false;
             // 
+            // CloseButton
+            // 
+            this.CloseButton.Location = new System.Drawing.Point(330, 302);
+            this.CloseButton.Name = "CloseButton";
+            this.CloseButton.Size = new System.Drawing.Size(111, 54);
+            this.CloseButton.TabIndex = 5;
+            this.CloseButton.Text = "Close";
+            this.CloseButton.UseVisualStyleBackColor = true;
+            this.CloseButton.Visible = false;
+            this.CloseButton.Click += new System.EventHandler(this.CloseButton_Click);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(220, 0);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(62, 16);
+            this.label4.TabIndex = 5;
+            this.label4.Text = "Walk Left";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(162, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(38, 29);
+            this.label3.TabIndex = 3;
+            this.label3.Text = "Walk Right";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(75, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(67, 29);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Walk Backward";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(3, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(56, 29);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "Walk Forward";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // SettingsMenu
+            // 
+            this.SettingsMenu.ColumnCount = 4;
+            this.SettingsMenu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 45.25547F));
+            this.SettingsMenu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 54.74453F));
+            this.SettingsMenu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 58F));
+            this.SettingsMenu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 78F));
+            this.SettingsMenu.Controls.Add(this.label2, 0, 0);
+            this.SettingsMenu.Controls.Add(this.label1, 1, 0);
+            this.SettingsMenu.Controls.Add(this.label3, 2, 0);
+            this.SettingsMenu.Controls.Add(this.label4, 3, 0);
+            this.SettingsMenu.Location = new System.Drawing.Point(239, 280);
+            this.SettingsMenu.Name = "SettingsMenu";
+            this.SettingsMenu.RowCount = 2;
+            this.SettingsMenu.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.SettingsMenu.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.SettingsMenu.Size = new System.Drawing.Size(296, 58);
+            this.SettingsMenu.TabIndex = 4;
+            this.SettingsMenu.Visible = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -344,9 +266,6 @@
             this.Controls.Add(this.HealthLabel);
             this.Controls.Add(this.EnemyHealthLabel);
             this.Controls.Add(this.PCHealthLabel);
-            this.Controls.Add(this.runButton);
-            this.Controls.Add(this.magicButton);
-            this.Controls.Add(this.attackButton);
             this.Controls.Add(this.MonLabel);
             this.Controls.Add(this.ResLabel);
             this.Controls.Add(this.MagicLabel);
@@ -354,10 +273,6 @@
             this.Controls.Add(this.StrLabel);
             this.Controls.Add(this.CloseButton);
             this.Controls.Add(this.SettingsMenu);
-            this.Controls.Add(this.resumeButton);
-            this.Controls.Add(this.quitButton);
-            this.Controls.Add(this.settingsButton);
-            this.Controls.Add(this.startButton);
             this.DoubleBuffered = true;
             this.KeyPreview = true;
             this.MaximizeBox = false;
@@ -367,6 +282,8 @@
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form1_Paint);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyUp);
+            this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseClick);
+            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseMove);
             this.SettingsMenu.ResumeLayout(false);
             this.SettingsMenu.PerformLayout();
             this.ResumeLayout(false);
@@ -375,32 +292,24 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Button startButton;
-        private System.Windows.Forms.Button settingsButton;
-        private System.Windows.Forms.Button quitButton;
-        private System.Windows.Forms.Button resumeButton;
-        private System.Windows.Forms.TableLayoutPanel SettingsMenu;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Button CloseButton;
         private System.Windows.Forms.Timer Movement;
         private System.Windows.Forms.Label StrLabel;
         private System.Windows.Forms.Label DefLabel;
         private System.Windows.Forms.Label MagicLabel;
         private System.Windows.Forms.Label ResLabel;
         private System.Windows.Forms.Label MonLabel;
-        private System.Windows.Forms.Button attackButton;
-        private System.Windows.Forms.Button magicButton;
-        private System.Windows.Forms.Button runButton;
         private System.Windows.Forms.Label PCHealthLabel;
         private System.Windows.Forms.Label EnemyHealthLabel;
         private System.Windows.Forms.Timer ShutOff;
         private System.Windows.Forms.Label HealthLabel;
         private System.Windows.Forms.Label XPLabel;
         private System.Windows.Forms.Label LevelLabel;
+        private System.Windows.Forms.Button CloseButton;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TableLayoutPanel SettingsMenu;
     }
 }
 
