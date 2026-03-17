@@ -135,5 +135,27 @@
   <ItemGroup>
     <EmbeddedResource Include="TitleTextTemp_DungeonCrawl.png" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="QuitButtonHighlighted_DungeonCrawl.png" />
+    <EmbeddedResource Include="QuitButton_DungeonCrawl.png" />
+    <EmbeddedResource Include="SettingsButtonHighlighted_DungeonCrawl.png" />
+    <EmbeddedResource Include="SettingsButton_DungeonCrawl.png" />
+    <EmbeddedResource Include="StartButtonHighlighted_DungeonCrawl.png" />
+    <EmbeddedResource Include="StartButton_DungeonCrawl.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ResumeButtonHighlighted_DungeonCrawl.png" />
+    <EmbeddedResource Include="ResumeButton_DungeonCrawl.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="AttackButtonHighlighted_DungeonCrawl.png" />
+    <EmbeddedResource Include="MagicButtonHighlighted_DungeonCrawl.png" />
+    <EmbeddedResource Include="MagicButton_DungeonCrawl.png" />
+    <EmbeddedResource Include="RunButtonHighlighted_DungeonCrawl.png" />
+    <EmbeddedResource Include="RunButton_DungeonCrawl.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="AttackButton_DungeonCrawl.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
