@@ -157,5 +157,19 @@
   <ItemGroup>
     <EmbeddedResource Include="AttackButton_DungeonCrawl.png" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="BaseWallsBL_DungeonCrawl.png" />
+    <EmbeddedResource Include="BaseWallsBR_DungeonCrawl.png" />
+    <EmbeddedResource Include="BaseWallsTL_DungeonCrawl.png" />
+    <EmbeddedResource Include="BaseWallsTR_DungeonCrawl.png" />
+    <EmbeddedResource Include="BigWallsBL_DungeonCrawl.png" />
+    <EmbeddedResource Include="BigWallsBR_DungeonCrawl.png" />
+    <EmbeddedResource Include="BigWallsTL_DungeonCrawl.png" />
+    <EmbeddedResource Include="BigWallsTR_DungeonCrawl.png" />
+    <EmbeddedResource Include="PillarWallsBL_DungeonCrawl.png" />
+    <EmbeddedResource Include="PillarWallsBR_DungeonCrawl.png" />
+    <EmbeddedResource Include="PillarWallsTL_DungeonCrawl.png" />
+    <EmbeddedResource Include="PillarWallsTR_DungeonCrawl.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

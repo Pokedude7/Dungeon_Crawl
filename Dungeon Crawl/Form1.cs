@@ -27,8 +27,6 @@ namespace Dungeon_Crawl
         readonly Image staff = Image.FromFile("../../StaffTemp_DungeonCrawl.png");
         readonly Image jewlery = Image.FromFile("../../JewleryTemp_DungeonCrawl.png");
         readonly Image money = Image.FromFile("../../MoneyTemp_DungeonCrawl.png");
-        readonly Image wallsL = Image.FromFile("../../WallTestLSide_DungeonCrawl.png");
-        readonly Image wallsR = Image.FromFile("../../WallTestRSide_DungeonCrawl.png");
         readonly Image skeleton = Image.FromFile("../../SkeletonTemp_DungeonCrawl.png");
         readonly Image goblin = Image.FromFile("../../GoblinTemp_DungeonCrawl.png");
         readonly Image ogre = Image.FromFile("../../OgreTemp_DungeonCrawl.png");
@@ -48,6 +46,19 @@ namespace Dungeon_Crawl
         readonly Image magicH = Image.FromFile("../../MagicButtonHighlighted_DungeonCrawl.png");
         readonly Image runB = Image.FromFile("../../RunButton_DungeonCrawl.png");
         readonly Image runH = Image.FromFile("../../RunButtonHighlighted_DungeonCrawl.png");
+        //Wall sprites
+        readonly Image baseWallTL = Image.FromFile("../../BaseWallsTL_DungeonCrawl.png");
+        readonly Image baseWallTR = Image.FromFile("../../BaseWallsTR_DungeonCrawl.png");
+        readonly Image baseWallBL = Image.FromFile("../../BaseWallsBL_DungeonCrawl.png");
+        readonly Image baseWallBR = Image.FromFile("../../BaseWallsBR_DungeonCrawl.png");
+        readonly Image bigWallTL = Image.FromFile("../../BigWallsTL_DungeonCrawl.png");
+        readonly Image bigWallTR = Image.FromFile("../../BigWallsTR_DungeonCrawl.png");
+        readonly Image bigWallBL = Image.FromFile("../../BigWallsBL_DungeonCrawl.png");
+        readonly Image bigWallBR = Image.FromFile("../../BigWallsBR_DungeonCrawl.png");
+        readonly Image pillarWallTL = Image.FromFile("../../PillarWallsTL_DungeonCrawl.png");
+        readonly Image pillarWallTR = Image.FromFile("../../PillarWallsTR_DungeonCrawl.png");
+        readonly Image pillarWallBL = Image.FromFile("../../PillarWallsBL_DungeonCrawl.png");
+        readonly Image pillarWallBR = Image.FromFile("../../PillarWallsBR_DungeonCrawl.png");
 
         //General Variables
         bool inGame = false;
@@ -354,8 +365,10 @@ namespace Dungeon_Crawl
                 EnemyHealthLabel.Visible = false;
 
                 //Draws the walls around the edges of the screen
-                e.Graphics.DrawImage(wallsL, 0, 0);
-                e.Graphics.DrawImage(wallsR, 768, 0);
+                e.Graphics.DrawImage(baseWallTL, 0, 0);
+                e.Graphics.DrawImage(baseWallTR, 768, 0);
+                e.Graphics.DrawImage(baseWallBL, 0, 432);
+                e.Graphics.DrawImage(baseWallBR, 768, 432);
 
                 //Draws the character sprite where the player is located on the screen and facing the correct direction
                 if (DHeld)
