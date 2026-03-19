@@ -15,7 +15,7 @@ namespace Dungeon_Crawl
             this.staffType = staffType;
             if (staffType == "novice")
             {
-                image = Image.FromFile("../../StaffTemp_DungeonCrawl.png");
+                image = Image.FromFile("../../Image/Items/StaffTemp_DungeonCrawl.png");
             }
 
             if (rarity == 0)
