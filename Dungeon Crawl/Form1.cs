@@ -145,7 +145,8 @@ namespace Dungeon_Crawl
             pY = 789;
             difficulty = 1;
             enteredFrom = 's';
-            room = "BBBB";
+            room = "pppp";
+            encountersInRoom = 0;
             PlayerButtonsVisible();
             SpawnItems();
             Invalidate();
@@ -377,6 +378,10 @@ namespace Dungeon_Crawl
                 {
                     e.Graphics.DrawImage(bigWallTL, 0, 0);
                 }
+                else if (room[0] == 'p')
+                {
+                    e.Graphics.DrawImage(pillarWallTL, 0, 0);
+                }
                 
                 if (room[1] == 'b')
                 {
@@ -385,6 +390,10 @@ namespace Dungeon_Crawl
                 else if (room[1] == 'B')
                 {
                     e.Graphics.DrawImage(bigWallTR, 768, 0);
+                }
+                else if (room[1] == 'p')
+                {
+                    e.Graphics.DrawImage(pillarWallTR, 768, 0);
                 }
 
                 if (room[2] == 'b')
@@ -395,6 +404,10 @@ namespace Dungeon_Crawl
                 {
                     e.Graphics.DrawImage(bigWallBL, 0, 432);
                 }
+                else if (room[2] == 'p')
+                {
+                    e.Graphics.DrawImage(pillarWallBL, 0, 432);
+                }
 
                 if (room[3] == 'b')
                 {
@@ -403,6 +416,10 @@ namespace Dungeon_Crawl
                 else if (room[3] == 'B')
                 {
                     e.Graphics.DrawImage(bigWallBR, 768, 432);
+                }
+                else if (room[3] == 'p')
+                {
+                    e.Graphics.DrawImage(pillarWallBR, 768, 432);
                 }
 
                 //Draws the character sprite where the player is located on the screen and facing the correct direction
@@ -556,61 +573,109 @@ namespace Dungeon_Crawl
             
             if (room[0] == 'b')
             {
-                if (pY <= 50 && pY >= 45 && pX <= 668)
+                if (pY <= 50 && pY >= 45 && pX <= 660)
                 {
                     pY = 50;
                 }
             }
             else if (room[0] == 'B')
             {
-                if (pY <= 332 && pY >= 327 && pX <= 668)
+                if (pY <= 332 && pY >= 327 && pX <= 660)
                 {
                     pY = 332;
+                }
+            }
+            else if (room[0] == 'p')
+            {
+                if (pY <= 50 && pY >= 45 && pX <= 660)
+                {
+                    pY = 50;
+                }
+
+                if (pY >= 157 && pY <= 162 && pX >= 493 && pX <= 768)
+                {
+                    pY = 157;
                 }
             }
             
             if (room[1] == 'b')
             {
-                if (pY <= 50 && pY >= 45 && pX >= 793)
+                if (pY <= 50 && pY >= 45 && pX >= 801)
                 {
                     pY = 50;
                 }
             }
             else if (room[1] == 'B')
             {
-                if (pY <= 332 && pY >= 327 && pX >= 793)
+                if (pY <= 332 && pY >= 327 && pX >= 801)
                 {
                     pY = 332;
+                }
+            }
+            else if (room[1] == 'p')
+            {
+                if (pY <= 50 && pY >= 45 && pX >= 801)
+                {
+                    pY = 50;
+                }
+
+                if (pY >= 157 && pY <= 162 && pX >= 769 && pX <= 978)
+                {
+                    pY = 157;
                 }
             }
 
             if (room[2] == 'b')
             {
-                if (pY >= 739 && pY <= 744 && pX <= 668)
+                if (pY >= 739 && pY <= 744 && pX <= 660)
                 {
                     pY = 739;
                 }
             }
             else if (room[2] == 'B')
             {
-                if (pY >= 1021 && pY <= 1026 && pX <= 668)
+                if (pY >= 458 && pY <= 463 && pX <= 660)
                 {
-                    pY = 1021;
+                    pY = 458;
+                }
+            }
+            else if (room[2] == 'p')
+            {
+                if (pY >= 739 && pY <= 744 && pX <= 660)
+                {
+                    pY = 739;
+                }
+
+                if (pY <= 632 && pY >= 627 && pX >= 493 && pX <= 768)
+                {
+                    pY = 632;
                 }
             }
 
             if (room[3] == 'b')
             {
-                if (pY >= 739 && pY <= 744 && pX >= 793)
+                if (pY >= 739 && pY <= 744 && pX >= 801)
                 {
                     pY = 739;
                 }
             }
             else if (room[3] == 'B')
             {
-                if (pY >= 1021 && pY <= 1026 && pX >= 793)
+                if (pY >= 458 && pY <= 463 && pX >= 801)
                 {
-                    pY = 1021;
+                    pY = 458;
+                }
+            }
+            else if (room[3] == 'p')
+            {
+                if (pY >= 739 && pY <= 744 && pX >= 801)
+                {
+                    pY = 739;
+                }
+
+                if (pY <= 632 && pY >= 627 && pX >= 493 && pX <= 979)
+                {
+                    pY = 632;
                 }
             }
 
@@ -662,61 +727,109 @@ namespace Dungeon_Crawl
 
             if (room[0] == 'b')
             {
-                if (pX <= 50 && pX >= 45 && pY <= 332)
+                if (pX <= 50 && pX >= 45 && pY <= 324)
                 {
                     pX = 50;
                 }
             }
             else if (room[0] == 'B')
             {
-                if (pX <= 668 && pX >= 663 && pY <= 332)
+                if (pX <= 668 && pX >= 663 && pY <= 324)
                 {
                     pX = 668;
+                }
+            }
+            else if (room[0] == 'p')
+            {
+                if (pX <= 50 && pX >= 45 && pY <= 324)
+                {
+                    pX = 50;
+                }
+                
+                if (pX >= 493 && pX <= 498 && pY >= 157 && pY <= 432)
+                {
+                    pX = 493;
                 }
             }
 
             if (room[1] == 'b')
             {
-                if (pX >= 1411 && pX <= 1416 && pY <= 332)
+                if (pX >= 1411 && pX <= 1416 && pY <= 324)
                 {
                     pX = 1411;
                 }
             }
             else if (room[1] == 'B')
             {
-                if (pX >= 793 && pX <= 798 && pY <= 332)
+                if (pX >= 793 && pX <= 798 && pY <= 324)
                 {
                     pX = 793;
+                }
+            }
+            else if (room[1] == 'p')
+            {
+                if (pX >= 1411 && pX <= 1416 && pY <= 324)
+                {
+                    pX = 1411;
+                }
+
+                if (pX <= 968 && pX >= 963 && pY >= 157 && pY <= 432)
+                {
+                    pX = 968;
                 }
             }
 
             if (room[2] == 'b')
             {
-                if (pX <= 50 && pX >= 45 && pY >= 457)
+                if (pX <= 50 && pX >= 45 && pY >= 465)
                 {
                     pX = 50;
                 }
             }
             else if (room[2] == 'B')
             {
-                if (pX <= 668 && pX >= 663 && pY >= 457)
+                if (pX <= 668 && pX >= 663 && pY >= 465)
                 {
                     pX = 668;
+                }
+            }
+            else if (room[2] == 'p')
+            {
+                if (pX <= 50 && pX >= 45 && pY >= 465)
+                {
+                    pX = 50;
+                }
+
+                if (pX >= 493 && pX <= 498 && pY >= 432 && pY <= 632)
+                {
+                    pX = 493;
                 }
             }
 
             if (room[3] == 'b')
             {
-                if (pX >= 1411 && pX <= 1416 && pY >= 457)
+                if (pX >= 1411 && pX <= 1416 && pY >= 465)
                 {
                     pX = 1411;
                 }
             }
             else if (room[3] == 'B')
             {
-                if (pX >= 793 && pX <= 798 && pY >= 457)
+                if (pX >= 793 && pX <= 798 && pY >= 465)
                 {
                     pX = 793;
+                }
+            }
+            else if (room[3] == 'p')
+            {
+                if (pX >= 1411 && pX <= 1416 && pY >= 465)
+                {
+                    pX = 1411;
+                }
+
+                if (pX <= 968 && pX >= 963 && pY >= 432 && pY <= 632)
+                {
+                    pX = 968;
                 }
             }
 
