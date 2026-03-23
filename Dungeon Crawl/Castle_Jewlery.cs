@@ -16,7 +16,7 @@ namespace Dungeon_Crawl
             this.jewleryType = jewleryType;
             if (jewleryType == "amulet")
             {
-                image = Image.FromFile("../../JewleryTemp_DungeonCrawl.png");
+                image = Image.FromFile("../../Image/Items/JewleryTemp_DungeonCrawl.png");
             }
 
             if (rarity == 0)

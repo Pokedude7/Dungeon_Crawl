@@ -12,42 +12,55 @@ namespace Dungeon_Crawl
 
         //Images for the game
         //Character sprites
-        readonly Image CS = Image.FromFile("../../PlaceholderCharacter_DungeonCrawl.png");
-        readonly Image CSU = Image.FromFile("../../PlaceHolderCharacterUp_DungeonCrawl.png");
-        readonly Image CSD = Image.FromFile("../../PlaceHolderCharacterDown_DungeonCrawl.png");
-        readonly Image CSL = Image.FromFile("../../PlaceHolderCharacterLeft_DungeonCrawl.png");
-        readonly Image CSR = Image.FromFile("../../PlaceHolderCharacterRight_DungeonCrawl.png");
+        readonly Image CS = Image.FromFile("../../Image/Character/PlaceholderCharacter_DungeonCrawl.png");
+        readonly Image CSU = Image.FromFile("../../Image/Character/PlaceHolderCharacterUp_DungeonCrawl.png");
+        readonly Image CSD = Image.FromFile("../../Image/Character/PlaceHolderCharacterDown_DungeonCrawl.png");
+        readonly Image CSL = Image.FromFile("../../Image/Character/PlaceHolderCharacterLeft_DungeonCrawl.png");
+        readonly Image CSR = Image.FromFile("../../Image/Character/PlaceHolderCharacterRight_DungeonCrawl.png");
         //Inventory square sprite
-        readonly Image ISq = Image.FromFile("../../InventorySquareTemp_DungeonCrawl.png");
+        readonly Image ISq = Image.FromFile("../../Image/Inventory/InventorySquareTemp_DungeonCrawl.png");
         //Inventory screen sprite
-        readonly Image ISc = Image.FromFile("../../InventoryScreenTemp_DungeonCrawl.png");
+        readonly Image ISc = Image.FromFile("../../Image/Inventory/InventoryScreenTemp_DungeonCrawl.png");
         //Item sprites
-        readonly Image armor = Image.FromFile("../../ArmorTemp_DungeonCrawl.png");
-        readonly Image weapon = Image.FromFile("../../WeaponTemp_DungeonCrawl.png");
-        readonly Image staff = Image.FromFile("../../StaffTemp_DungeonCrawl.png");
-        readonly Image jewlery = Image.FromFile("../../JewleryTemp_DungeonCrawl.png");
-        readonly Image money = Image.FromFile("../../MoneyTemp_DungeonCrawl.png");
-        readonly Image wallsL = Image.FromFile("../../WallTestLSide_DungeonCrawl.png");
-        readonly Image wallsR = Image.FromFile("../../WallTestRSide_DungeonCrawl.png");
-        readonly Image skeleton = Image.FromFile("../../SkeletonTemp_DungeonCrawl.png");
-        readonly Image goblin = Image.FromFile("../../GoblinTemp_DungeonCrawl.png");
-        readonly Image ogre = Image.FromFile("../../OgreTemp_DungeonCrawl.png");
-        readonly Image titleText = Image.FromFile("../../TitleTextTemp_DungeonCrawl.png");
+        readonly Image armor = Image.FromFile("../../Image/Items/ArmorTemp_DungeonCrawl.png");
+        readonly Image weapon = Image.FromFile("../../Image/Items/WeaponTemp_DungeonCrawl.png");
+        readonly Image staff = Image.FromFile("../../Image/Items/StaffTemp_DungeonCrawl.png");
+        readonly Image jewlery = Image.FromFile("../../Image/Items/JewleryTemp_DungeonCrawl.png");
+        readonly Image money = Image.FromFile("../../Image/Items/MoneyTemp_DungeonCrawl.png");
+        //Enemy sprites
+        readonly Image skeleton = Image.FromFile("../../Image/Enemies/SkeletonTemp_DungeonCrawl.png");
+        readonly Image goblin = Image.FromFile("../../Image/Enemies/GoblinTemp_DungeonCrawl.png");
+        readonly Image ogre = Image.FromFile("../../Image/Enemies/OgreTemp_DungeonCrawl.png");
+        //Title text sprite
+        readonly Image titleText = Image.FromFile("../../Image/Start_Screen/TitleTextTemp_DungeonCrawl.png");
         //Button sprites
-        readonly Image startB = Image.FromFile("../../StartButton_DungeonCrawl.png");
-        readonly Image startH = Image.FromFile("../../StartButtonHighlighted_DungeonCrawl.png");
-        readonly Image settingsB = Image.FromFile("../../SettingsButton_DungeonCrawl.png");
-        readonly Image settingsH = Image.FromFile("../../SettingsButtonHighlighted_DungeonCrawl.png");
-        readonly Image quitB = Image.FromFile("../../QuitButton_DungeonCrawl.png");
-        readonly Image quitH = Image.FromFile("../../QuitButtonHighlighted_DungeonCrawl.png");
-        readonly Image resumeB = Image.FromFile("../../ResumeButton_DungeonCrawl.png");
-        readonly Image resumeH = Image.FromFile("../../ResumeButtonHighlighted_DungeonCrawl.png");
-        readonly Image attackB = Image.FromFile("../../AttackButton_DungeonCrawl.png");
-        readonly Image attackH = Image.FromFile("../../AttackButtonHighlighted_DungeonCrawl.png");
-        readonly Image magicB = Image.FromFile("../../MagicButton_DungeonCrawl.png");
-        readonly Image magicH = Image.FromFile("../../MagicButtonHighlighted_DungeonCrawl.png");
-        readonly Image runB = Image.FromFile("../../RunButton_DungeonCrawl.png");
-        readonly Image runH = Image.FromFile("../../RunButtonHighlighted_DungeonCrawl.png");
+        readonly Image startB = Image.FromFile("../../Image/Buttons/StartButton_DungeonCrawl.png");
+        readonly Image startH = Image.FromFile("../../Image/Buttons/StartButtonHighlighted_DungeonCrawl.png");
+        readonly Image settingsB = Image.FromFile("../../Image/Buttons/SettingsButton_DungeonCrawl.png");
+        readonly Image settingsH = Image.FromFile("../../Image/Buttons/SettingsButtonHighlighted_DungeonCrawl.png");
+        readonly Image quitB = Image.FromFile("../../Image/Buttons/QuitButton_DungeonCrawl.png");
+        readonly Image quitH = Image.FromFile("../../Image/Buttons/QuitButtonHighlighted_DungeonCrawl.png");
+        readonly Image resumeB = Image.FromFile("../../Image/Buttons/ResumeButton_DungeonCrawl.png");
+        readonly Image resumeH = Image.FromFile("../../Image/Buttons/ResumeButtonHighlighted_DungeonCrawl.png");
+        readonly Image attackB = Image.FromFile("../../Image/Buttons/AttackButton_DungeonCrawl.png");
+        readonly Image attackH = Image.FromFile("../../Image/Buttons/AttackButtonHighlighted_DungeonCrawl.png");
+        readonly Image magicB = Image.FromFile("../../Image/Buttons/MagicButton_DungeonCrawl.png");
+        readonly Image magicH = Image.FromFile("../../Image/Buttons/MagicButtonHighlighted_DungeonCrawl.png");
+        readonly Image runB = Image.FromFile("../../Image/Buttons/RunButton_DungeonCrawl.png");
+        readonly Image runH = Image.FromFile("../../Image/Buttons/RunButtonHighlighted_DungeonCrawl.png");
+        //Wall sprites
+        readonly Image baseWallTL = Image.FromFile("../../Image/Walls/BaseWallsTL_DungeonCrawl.png");
+        readonly Image baseWallTR = Image.FromFile("../../Image/Walls/BaseWallsTR_DungeonCrawl.png");
+        readonly Image baseWallBL = Image.FromFile("../../Image/Walls/BaseWallsBL_DungeonCrawl.png");
+        readonly Image baseWallBR = Image.FromFile("../../Image/Walls/BaseWallsBR_DungeonCrawl.png");
+        readonly Image bigWallTL = Image.FromFile("../../Image/Walls/BigWallsTL_DungeonCrawl.png");
+        readonly Image bigWallTR = Image.FromFile("../../Image/Walls/BigWallsTR_DungeonCrawl.png");
+        readonly Image bigWallBL = Image.FromFile("../../Image/Walls/BigWallsBL_DungeonCrawl.png");
+        readonly Image bigWallBR = Image.FromFile("../../Image/Walls/BigWallsBR_DungeonCrawl.png");
+        readonly Image pillarWallTL = Image.FromFile("../../Image/Walls/PillarWallsTL_DungeonCrawl.png");
+        readonly Image pillarWallTR = Image.FromFile("../../Image/Walls/PillarWallsTR_DungeonCrawl.png");
+        readonly Image pillarWallBL = Image.FromFile("../../Image/Walls/PillarWallsBL_DungeonCrawl.png");
+        readonly Image pillarWallBR = Image.FromFile("../../Image/Walls/PillarWallsBR_DungeonCrawl.png");
 
         //General Variables
         bool inGame = false;
@@ -58,6 +71,7 @@ namespace Dungeon_Crawl
         int pY = 789;
         int difficulty = 1;
         char enteredFrom = 's';
+        string room = "bbbb";
 
         //Mouse Variables
         bool startHover = false;
@@ -131,6 +145,8 @@ namespace Dungeon_Crawl
             pY = 789;
             difficulty = 1;
             enteredFrom = 's';
+            room = "bbbb";
+            encountersInRoom = 0;
             PlayerButtonsVisible();
             SpawnItems();
             Invalidate();
@@ -354,8 +370,57 @@ namespace Dungeon_Crawl
                 EnemyHealthLabel.Visible = false;
 
                 //Draws the walls around the edges of the screen
-                e.Graphics.DrawImage(wallsL, 0, 0);
-                e.Graphics.DrawImage(wallsR, 768, 0);
+                if (room[0] == 'b')
+                {
+                    e.Graphics.DrawImage(baseWallTL, 0, 0);
+                }
+                else if (room[0] == 'B')
+                {
+                    e.Graphics.DrawImage(bigWallTL, 0, 0);
+                }
+                else if (room[0] == 'p')
+                {
+                    e.Graphics.DrawImage(pillarWallTL, 0, 0);
+                }
+                
+                if (room[1] == 'b')
+                {
+                    e.Graphics.DrawImage(baseWallTR, 768, 0);
+                }
+                else if (room[1] == 'B')
+                {
+                    e.Graphics.DrawImage(bigWallTR, 768, 0);
+                }
+                else if (room[1] == 'p')
+                {
+                    e.Graphics.DrawImage(pillarWallTR, 768, 0);
+                }
+
+                if (room[2] == 'b')
+                {
+                    e.Graphics.DrawImage(baseWallBL, 0, 432);
+                }
+                else if (room[2] == 'B')
+                {
+                    e.Graphics.DrawImage(bigWallBL, 0, 432);
+                }
+                else if (room[2] == 'p')
+                {
+                    e.Graphics.DrawImage(pillarWallBL, 0, 432);
+                }
+
+                if (room[3] == 'b')
+                {
+                    e.Graphics.DrawImage(baseWallBR, 768, 432);
+                }
+                else if (room[3] == 'B')
+                {
+                    e.Graphics.DrawImage(bigWallBR, 768, 432);
+                }
+                else if (room[3] == 'p')
+                {
+                    e.Graphics.DrawImage(pillarWallBR, 768, 432);
+                }
 
                 //Draws the character sprite where the player is located on the screen and facing the correct direction
                 if (DHeld)
@@ -505,43 +570,136 @@ namespace Dungeon_Crawl
         {
             //Constantly updates the players position relative to if they are moving or not
             pY += upDownMove;
-
-            //Checks to see if the player is trying to move through the top wall and if they are it sets their position to be right next to the wall instead of going through it
-            if (pY <= 50 && pY >= 45 && (pX <= 668 || pX >= 793))
+            
+            if (room[0] == 'b')
             {
-                pY = 50;
+                if (pY <= 50 && pY >= 45 && pX <= 660)
+                {
+                    pY = 50;
+                }
+            }
+            else if (room[0] == 'B')
+            {
+                if (pY <= 332 && pY >= 327 && pX <= 660)
+                {
+                    pY = 332;
+                }
+            }
+            else if (room[0] == 'p')
+            {
+                if (pY <= 50 && pY >= 45 && pX <= 660)
+                {
+                    pY = 50;
+                }
+
+                if (pY >= 157 && pY <= 162 && pX >= 497 && pX <= 768)
+                {
+                    pY = 157;
+                }
+            }
+            
+            if (room[1] == 'b')
+            {
+                if (pY <= 50 && pY >= 45 && pX >= 801)
+                {
+                    pY = 50;
+                }
+            }
+            else if (room[1] == 'B')
+            {
+                if (pY <= 332 && pY >= 327 && pX >= 801)
+                {
+                    pY = 332;
+                }
+            }
+            else if (room[1] == 'p')
+            {
+                if (pY <= 50 && pY >= 45 && pX >= 801)
+                {
+                    pY = 50;
+                }
+
+                if (pY >= 157 && pY <= 162 && pX >= 769 && pX <= 960)
+                {
+                    pY = 157;
+                }
             }
 
-            //Checks to see if the player is trying to move through the bottom wall and if they are it sets their position to be right next to the wall instead of going through it
-            if (pY >= 739 && pY <= 744 && (pX <= 668 || pX >= 793))
+            if (room[2] == 'b')
             {
-                pY = 739;
+                if (pY >= 739 && pY <= 744 && pX <= 660)
+                {
+                    pY = 739;
+                }
+            }
+            else if (room[2] == 'B')
+            {
+                if (pY >= 458 && pY <= 463 && pX <= 660)
+                {
+                    pY = 458;
+                }
+            }
+            else if (room[2] == 'p')
+            {
+                if (pY >= 739 && pY <= 744 && pX <= 660)
+                {
+                    pY = 739;
+                }
+
+                if (pY <= 632 && pY >= 627 && pX >= 497 && pX <= 768)
+                {
+                    pY = 632;
+                }
             }
 
-            //Checks to see if the player is trying to move through the left wall in the top corridor and if they are it sets their position to be right next to the wall instead of going through it
+            if (room[3] == 'b')
+            {
+                if (pY >= 739 && pY <= 744 && pX >= 801)
+                {
+                    pY = 739;
+                }
+            }
+            else if (room[3] == 'B')
+            {
+                if (pY >= 458 && pY <= 463 && pX >= 801)
+                {
+                    pY = 458;
+                }
+            }
+            else if (room[3] == 'p')
+            {
+                if (pY >= 739 && pY <= 744 && pX >= 801)
+                {
+                    pY = 739;
+                }
+
+                if (pY <= 632 && pY >= 627 && pX >= 769 && pX <= 960)
+                {
+                    pY = 632;
+                }
+            }
+
+            //Always true for any room
             if (pX <= 45 && pY <= 332)
             {
                 pY = 332;
             }
 
-            //Checks to see if the player is trying to move through the right wall in the top corridor and if they are it sets their position to be right next to the wall instead of going through it
             if (pX <= 45 && pY >= 457)
             {
                 pY = 457;
             }
-            //Checks to see if the player is trying to move through the left wall in the bottom corridor and if they are it sets their position to be right next to the wall instead of going through it
+
             if (pX >= 1416 && pY <= 332)
             {
                 pY = 332;
             }
 
-            //Checks to see if the player is trying to move through the right wall in the bottom corridor and if they are it sets their position to be right next to the wall instead of going through it
             if (pX >= 1416 && pY >= 457)
             {
                 pY = 457;
             }
 
-            //Allows the player to enter the next room through the north corridor if they didn't enter through it
             if (pY < 0 && enteredFrom != 'n')
             {
                 enteredFrom = 's';
@@ -553,7 +711,6 @@ namespace Dungeon_Crawl
                 upDownMove = 0;
             }
 
-            //Allows the player to enter the next room through the south corridor if they didn't enter through it
             if (pY > 789 && enteredFrom != 's')
             {
                 enteredFrom = 'n';
@@ -565,45 +722,138 @@ namespace Dungeon_Crawl
                 upDownMove = 0;
             }
 
+
             pX += sideMove;
 
-            //Checks to see if the player is trying to move through the left wall and if they are it sets their position to be right next to the wall instead of going through it
-            if (pX <= 50 && pX >= 45 && (pY <= 332 || pY >= 457))
+            if (room[0] == 'b')
             {
-                pX = 50;
+                if (pX <= 50 && pX >= 45 && pY <= 324)
+                {
+                    pX = 50;
+                }
+            }
+            else if (room[0] == 'B')
+            {
+                if (pX <= 668 && pX >= 663 && pY <= 324)
+                {
+                    pX = 668;
+                }
+            }
+            else if (room[0] == 'p')
+            {
+                if (pX <= 50 && pX >= 45 && pY <= 324)
+                {
+                    pX = 50;
+                }
+                
+                if (pX >= 493 && pX <= 498 && pY >= 161 && pY <= 432)
+                {
+                    pX = 493;
+                }
             }
 
-            //Checks to see if the player is trying to move through the right wall and if they are it sets their position to be right next to the wall instead of going through it
-            if (pX >= 1411 && pX <= 1416 && (pY <= 332 || pY >= 457))
+            if (room[1] == 'b')
             {
-                pX = 1411;
+                if (pX >= 1411 && pX <= 1416 && pY <= 324)
+                {
+                    pX = 1411;
+                }
+            }
+            else if (room[1] == 'B')
+            {
+                if (pX >= 793 && pX <= 798 && pY <= 324)
+                {
+                    pX = 793;
+                }
+            }
+            else if (room[1] == 'p')
+            {
+                if (pX >= 1411 && pX <= 1416 && pY <= 324)
+                {
+                    pX = 1411;
+                }
+
+                if (pX <= 968 && pX >= 963 && pY >= 161 && pY <= 432)
+                {
+                    pX = 968;
+                }
             }
 
-            //Checks to see if the player is trying to move through the top wall in the right corridor and if they are it sets their position to be right next to the wall instead of going through it
+            if (room[2] == 'b')
+            {
+                if (pX <= 50 && pX >= 45 && pY >= 465)
+                {
+                    pX = 50;
+                }
+            }
+            else if (room[2] == 'B')
+            {
+                if (pX <= 668 && pX >= 663 && pY >= 465)
+                {
+                    pX = 668;
+                }
+            }
+            else if (room[2] == 'p')
+            {
+                if (pX <= 50 && pX >= 45 && pY >= 465)
+                {
+                    pX = 50;
+                }
+
+                if (pX >= 493 && pX <= 498 && pY >= 432 && pY <= 628)
+                {
+                    pX = 493;
+                }
+            }
+
+            if (room[3] == 'b')
+            {
+                if (pX >= 1411 && pX <= 1416 && pY >= 465)
+                {
+                    pX = 1411;
+                }
+            }
+            else if (room[3] == 'B')
+            {
+                if (pX >= 793 && pX <= 798 && pY >= 465)
+                {
+                    pX = 793;
+                }
+            }
+            else if (room[3] == 'p')
+            {
+                if (pX >= 1411 && pX <= 1416 && pY >= 465)
+                {
+                    pX = 1411;
+                }
+
+                if (pX <= 968 && pX >= 963 && pY >= 432 && pY <= 628)
+                {
+                    pX = 968;
+                }
+            }
+
+            //Always true for any room
             if (pY <= 45 && pX <= 668)
             {
                 pX = 668;
             }
 
-            //Checks to see if the player is trying to move through the bottom wall in the right corridor and if they are it sets their position to be right next to the wall instead of going through it
             if (pY <= 45 && pX >= 793)
             {
                 pX = 793;
             }
 
-            //Checks to see if the player is trying to move through the top wall in the left corridor and if they are it sets their position to be right next to the wall instead of going through it
             if (pY >= 744 && pX <= 668)
             {
                 pX = 668;
             }
 
-            //Checks to see if the player is trying to move through the bottom wall in the left corridor and if they are it sets their position to be right next to the wall instead of going through it
             if (pY >= 744 && pX >= 793)
             {
                 pX = 793;
             }
 
-            //Allows the player to enter the next room through the west corridor if they didn't enter through it
             if (pX < 0 && enteredFrom != 'w')
             {
                 enteredFrom = 'e';
@@ -615,7 +865,6 @@ namespace Dungeon_Crawl
                 sideMove = 0;
             }
 
-            //Allows the player to enter the next room through the east corridor if they didn't enter through it
             if (pX > 1461 && enteredFrom != 'e')
             {
                 enteredFrom = 'w';
@@ -626,6 +875,7 @@ namespace Dungeon_Crawl
                 pX = 1461;
                 sideMove = 0;
             }
+
 
             if (sideMove != 0 || upDownMove != 0)
             {
@@ -948,6 +1198,8 @@ namespace Dungeon_Crawl
             {
                 pX = 50;
             }
+
+            RandomRoom();
 
             SpawnItems();
             encountersInRoom = ran.Next(1, difficulty + 2);
@@ -1335,6 +1587,65 @@ namespace Dungeon_Crawl
             else if (runHover)
             {
                 runButtonClick();
+            }
+        }
+        private void RandomRoom()
+        {
+            int roomType = ran.Next(0, 5);
+
+            if (roomType == 0)
+            {
+                room = "bbbb";
+            }
+            else if (roomType == 1)
+            {
+                room = "pppp";
+            }
+            else if (roomType == 2)
+            {
+                room = "BBBB";
+            }
+            else if (roomType == 3)
+            {
+                roomType = ran.Next(0, 4);
+
+                if (roomType == 0)
+                {
+                    room = "BBbb";
+                }
+                else if (roomType == 1)
+                {
+                    room = "bBBb";
+                }
+                else if (roomType == 2)
+                {
+                    room = "bbBB";
+                }
+                else if (roomType == 3)
+                {
+                    room = "BbbB";
+                }
+            }
+            else if (roomType == 4)
+            {
+                roomType = ran.Next(0, 4);
+
+                if (roomType == 0)
+                {
+                    room = "Bbbb";
+                }
+                else if (roomType == 1)
+                {
+                    room = "bBbb";
+                }
+                else if (roomType == 2)
+                {
+                    room = "bbBb";
+                }
+                else if (roomType == 3)
+                {
+                    room = "bbbB";
+                }
             }
         }
     }
