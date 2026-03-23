@@ -71,7 +71,7 @@ namespace Dungeon_Crawl
         int pY = 789;
         int difficulty = 1;
         char enteredFrom = 's';
-        string room = "BBBB";
+        string room = "bbbb";
 
         //Mouse Variables
         bool startHover = false;
@@ -145,7 +145,7 @@ namespace Dungeon_Crawl
             pY = 789;
             difficulty = 1;
             enteredFrom = 's';
-            room = "pppp";
+            room = "bbbb";
             encountersInRoom = 0;
             PlayerButtonsVisible();
             SpawnItems();
@@ -592,7 +592,7 @@ namespace Dungeon_Crawl
                     pY = 50;
                 }
 
-                if (pY >= 157 && pY <= 162 && pX >= 493 && pX <= 768)
+                if (pY >= 157 && pY <= 162 && pX >= 497 && pX <= 768)
                 {
                     pY = 157;
                 }
@@ -619,7 +619,7 @@ namespace Dungeon_Crawl
                     pY = 50;
                 }
 
-                if (pY >= 157 && pY <= 162 && pX >= 769 && pX <= 978)
+                if (pY >= 157 && pY <= 162 && pX >= 769 && pX <= 960)
                 {
                     pY = 157;
                 }
@@ -646,7 +646,7 @@ namespace Dungeon_Crawl
                     pY = 739;
                 }
 
-                if (pY <= 632 && pY >= 627 && pX >= 493 && pX <= 768)
+                if (pY <= 632 && pY >= 627 && pX >= 497 && pX <= 768)
                 {
                     pY = 632;
                 }
@@ -673,7 +673,7 @@ namespace Dungeon_Crawl
                     pY = 739;
                 }
 
-                if (pY <= 632 && pY >= 627 && pX >= 493 && pX <= 979)
+                if (pY <= 632 && pY >= 627 && pX >= 769 && pX <= 960)
                 {
                     pY = 632;
                 }
@@ -746,7 +746,7 @@ namespace Dungeon_Crawl
                     pX = 50;
                 }
                 
-                if (pX >= 493 && pX <= 498 && pY >= 157 && pY <= 432)
+                if (pX >= 493 && pX <= 498 && pY >= 161 && pY <= 432)
                 {
                     pX = 493;
                 }
@@ -773,7 +773,7 @@ namespace Dungeon_Crawl
                     pX = 1411;
                 }
 
-                if (pX <= 968 && pX >= 963 && pY >= 157 && pY <= 432)
+                if (pX <= 968 && pX >= 963 && pY >= 161 && pY <= 432)
                 {
                     pX = 968;
                 }
@@ -800,7 +800,7 @@ namespace Dungeon_Crawl
                     pX = 50;
                 }
 
-                if (pX >= 493 && pX <= 498 && pY >= 432 && pY <= 632)
+                if (pX >= 493 && pX <= 498 && pY >= 432 && pY <= 628)
                 {
                     pX = 493;
                 }
@@ -827,7 +827,7 @@ namespace Dungeon_Crawl
                     pX = 1411;
                 }
 
-                if (pX <= 968 && pX >= 963 && pY >= 432 && pY <= 632)
+                if (pX <= 968 && pX >= 963 && pY >= 432 && pY <= 628)
                 {
                     pX = 968;
                 }
