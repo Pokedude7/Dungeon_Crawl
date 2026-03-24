@@ -382,7 +382,7 @@ namespace Dungeon_Crawl
                 {
                     e.Graphics.DrawImage(pillarWallTL, 0, 0);
                 }
-                
+
                 if (room[1] == 'b')
                 {
                     e.Graphics.DrawImage(baseWallTR, 768, 0);
@@ -570,7 +570,7 @@ namespace Dungeon_Crawl
         {
             //Constantly updates the players position relative to if they are moving or not
             pY += upDownMove;
-            
+
             if (room[0] == 'b')
             {
                 if (pY <= 50 && pY >= 45 && pX <= 660)
@@ -597,7 +597,7 @@ namespace Dungeon_Crawl
                     pY = 157;
                 }
             }
-            
+
             if (room[1] == 'b')
             {
                 if (pY <= 50 && pY >= 45 && pX >= 801)
@@ -745,7 +745,7 @@ namespace Dungeon_Crawl
                 {
                     pX = 50;
                 }
-                
+
                 if (pX >= 493 && pX <= 498 && pY >= 161 && pY <= 432)
                 {
                     pX = 493;
@@ -948,6 +948,9 @@ namespace Dungeon_Crawl
             bool spawnItem = false;
             int itemSpawned = 0;
             int amountOfItems = difficulty;
+            int quadrantSpawn;
+            int ranX = 0;
+            int ranY = 0;
 
             itemsOnScreen.Clear();
 
@@ -967,27 +970,167 @@ namespace Dungeon_Crawl
 
                 if (spawnItem)
                 {
+                    quadrantSpawn = ran.Next(0, 4);
+
+                    if (quadrantSpawn == 0)
+                    {
+                        if (room[0] == 'b')
+                        {
+                            ranX = ran.Next(50, 768);
+                            ranY = ran.Next(50, 432);
+                        }
+                        else if (room[0] == 'B')
+                        {
+                            ranX = ran.Next(50, 768);
+
+                            if (ranX >= 668)
+                            {
+                                ranY = ran.Next(50, 432);
+                            }
+                            else
+                            {
+                                ranY = ran.Next(332, 432);
+                            }
+                        }
+                        else if (room[0] == 'p')
+                        {
+                            ranX = ran.Next(50, 768);
+
+                            if (ranX <= 518)
+                            {
+                                ranY = ran.Next(50, 432);
+                            }
+                            else
+                            {
+                                ranY = ran.Next(50, 182);
+                            }
+                        }
+                    }
+                    else if (quadrantSpawn == 1)
+                    {
+                        if (room[1] == 'b')
+                        {
+                            ranX = ran.Next(768, 1436);
+                            ranY = ran.Next(50, 432);
+                        }
+                        else if (room[1] == 'B')
+                        {
+                            ranX = ran.Next(768, 1436);
+
+                            if (ranX <= 818)
+                            {
+                                ranY = ran.Next(50, 432);
+
+                            }
+                            else
+                            {
+                                ranY = ran.Next(332, 432);
+                            }
+                        }
+                        else if (room[1] == 'p')
+                        {
+                            ranX = ran.Next(768, 1436);
+
+                            if (ranX >= 968)
+                            {
+                                ranY = ran.Next(50, 432);
+                            }
+                            else
+                            {
+                                ranY = ran.Next(50, 182);
+                            }
+                        }
+                    }
+                    else if (quadrantSpawn == 2)
+                    {
+                        if (room[2] == 'b')
+                        {
+                            ranX = ran.Next(50, 768);
+                            ranY = ran.Next(432, 764);
+                        }
+                        else if (room[2] == 'B')
+                        {
+                            ranX = ran.Next(50, 768);
+
+                            if (ranX >= 668)
+                            {
+                                ranY = ran.Next(432, 764);
+                            }
+                            else
+                            {
+                                ranY = ran.Next(432, 482);
+                            }
+                        }
+                        else if (room[2] == 'p')
+                        {
+                            ranX = ran.Next(50, 768);
+
+                            if (ranX <= 518)
+                            {
+                                ranY = ran.Next(432, 764);
+                            }
+                            else
+                            {
+                                ranY = ran.Next(632, 764);
+                            }
+                        }
+                    }
+                    else if (quadrantSpawn == 3)
+                    {
+                        if (room[3] == 'b')
+                        {
+                            ranX = ran.Next(768, 1436);
+                            ranY = ran.Next(432, 764);
+                        }
+                        else if (room[3] == 'B')
+                        {
+                            ranX = ran.Next(768, 1436);
+
+                            if (ranX <= 818)
+                            {
+                                ranY = ran.Next(432, 764);
+                            }
+                            else
+                            {
+                                ranY = ran.Next(432, 482);
+                            }
+                        }
+                        else if (room[3] == 'p')
+                        {
+                            ranX = ran.Next(768, 1436);
+
+                            if (ranX >= 968)
+                            {
+                                ranY = ran.Next(432, 764);
+                            }
+                            else
+                            {
+                                ranY = ran.Next(632, 764);
+                            }
+                        }
+                    }
+
                     itemSpawned = ran.Next(1, 6);
 
                     if (itemSpawned == 1)
                     {
-                        itemsOnScreen.Add(new Castle_Armor("plate", new Point(ran.Next(50, 1436), ran.Next(50, 764)), ran.Next(difficulty - 1, difficulty + 1)));
+                        itemsOnScreen.Add(new Castle_Armor("plate", new Point(ranX, ranY), ran.Next(difficulty - 1, difficulty + 1)));
                     }
                     else if (itemSpawned == 2)
                     {
-                        itemsOnScreen.Add(new Castle_Weapon("sword", new Point(ran.Next(50, 1436), ran.Next(50, 764)), ran.Next(difficulty - 1, difficulty + 1)));
+                        itemsOnScreen.Add(new Castle_Weapon("sword", new Point(ranX, ranY), ran.Next(difficulty - 1, difficulty + 1)));
                     }
                     else if (itemSpawned == 3)
                     {
-                        itemsOnScreen.Add(new Castle_Staff("novice", new Point(ran.Next(50, 1436), ran.Next(50, 764)), ran.Next(difficulty - 1, difficulty + 1)));
+                        itemsOnScreen.Add(new Castle_Staff("novice", new Point(ranX, ranY), ran.Next(difficulty - 1, difficulty + 1)));
                     }
                     else if (itemSpawned == 4)
                     {
-                        itemsOnScreen.Add(new Castle_Jewlery("amulet", new Point(ran.Next(50, 1436), ran.Next(50, 764)), ran.Next(difficulty - 1, difficulty + 1)));
+                        itemsOnScreen.Add(new Castle_Jewlery("amulet", new Point(ranX, ranY), ran.Next(difficulty - 1, difficulty + 1)));
                     }
                     else if (itemSpawned == 5)
                     {
-                        itemsOnScreen.Add(new Money(ran.Next(difficulty - 1, difficulty + 1), new Point(ran.Next(50, 1436), ran.Next(50, 764))));
+                        itemsOnScreen.Add(new Money(ran.Next(difficulty - 1, difficulty + 1), new Point(ranX, ranY)));
                     }
                 }
             }
