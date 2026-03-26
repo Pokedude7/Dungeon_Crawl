@@ -51,6 +51,7 @@
     <Compile Include="Castle_Armor.cs" />
     <Compile Include="Castle_Staff.cs" />
     <Compile Include="Castle_Weapon.cs" />
+    <Compile Include="Chest.cs" />
     <Compile Include="Enemy.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -165,6 +166,11 @@
     <EmbeddedResource Include="Image\Walls\PillarWallsTL_DungeonCrawl.png" />
     <EmbeddedResource Include="Image\Walls\PillarWallsTR_DungeonCrawl.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Image\Items\ChestTemp_DungeonCrawl.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Image\Items\ChestOpenTemp_DungeonCrawl.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
