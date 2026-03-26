@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 
 namespace Dungeon_Crawl
@@ -68,6 +69,14 @@ namespace Dungeon_Crawl
         public int getYLoc()
         {
             return location.Y;
+        }
+        public Image getImage()
+        {
+            return image;
+        }
+        public virtual List<Item> Open()
+        {
+            return new List<Item>();
         }
     }
 }

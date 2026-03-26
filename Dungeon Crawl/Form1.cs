@@ -27,6 +27,7 @@ namespace Dungeon_Crawl
         readonly Image staff = Image.FromFile("../../Image/Items/StaffTemp_DungeonCrawl.png");
         readonly Image jewlery = Image.FromFile("../../Image/Items/JewleryTemp_DungeonCrawl.png");
         readonly Image money = Image.FromFile("../../Image/Items/MoneyTemp_DungeonCrawl.png");
+        readonly Image chest = Image.FromFile("../../Image/Items/ChestTemp_DungeonCrawl.png");
         //Enemy sprites
         readonly Image skeleton = Image.FromFile("../../Image/Enemies/SkeletonTemp_DungeonCrawl.png");
         readonly Image goblin = Image.FromFile("../../Image/Enemies/GoblinTemp_DungeonCrawl.png");
@@ -457,30 +458,10 @@ namespace Dungeon_Crawl
                 }
 
                 //Draws the various items on the screen from the itemsOnScreen list in their respective locations
-                for (int i = 0; i < itemsOnScreen.Count; i++)
+                foreach (Item i in itemsOnScreen)
                 {
-                    if (itemsOnScreen[i].getType() == "armor")
-                    {
-                        e.Graphics.DrawImage(armor, itemsOnScreen[i].getXLoc(), itemsOnScreen[i].getYLoc());
-                    }
-                    else if (itemsOnScreen[i].getType() == "weapon")
-                    {
-                        e.Graphics.DrawImage(weapon, itemsOnScreen[i].getXLoc(), itemsOnScreen[i].getYLoc());
-                    }
-                    else if (itemsOnScreen[i].getType() == "staff")
-                    {
-                        e.Graphics.DrawImage(staff, itemsOnScreen[i].getXLoc(), itemsOnScreen[i].getYLoc());
-                    }
-                    else if (itemsOnScreen[i].getType() == "jewlery")
-                    {
-                        e.Graphics.DrawImage(jewlery, itemsOnScreen[i].getXLoc(), itemsOnScreen[i].getYLoc());
-                    }
-                    else if (itemsOnScreen[i].getType() == "money")
-                    {
-                        e.Graphics.DrawImage(money, itemsOnScreen[i].getXLoc(), itemsOnScreen[i].getYLoc());
-                    }
+                    e.Graphics.DrawImage(i.getImage(), i.getXLoc(), i.getYLoc());
                 }
-
             }
             else if (inventoryOpen && !pauseScreen)
             {
@@ -946,6 +927,7 @@ namespace Dungeon_Crawl
         {
             //Spawns items at the start of new rooms for the player to pick up and adds them to the itemsOnScreen list
             bool spawnItem = false;
+            bool spawnChest = false;
             int itemSpawned = 0;
             int amountOfItems = difficulty;
             int quadrantSpawn;
@@ -961,12 +943,17 @@ namespace Dungeon_Crawl
 
             for (int i = 0; i < amountOfItems; i++)
             {
-                if (ran.Next(1, 3) == 1)
+                if (ran.Next(0, 10) == 0)
                 {
                     spawnItem = true;
                 }
+                else if (ran.Next(0, 2) == 0)
+                {
+                    spawnChest = true;
+                }
 
                 spawnItem = true;
+                spawnChest = true;
 
                 if (spawnItem)
                 {
@@ -1133,6 +1120,68 @@ namespace Dungeon_Crawl
                         itemsOnScreen.Add(new Money(ran.Next(difficulty - 1, difficulty + 1), new Point(ranX, ranY)));
                     }
                 }
+
+                if (spawnChest)
+                {
+                    quadrantSpawn = ran.Next(0, 4);
+
+                    if (quadrantSpawn == 0)
+                    {
+                        if (room[0] == 'b' || room[0] == 'p')
+                        {
+                            ranX = 100;
+                            ranY = 100;
+                        }
+                        else if (room[0] == 'B')
+                        {
+                            ranX = 743;
+                            ranY = 407;
+                        }
+
+                    }
+                    else if (quadrantSpawn == 1)
+                    {
+                        if (room[1] == 'b' || room[1] == 'p')
+                        {
+                            ranX = 1386;
+                            ranY = 100;
+                        }
+                        else if (room[1] == 'B')
+                        {
+                            ranX = 743;
+                            ranY = 407;
+                        }
+                    }
+                    else if (quadrantSpawn == 2)
+                    {
+                        if (room[2] == 'b' || room[2] == 'p')
+                        {
+                            ranX = 100;
+                            ranY = 714;
+                        }
+                        else if (room[2] == 'B')
+                        {
+                            ranX = 743;
+                            ranY = 407;
+                        }
+                    }
+                    else if (quadrantSpawn == 3)
+                    {
+                        if (room[3] == 'b' || room[3] == 'p')
+                        {
+                            ranX = 1386;
+                            ranY = 714;
+                        }
+                        else if (room[3] == 'B')
+                        {
+                            ranX = 743;
+                            ranY = 407;
+                        }
+                    }
+
+                    itemsOnScreen.Add(new Chest(difficulty, new Point(ranX, ranY)));
+
+                }
             }
         }
         private void ItemCheck()
@@ -1186,6 +1235,10 @@ namespace Dungeon_Crawl
                     else if (itemsOnScreen[i].getType() == "jewlery" && equipedItems[3] != null)
                     {
                         compareItems(equipedItems[3], itemsOnScreen[i]);
+                    }
+                    else if (itemsOnScreen[i].getType() == "chest")
+                    {
+                        itemsOnScreen.AddRange(itemsOnScreen[i].Open());
                     }
 
                     Invalidate();
