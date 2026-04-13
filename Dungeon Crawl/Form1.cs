@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace Dungeon_Crawl
@@ -121,6 +122,7 @@ namespace Dungeon_Crawl
             MagicLabel.Location = new Point(660, 320);
             ResLabel.Location = new Point(670, 370);
             HealthLabel.Location = new Point(640, 420);
+            HealLabel.Location = new Point(643, 445);
             XPLabel.Location = new Point(640, 470);
             LevelLabel.Location = new Point(670, 520);
         }
@@ -165,6 +167,7 @@ namespace Dungeon_Crawl
             ResLabel.Visible = false;
             MonLabel.Visible = false;
             HealthLabel.Visible = false;
+            HealLabel.Visible = false;
             XPLabel.Visible = false;
             LevelLabel.Visible = false;
             pauseScreen = true;
@@ -236,7 +239,7 @@ namespace Dungeon_Crawl
         }
         private void resumeButtonClick()
         {
-            //Sets the buttons to invisible and then calls the method to resume the game if the inventory wasn't open prior
+            //Calls the method to resume the game if the inventory wasn't open prior
 
             Cursor.Hide();
             if (!inventoryOpen)
@@ -261,6 +264,7 @@ namespace Dungeon_Crawl
                 ResLabel.Visible = true;
                 MonLabel.Visible = true;
                 HealthLabel.Visible = true;
+                HealLabel.Visible = true;
                 XPLabel.Visible = true;
                 LevelLabel.Visible = true;
             }
@@ -286,7 +290,7 @@ namespace Dungeon_Crawl
         }
         private void CloseSettingsMenu()
         {
-            //Sets the buttons and menus to invisible and then sets the correct buttons to visible based on which menu was open before settings
+            //Sets menus to invisible and then sets the correct buttons to visible based on which menu was open before settings
             CloseButton.Visible = false;
             SettingsMenu.Visible = false;
             if (reopenMenu == "start")
@@ -897,6 +901,7 @@ namespace Dungeon_Crawl
             ResLabel.Text = "Res: " + pc.getResistance();
             MonLabel.Text = Convert.ToString(pc.getMoney());
             HealthLabel.Text = "HP " + pc.getHealth() + "/" + pc.getMaxHealth();
+            HealLabel.Text = "Heal " + pc.getHeal();
             XPLabel.Text = "XP " + pc.getXP() + "/" + (20 * pc.getLevel());
             LevelLabel.Text = "Lv. " + pc.getLevel();
             inventoryOpen = true;
@@ -906,6 +911,7 @@ namespace Dungeon_Crawl
             ResLabel.Visible = true;
             MonLabel.Visible = true;
             HealthLabel.Visible = true;
+            HealLabel.Visible = true;
             XPLabel.Visible = true;
             LevelLabel.Visible = true;
         }
@@ -920,6 +926,7 @@ namespace Dungeon_Crawl
             ResLabel.Visible = false;
             MonLabel.Visible = false;
             HealthLabel.Visible = false;
+            HealLabel.Visible = false;
             XPLabel.Visible = false;
             LevelLabel.Visible = false;
         }
@@ -928,7 +935,8 @@ namespace Dungeon_Crawl
             //Spawns items at the start of new rooms for the player to pick up and adds them to the itemsOnScreen list
             bool spawnItem = false;
             bool spawnChest = false;
-            int itemSpawned = 0;
+            bool chestSpawned = false;
+            int itemSpawned;
             int amountOfItems = difficulty;
             int quadrantSpawn;
             int ranX = 0;
@@ -943,17 +951,24 @@ namespace Dungeon_Crawl
 
             for (int i = 0; i < amountOfItems; i++)
             {
+                if (itemsOnScreen.OfType<Chest>().Any())
+                {
+                    chestSpawned = true;
+                }
+
                 if (ran.Next(0, 10) == 0)
                 {
                     spawnItem = true;
                 }
-                else if (ran.Next(0, 2) == 0)
+                else if (ran.Next(0, 2) == 0 && !chestSpawned)
                 {
                     spawnChest = true;
                 }
-
-                spawnItem = true;
-                spawnChest = true;
+                else
+                {
+                    spawnChest = false;
+                    spawnItem = false;
+                }
 
                 if (spawnItem)
                 {
@@ -1271,6 +1286,7 @@ namespace Dungeon_Crawl
                     else if (i == 3)
                     {
                         pc.setJewleryAdd(equipedItems[i].getAmount());
+                        pc.setHealAdd(equipedItems[i].getHealIncrease());
                     }
                 }
             }
@@ -1289,7 +1305,7 @@ namespace Dungeon_Crawl
             Invalidate();
             if (equiped.getType() == "armor")
             {
-                message = "Do you want to equip this item?\nCurrent: +" + equipedItems[0].getAmount() + " --> New: +" + onGround.getAmount() + "\nWARNING: THIS CANNOT BE UNDON. ANY ITEM NOT EQUIPED WILL BE LOST FOREVER";
+                message = "Do you want to equip this item?\nDefense: +" + equipedItems[0].getAmount() + " --> New: +" + onGround.getAmount() + "\nWARNING: THIS CANNOT BE UNDON. ANY ITEM NOT EQUIPED WILL BE LOST FOREVER";
                 result = MessageBox.Show(message, null, MessageBoxButtons.YesNo);
 
                 if (result == DialogResult.Yes)
@@ -1310,7 +1326,7 @@ namespace Dungeon_Crawl
             }
             else if (equiped.getType() == "weapon")
             {
-                message = "Do you want to equip this item?\nCurrent: +" + equipedItems[1].getAmount() + " --> New: +" + onGround.getAmount() + "\nWARNING: THIS CANNOT BE UNDON. ANY ITEM NOT EQUIPED WILL BE LOST FOREVER";
+                message = "Do you want to equip this item?\nStrength: +" + equipedItems[1].getAmount() + " --> New: +" + onGround.getAmount() + "\nWARNING: THIS CANNOT BE UNDON. ANY ITEM NOT EQUIPED WILL BE LOST FOREVER";
                 result = MessageBox.Show(message, null, MessageBoxButtons.YesNo);
 
                 if (result == DialogResult.Yes)
@@ -1331,7 +1347,7 @@ namespace Dungeon_Crawl
             }
             else if (equiped.getType() == "staff")
             {
-                message = "Do you want to equip this item?\nCurrent: +" + equipedItems[2].getAmount() + " --> New: +" + onGround.getAmount() + "\nWARNING: THIS CANNOT BE UNDON. ANY ITEM NOT EQUIPED WILL BE LOST FOREVER";
+                message = "Do you want to equip this item?\nMagic: +" + equipedItems[2].getAmount() + " --> New: +" + onGround.getAmount() + "\nWARNING: THIS CANNOT BE UNDON. ANY ITEM NOT EQUIPED WILL BE LOST FOREVER";
                 result = MessageBox.Show(message, null, MessageBoxButtons.YesNo);
 
                 if (result == DialogResult.Yes)
@@ -1352,7 +1368,7 @@ namespace Dungeon_Crawl
             }
             else if (equiped.getType() == "jewlery")
             {
-                message = "Do you want to equip this item?\nCurrent: +" + equipedItems[3].getAmount() + " --> New: +" + onGround.getAmount() + "\nWARNING: THIS CANNOT BE UNDON. ANY ITEM NOT EQUIPED WILL BE LOST FOREVER";
+                message = "Do you want to equip this item?\nResistance: +" + equipedItems[3].getAmount() + " --> New: +" + onGround.getAmount() + "\nHeal: +" + equipedItems[3].getHealIncrease() + "-- > New: +" + onGround.getHealIncrease() + "\nWARNING: THIS CANNOT BE UNDON. ANY ITEM NOT EQUIPED WILL BE LOST FOREVER";
                 result = MessageBox.Show(message, null, MessageBoxButtons.YesNo);
 
                 if (result == DialogResult.Yes)
@@ -1396,7 +1412,6 @@ namespace Dungeon_Crawl
             }
 
             RandomRoom();
-
             SpawnItems();
             encountersInRoom = ran.Next(1, difficulty + 2);
         }
@@ -1596,6 +1611,7 @@ namespace Dungeon_Crawl
                     MessageBox.Show("You won! You gained " + enemy.getXP() + " exp and $" + enemy.getMoney() + "\nYou also find a " + enemy.getItem().getType() + " on its corpse.");
                     pc.addExp(enemy.getXP());
                     pc.addMoney(enemy.getMoney());
+                    pc.setHealth(pc.getHealth() + pc.getHeal());
                     enemy.getItem().setLocation(new Point(pX, pY));
                     itemsOnScreen.Add(enemy.getItem());
                     ItemCheck();
@@ -1605,6 +1621,7 @@ namespace Dungeon_Crawl
                     MessageBox.Show("You won! You gained " + enemy.getXP() + " exp and $" + enemy.getMoney());
                     pc.addExp(enemy.getXP());
                     pc.addMoney(enemy.getMoney());
+                    pc.setHealth(pc.getHealth() + pc.getHeal());
                 }
 
                 inFight = false;

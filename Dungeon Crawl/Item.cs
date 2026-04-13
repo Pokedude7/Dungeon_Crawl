@@ -11,6 +11,7 @@ namespace Dungeon_Crawl
         protected string statIncreases;
         protected int rarity;
         protected int amountIncrease;
+        protected int healIncrease;
         protected Point location;
         protected Image image;
         public Item()
@@ -45,6 +46,7 @@ namespace Dungeon_Crawl
         {
             location = newLocation;
         }
+        public void setHealIncrease(int healIncrease) { this.healIncrease = healIncrease; }
 
         public string getStat()
         {
@@ -62,6 +64,7 @@ namespace Dungeon_Crawl
         {
             return itemType;
         }
+        public int getHealIncrease() { return this.healIncrease; }
         public int getXLoc()
         {
             return location.X;

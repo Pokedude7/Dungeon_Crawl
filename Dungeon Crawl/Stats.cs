@@ -79,6 +79,10 @@ namespace Dungeon_Crawl
         public void setHealth(double health)
         {
             this.health = health;
+            if (this.health > maxHealth)
+            {
+                this.health = maxHealth;
+            }
         }
         public void setMaxHealth(double maxHealth)
         {

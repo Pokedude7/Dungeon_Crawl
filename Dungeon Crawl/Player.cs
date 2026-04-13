@@ -6,6 +6,7 @@
         double armorAdd;
         double staffAdd;
         double jewleryAdd;
+        double healAdd;
 
         public Player()
         {
@@ -36,6 +37,10 @@
         {
             this.jewleryAdd = jewleryAdd;
         }
+        public void setHealAdd(double healAdd)
+        {
+            this.healAdd = healAdd;
+        }
 
         public override double getStrength()
         {
@@ -53,7 +58,10 @@
         {
             return resistance + jewleryAdd;
         }
-
+        public double getHeal()
+        {
+            return healAdd;
+        }
         public void addMoney(double money)
         {
             this.money += money;

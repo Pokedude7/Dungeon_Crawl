@@ -47,6 +47,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.SettingsMenu = new System.Windows.Forms.TableLayoutPanel();
+            this.HealLabel = new System.Windows.Forms.Label();
             this.SettingsMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -198,7 +199,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(220, 0);
+            this.label4.Location = new System.Drawing.Point(218, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(62, 16);
             this.label4.TabIndex = 5;
@@ -208,7 +209,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(162, 0);
+            this.label3.Location = new System.Drawing.Point(160, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(38, 29);
             this.label3.TabIndex = 3;
@@ -218,7 +219,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(75, 0);
+            this.label1.Location = new System.Drawing.Point(74, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(67, 29);
             this.label1.TabIndex = 0;
@@ -241,7 +242,7 @@
             this.SettingsMenu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 45.25547F));
             this.SettingsMenu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 54.74453F));
             this.SettingsMenu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 58F));
-            this.SettingsMenu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 78F));
+            this.SettingsMenu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
             this.SettingsMenu.Controls.Add(this.label2, 0, 0);
             this.SettingsMenu.Controls.Add(this.label1, 1, 0);
             this.SettingsMenu.Controls.Add(this.label3, 2, 0);
@@ -255,12 +256,26 @@
             this.SettingsMenu.TabIndex = 4;
             this.SettingsMenu.Visible = false;
             // 
+            // HealLabel
+            // 
+            this.HealLabel.AutoSize = true;
+            this.HealLabel.BackColor = System.Drawing.Color.Transparent;
+            this.HealLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.HealLabel.ForeColor = System.Drawing.Color.White;
+            this.HealLabel.Location = new System.Drawing.Point(177, 188);
+            this.HealLabel.Name = "HealLabel";
+            this.HealLabel.Size = new System.Drawing.Size(53, 20);
+            this.HealLabel.TabIndex = 19;
+            this.HealLabel.Text = "label8";
+            this.HealLabel.Visible = false;
+            // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.ControlBox = false;
+            this.Controls.Add(this.HealLabel);
             this.Controls.Add(this.LevelLabel);
             this.Controls.Add(this.XPLabel);
             this.Controls.Add(this.HealthLabel);
@@ -310,6 +325,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TableLayoutPanel SettingsMenu;
+        private System.Windows.Forms.Label HealLabel;
     }
 }
 
