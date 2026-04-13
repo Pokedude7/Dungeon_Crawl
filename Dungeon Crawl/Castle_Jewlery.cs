@@ -22,14 +22,17 @@ namespace Dungeon_Crawl
             if (rarity == 0)
             {
                 amountIncrease = ran.Next(1, 2);
+                healIncrease = ran.Next(1, 2);
             }
             else if (rarity == 1)
             {
                 amountIncrease = ran.Next(2, 3);
+                healIncrease = ran.Next(2, 3);
             }
             else if (rarity == 2)
             {
                 amountIncrease = ran.Next(3, 6);
+                healIncrease = ran.Next(3, 6);
             }
 
             setLocation(point);

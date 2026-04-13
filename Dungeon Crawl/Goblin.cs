@@ -9,8 +9,8 @@ namespace Dungeon_Crawl
         {
             enemyType = "goblin";
             setLevel(enemyLevel);
-            setHealth((int)(5 * (0.5 * enemyLevel)));
             setMaxHealth((int)(5 * (0.5 * enemyLevel)));
+            setHealth((int)(5 * (0.5 * enemyLevel)));
             setStrength((int)(2 * (0.5 * enemyLevel)));
             setMagic(0);
             setDefense((int)(1 * (0.5 * enemyLevel)));

@@ -9,8 +9,8 @@ namespace Dungeon_Crawl
             enemyType = "ogre";
             setLevel(enemyLevel);
             setEnemyType(enemyType);
-            setHealth((int)(15 * (0.5 * enemyLevel)));
             setMaxHealth((int)(15 * (0.5 * enemyLevel)));
+            setHealth((int)(15 * (0.5 * enemyLevel)));
             setStrength((int)(4 * (0.5 * enemyLevel)));
             setMagic(0);
             setDefense(0);
