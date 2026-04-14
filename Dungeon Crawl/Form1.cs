@@ -74,6 +74,8 @@ namespace Dungeon_Crawl
         int difficulty = 1;
         char enteredFrom = 's';
         string room = "bbbb";
+        int numOfRoomsEntered = 0;
+        int numOfRoomsInArea = 0;
 
         //Mouse Variables
         bool startHover = false;
@@ -103,6 +105,7 @@ namespace Dungeon_Crawl
 
         //Variables for encounters
         int encountersInRoom = 0;
+        bool bossRoom = false;
         bool inFight = false;
         bool turnOver = false;
         int whoseturn = 0;
@@ -150,6 +153,8 @@ namespace Dungeon_Crawl
             enteredFrom = 's';
             room = "bbbb";
             encountersInRoom = 0;
+            numOfRoomsEntered = 0;
+            numOfRoomsInArea = ran.Next(10, 16);
             PlayerButtonsVisible();
             SpawnItems();
             Invalidate();
@@ -1411,6 +1416,8 @@ namespace Dungeon_Crawl
                 pX = 50;
             }
 
+            numOfRoomsEntered++;
+
             RandomRoom();
             SpawnItems();
             encountersInRoom = ran.Next(1, difficulty + 2);
@@ -1421,7 +1428,7 @@ namespace Dungeon_Crawl
             //Then, it randomly decides which enemy to spawn and starts the fight
             int encounterChance = ran.Next(1, 50);
             int enemySpawn = ran.Next(1, 4);
-            if (encountersInRoom != 0 && encounterChance == 1)
+            if (encountersInRoom != 0 && encounterChance == 1 && !bossRoom)
             {
                 if (enemySpawn == 1)
                 {
@@ -1805,8 +1812,26 @@ namespace Dungeon_Crawl
         private void RandomRoom()
         {
             int roomType = ran.Next(0, 5);
+            if (numOfRoomsEntered == numOfRoomsInArea)
+            {
+                if (enteredFrom == 'n')
+                {
 
-            if (roomType == 0)
+                }
+                else if (enteredFrom == 's')
+                {
+
+                }
+                else if (enteredFrom == 'e')
+                {
+
+                }
+                else if (enteredFrom == 'w')
+                {
+
+                }
+            }
+            else if (roomType == 0)
             {
                 room = "bbbb";
             }
