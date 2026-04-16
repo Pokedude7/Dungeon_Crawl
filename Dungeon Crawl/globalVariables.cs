@@ -8,5 +8,6 @@ namespace Dungeon_Crawl
 {
     internal class globalVariables
     {
+        public static int Area {  get; set; }
     }
 }
