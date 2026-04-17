@@ -996,7 +996,7 @@ namespace Dungeon_Crawl
                 SpawnEncounter();
             }
 
-            if (bossRoom && pY >= 232 && pY <= 557 && pX >= 568 && pX <= 893)
+            if (bossRoom && pY >= 232 && pY <= 557 && pX >= 568 && pX <= 893 && room[0] == 'F')
             {
                 spawnBoss();
             }
@@ -1093,10 +1093,12 @@ namespace Dungeon_Crawl
                 if (ran.Next(0, 10) == 0)
                 {
                     spawnItem = true;
+                    spawnChest = false;
                 }
                 else if (ran.Next(0, 2) == 0 && !chestSpawned)
                 {
                     spawnChest = true;
+                    spawnItem = false;
                 }
                 else
                 {
@@ -1782,6 +1784,11 @@ namespace Dungeon_Crawl
                     pc.addExp(enemy.getXP());
                     pc.addMoney(enemy.getMoney());
                     pc.setHealth(pc.getHealth() + pc.getHeal());
+                }
+
+                if (bossRoom)
+                {
+                    bossRoom = false;
                 }
 
                 inFight = false;

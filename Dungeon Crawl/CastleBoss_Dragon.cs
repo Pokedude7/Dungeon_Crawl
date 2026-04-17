@@ -18,11 +18,11 @@
 
         public override void setPhases()
         {
-            phaseStats[0, 0] = 200;
-            phaseStats[0, 1] = 200;
+            phaseStats[0, 0] = 150;
+            phaseStats[0, 1] = 150;
             phaseStats[0, 2] = 20;
             phaseStats[0, 3] = 10;
-            phaseStats[0, 4] = 15;
+            phaseStats[0, 4] = 12;
             phaseStats[0, 5] = 9;
         }
         public override void startPhase()

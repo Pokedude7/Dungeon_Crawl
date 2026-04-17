@@ -191,5 +191,8 @@
     <EmbeddedResource Include="Image\Walls\BossWallsTL_DungeonCrawl.png" />
     <EmbeddedResource Include="Image\Walls\BossWallsTR_DungeonCrawl.png" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Image\Enemies\DragonTemp_DungeonCrawl.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
