@@ -1789,6 +1789,9 @@ namespace Dungeon_Crawl
                 if (bossRoom)
                 {
                     bossRoom = false;
+                    encountersInRoom = 0;
+                    globalVariables.Area++;
+                    Win();
                 }
 
                 inFight = false;
@@ -1808,6 +1811,24 @@ namespace Dungeon_Crawl
             HideAll();
             Invalidate();
             string message = "You Died.\nHere are your stats:\nLevel: " + pc.getLevel() + "\nStrength: " + pc.getStrength() + "\nDefense: " + pc.getDefense() + "\nMagic: " + pc.getMagic() + "\nResistance: " + pc.getResistance() + "\nMoney: " + pc.getMoney() + "\n\nWould you like to restart?";
+            DialogResult result = MessageBox.Show(message, null, MessageBoxButtons.YesNo);
+
+            if (result == DialogResult.Yes)
+            {
+                StartGame();
+            }
+            else
+            {
+                HomeScreen();
+            }
+
+            Invalidate();
+        }
+        private void Win()
+        {
+            HideAll();
+            Invalidate();
+            string message = "You Won!\nHere are your stats:\nLevel: " + pc.getLevel() + "\nStrength: " + pc.getStrength() + "\nDefense: " + pc.getDefense() + "\nMagic: " + pc.getMagic() + "\nResistance: " + pc.getResistance() + "\nMoney: " + pc.getMoney() + "\n\nWould you like to restart?";
             DialogResult result = MessageBox.Show(message, null, MessageBoxButtons.YesNo);
 
             if (result == DialogResult.Yes)
