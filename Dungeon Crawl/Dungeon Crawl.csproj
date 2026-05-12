@@ -194,5 +194,8 @@
   <ItemGroup>
     <EmbeddedResource Include="Image\Enemies\DragonTemp_DungeonCrawl.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Image\Character\Animations\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
