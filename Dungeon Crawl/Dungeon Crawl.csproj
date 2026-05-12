@@ -47,6 +47,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Armor.cs" />
+    <Compile Include="Boss.cs" />
+    <Compile Include="CastleBoss_Dragon.cs" />
     <Compile Include="Castle_Jewlery.cs" />
     <Compile Include="Castle_Armor.cs" />
     <Compile Include="Castle_Staff.cs" />
@@ -59,6 +61,7 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="globalVariables.cs" />
     <Compile Include="Goblin.cs" />
     <Compile Include="Item.cs" />
     <Compile Include="Jewlery.cs" />
@@ -171,6 +174,25 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Image\Items\ChestOpenTemp_DungeonCrawl.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Image\Walls\PreBossWallsFBL_DungeonCrawl.png" />
+    <EmbeddedResource Include="Image\Walls\PreBossWallsFBR_DungeonCrawl.png" />
+    <EmbeddedResource Include="Image\Walls\PreBossWallsFLBL_DungeonCrawl.png" />
+    <EmbeddedResource Include="Image\Walls\PreBossWallsFLTL_DungeonCrawl.png" />
+    <EmbeddedResource Include="Image\Walls\PreBossWallsFRBR_DungeonCrawl.png" />
+    <EmbeddedResource Include="Image\Walls\PreBossWallsFRTR_DungeonCrawl.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Image\Walls\PreBossWallsFBBL_DungeonCrawl.png" />
+    <EmbeddedResource Include="Image\Walls\PreBossWallsFBBR_DungeonCrawl.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Image\Walls\BossWallsTL_DungeonCrawl.png" />
+    <EmbeddedResource Include="Image\Walls\BossWallsTR_DungeonCrawl.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Image\Enemies\DragonTemp_DungeonCrawl.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

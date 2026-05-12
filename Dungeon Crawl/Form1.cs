@@ -33,6 +33,7 @@ namespace Dungeon_Crawl
         readonly Image skeleton = Image.FromFile("../../Image/Enemies/SkeletonTemp_DungeonCrawl.png");
         readonly Image goblin = Image.FromFile("../../Image/Enemies/GoblinTemp_DungeonCrawl.png");
         readonly Image ogre = Image.FromFile("../../Image/Enemies/OgreTemp_DungeonCrawl.png");
+        readonly Image dragon = Image.FromFile("../../Image/Enemies/DragonTemp_DungeonCrawl.png");
         //Title text sprite
         readonly Image titleText = Image.FromFile("../../Image/Start_Screen/TitleTextTemp_DungeonCrawl.png");
         //Button sprites
@@ -63,6 +64,16 @@ namespace Dungeon_Crawl
         readonly Image pillarWallTR = Image.FromFile("../../Image/Walls/PillarWallsTR_DungeonCrawl.png");
         readonly Image pillarWallBL = Image.FromFile("../../Image/Walls/PillarWallsBL_DungeonCrawl.png");
         readonly Image pillarWallBR = Image.FromFile("../../Image/Walls/PillarWallsBR_DungeonCrawl.png");
+        readonly Image preBossWallFBL = Image.FromFile("../../Image/Walls/PreBossWallsFBL_DungeonCrawl.png");
+        readonly Image preBossWallFBR = Image.FromFile("../../Image/Walls/PreBossWallsFBR_DungeonCrawl.png");
+        readonly Image preBossWallFLBL = Image.FromFile("../../Image/Walls/PreBossWallsFLBL_DungeonCrawl.png");
+        readonly Image preBossWallFLTL = Image.FromFile("../../Image/Walls/PreBossWallsFLTL_DungeonCrawl.png");
+        readonly Image preBossWallFRBR = Image.FromFile("../../Image/Walls/PreBossWallsFRBR_DungeonCrawl.png");
+        readonly Image preBossWallFRTR = Image.FromFile("../../Image/Walls/PreBossWallsFRTR_DungeonCrawl.png");
+        readonly Image preBossWallFBBL = Image.FromFile("../../Image/Walls/PreBossWallsFBBL_DungeonCrawl.png");
+        readonly Image preBossWallFBBR = Image.FromFile("../../Image/Walls/PreBossWallsFBBR_DungeonCrawl.png");
+        readonly Image bossWallTL = Image.FromFile("../../Image/Walls/BossWallsTL_DungeonCrawl.png");
+        readonly Image bossWallTR = Image.FromFile("../../Image/Walls/BossWallsTR_DungeonCrawl.png");
 
         //General Variables
         bool inGame = false;
@@ -74,6 +85,8 @@ namespace Dungeon_Crawl
         int difficulty = 1;
         char enteredFrom = 's';
         string room = "bbbb";
+        int numOfRoomsEntered = 0;
+        int numOfRoomsInArea = 0;
 
         //Mouse Variables
         bool startHover = false;
@@ -103,6 +116,7 @@ namespace Dungeon_Crawl
 
         //Variables for encounters
         int encountersInRoom = 0;
+        bool bossRoom = false;
         bool inFight = false;
         bool turnOver = false;
         int whoseturn = 0;
@@ -150,6 +164,9 @@ namespace Dungeon_Crawl
             enteredFrom = 's';
             room = "bbbb";
             encountersInRoom = 0;
+            numOfRoomsEntered = 0;
+            numOfRoomsInArea = ran.Next(10, 16);
+            globalVariables.Area = 1;
             PlayerButtonsVisible();
             SpawnItems();
             Invalidate();
@@ -387,6 +404,14 @@ namespace Dungeon_Crawl
                 {
                     e.Graphics.DrawImage(pillarWallTL, 0, 0);
                 }
+                else if (room[0] == 'W')
+                {
+                    e.Graphics.DrawImage(preBossWallFLTL, 0, 0);
+                }
+                else if (room[0] == 'F')
+                {
+                    e.Graphics.DrawImage(bossWallTL, 0, 0);
+                }
 
                 if (room[1] == 'b')
                 {
@@ -399,6 +424,14 @@ namespace Dungeon_Crawl
                 else if (room[1] == 'p')
                 {
                     e.Graphics.DrawImage(pillarWallTR, 768, 0);
+                }
+                else if (room[1] == 'E')
+                {
+                    e.Graphics.DrawImage(preBossWallFRTR, 768, 0);
+                }
+                else if (room[1] == 'F')
+                {
+                    e.Graphics.DrawImage(bossWallTR, 768, 0);
                 }
 
                 if (room[2] == 'b')
@@ -413,6 +446,18 @@ namespace Dungeon_Crawl
                 {
                     e.Graphics.DrawImage(pillarWallBL, 0, 432);
                 }
+                else if (room[2] == 'W')
+                {
+                    e.Graphics.DrawImage(preBossWallFLBL, 0, 432);
+                }
+                else if (room[2] == 'S')
+                {
+                    e.Graphics.DrawImage(preBossWallFBBL, 0, 432);
+                }
+                else if (room[2] == 'F')
+                {
+                    e.Graphics.DrawImage(preBossWallFBL, 0, 432);
+                }
 
                 if (room[3] == 'b')
                 {
@@ -425,6 +470,19 @@ namespace Dungeon_Crawl
                 else if (room[3] == 'p')
                 {
                     e.Graphics.DrawImage(pillarWallBR, 768, 432);
+                }
+                else if (room[3] == 'E')
+                {
+                    e.Graphics.DrawImage(preBossWallFRBR, 768, 432);
+
+                }
+                else if (room[3] == 'S')
+                {
+                    e.Graphics.DrawImage(preBossWallFBBR, 768, 432);
+                }
+                else if (room[3] == 'F')
+                {
+                    e.Graphics.DrawImage(preBossWallFBR, 768, 432);
                 }
 
                 //Draws the character sprite where the player is located on the screen and facing the correct direction
@@ -506,19 +564,34 @@ namespace Dungeon_Crawl
                 EnemyHealthLabel.Text = "Enemy Health: " + enemy.getHealth() + "/" + enemy.getMaxHealth();
                 PCHealthLabel.Location = new Point(911, 205);
                 e.Graphics.DrawImage(CS, 911, 113);
-                EnemyHealthLabel.Location = new Point(550, 205);
-                if (enemy.getEnemyType() == "skeleton")
+                
+                if (!bossRoom)
                 {
-                    e.Graphics.DrawImage(skeleton, 550, 100);
+                    if (enemy.getEnemyType() == "skeleton")
+                    {
+                        e.Graphics.DrawImage(skeleton, 550, 100);
+                    }
+                    else if (enemy.getEnemyType() == "goblin")
+                    {
+                        e.Graphics.DrawImage(goblin, 550, 100);
+                    }
+                    else if (enemy.getEnemyType() == "ogre")
+                    {
+                        e.Graphics.DrawImage(ogre, 550, 100);
+                    }
+
+                    EnemyHealthLabel.Location = new Point(550, 205);
                 }
-                else if (enemy.getEnemyType() == "goblin")
+                else
                 {
-                    e.Graphics.DrawImage(goblin, 550, 100);
+                    if (enemy.getEnemyType() == "dragon")
+                    {
+                        e.Graphics.DrawImage(dragon, 500, 50);
+                    }
+
+                    EnemyHealthLabel.Location = new Point(550, 255);
                 }
-                else if (enemy.getEnemyType() == "ogre")
-                {
-                    e.Graphics.DrawImage(ogre, 550, 100);
-                }
+
 
                 PCHealthLabel.Visible = true;
                 EnemyHealthLabel.Visible = true;
@@ -556,7 +629,7 @@ namespace Dungeon_Crawl
             //Constantly updates the players position relative to if they are moving or not
             pY += upDownMove;
 
-            if (room[0] == 'b')
+            if (room[0] == 'b' || room[0] == 'W')
             {
                 if (pY <= 50 && pY >= 45 && pX <= 660)
                 {
@@ -582,8 +655,15 @@ namespace Dungeon_Crawl
                     pY = 157;
                 }
             }
+            else if (room[0] == 'F')
+            {
+                if (pY <= 50 && pY >= 45)
+                {
+                    pY = 50;
+                }
+            }
 
-            if (room[1] == 'b')
+            if (room[1] == 'b' || room[1] == 'E')
             {
                 if (pY <= 50 && pY >= 45 && pX >= 801)
                 {
@@ -609,8 +689,15 @@ namespace Dungeon_Crawl
                     pY = 157;
                 }
             }
+            else if (room[1] == 'F')
+            {
+                if (pY <= 50 && pY >= 45)
+                {
+                    pY = 50;
+                }
+            }
 
-            if (room[2] == 'b')
+            if (room[2] == 'b' || room[2] == 'W')
             {
                 if (pY >= 739 && pY <= 744 && pX <= 660)
                 {
@@ -636,8 +723,15 @@ namespace Dungeon_Crawl
                     pY = 632;
                 }
             }
+            else if (room[2] == 'F' || room[2] == 'S')
+            {
+                if (pY >= 739 && pY <= 744)
+                {
+                    pY = 739;
+                }
+            }
 
-            if (room[3] == 'b')
+            if (room[3] == 'b' || room[3] == 'E')
             {
                 if (pY >= 739 && pY <= 744 && pX >= 801)
                 {
@@ -661,6 +755,13 @@ namespace Dungeon_Crawl
                 if (pY <= 632 && pY >= 627 && pX >= 769 && pX <= 960)
                 {
                     pY = 632;
+                }
+            }
+            else if (room[3] == 'F' || room[3] == 'S')
+            {
+                if (pY >= 739 && pY <= 744)
+                {
+                    pY = 739;
                 }
             }
 
@@ -736,6 +837,13 @@ namespace Dungeon_Crawl
                     pX = 493;
                 }
             }
+            else if (room[0] == 'F' || room[0] == 'W')
+            {
+                if (pX <= 50 && pX >= 45)
+                {
+                    pX = 50;
+                }
+            }
 
             if (room[1] == 'b')
             {
@@ -763,8 +871,15 @@ namespace Dungeon_Crawl
                     pX = 968;
                 }
             }
+            else if (room[1] == 'F' || room[1] == 'E')
+            {
+                if (pX >= 1411 && pX <= 1416)
+                {
+                    pX = 1411;
+                }
+            }
 
-            if (room[2] == 'b')
+            if (room[2] == 'b' || room[2] == 'S')
             {
                 if (pX <= 50 && pX >= 45 && pY >= 465)
                 {
@@ -790,8 +905,15 @@ namespace Dungeon_Crawl
                     pX = 493;
                 }
             }
+            else if (room[2] == 'F' || room[2] == 'W')
+            {
+                if (pX <= 50 && pX >= 45)
+                {
+                    pX = 50;
+                }
+            }
 
-            if (room[3] == 'b')
+            if (room[3] == 'b' || room[3] == 'S')
             {
                 if (pX >= 1411 && pX <= 1416 && pY >= 465)
                 {
@@ -815,6 +937,13 @@ namespace Dungeon_Crawl
                 if (pX <= 968 && pX >= 963 && pY >= 432 && pY <= 628)
                 {
                     pX = 968;
+                }
+            }
+            else if (room[3] == 'F' || room[3] == 'E')
+            {
+                if (pX >= 1411 && pX <= 1416)
+                {
+                    pX = 1411;
                 }
             }
 
@@ -865,6 +994,11 @@ namespace Dungeon_Crawl
             if (sideMove != 0 || upDownMove != 0)
             {
                 SpawnEncounter();
+            }
+
+            if (bossRoom && pY >= 232 && pY <= 557 && pX >= 568 && pX <= 893 && room[0] == 'F')
+            {
+                spawnBoss();
             }
 
             Invalidate();
@@ -959,10 +1093,12 @@ namespace Dungeon_Crawl
                 if (ran.Next(0, 10) == 0)
                 {
                     spawnItem = true;
+                    spawnChest = false;
                 }
                 else if (ran.Next(0, 2) == 0 && !chestSpawned)
                 {
                     spawnChest = true;
+                    spawnItem = false;
                 }
                 else
                 {
@@ -1394,7 +1530,12 @@ namespace Dungeon_Crawl
         {
             //Sets the players position to the right spot in the new room based on which direction they entered from
             //Then spawns the items in the room and sets the number of encounters in the room
-            if (enteredFrom == 'n')
+            if (bossRoom)
+            {
+                itemsOnScreen.Clear();
+                pY = 689;
+            }
+            else if (enteredFrom == 'n')
             {
                 pY = 50;
             }
@@ -1411,9 +1552,19 @@ namespace Dungeon_Crawl
                 pX = 50;
             }
 
+            numOfRoomsEntered++;
+
             RandomRoom();
-            SpawnItems();
-            encountersInRoom = ran.Next(1, difficulty + 2);
+
+            if (!bossRoom)
+            {
+                SpawnItems();
+                encountersInRoom = ran.Next(1, difficulty + 2);
+            }
+            else
+            {
+                itemsOnScreen.Clear();
+            }
         }
         private void SpawnEncounter()
         {
@@ -1421,7 +1572,7 @@ namespace Dungeon_Crawl
             //Then, it randomly decides which enemy to spawn and starts the fight
             int encounterChance = ran.Next(1, 50);
             int enemySpawn = ran.Next(1, 4);
-            if (encountersInRoom != 0 && encounterChance == 1)
+            if (encountersInRoom != 0 && encounterChance == 1 && !bossRoom)
             {
                 if (enemySpawn == 1)
                 {
@@ -1463,6 +1614,15 @@ namespace Dungeon_Crawl
                     StartFight();
                 }
             }
+        }
+        private void spawnBoss()
+        {
+            if (globalVariables.Area == 1)
+            {
+                enemy = new CastleBoss_Dragon();
+            }
+
+            StartFight();
         }
         private void StartFight()
         {
@@ -1547,6 +1707,7 @@ namespace Dungeon_Crawl
                 turnOver = true;
                 inGame = true;
                 PlayerButtonsVisible();
+                pc.setHealth(pc.getHealth() + pc.getHeal());
             }
             else
             {
@@ -1558,6 +1719,7 @@ namespace Dungeon_Crawl
                     turnOver = true;
                     inGame = true;
                     PlayerButtonsVisible();
+                    pc.setHealth(pc.getHealth() + pc.getHeal());
                 }
                 else
                 {
@@ -1624,6 +1786,14 @@ namespace Dungeon_Crawl
                     pc.setHealth(pc.getHealth() + pc.getHeal());
                 }
 
+                if (bossRoom)
+                {
+                    bossRoom = false;
+                    encountersInRoom = 0;
+                    globalVariables.Area++;
+                    Win();
+                }
+
                 inFight = false;
                 inGame = true;
                 turnOver = true;
@@ -1641,6 +1811,24 @@ namespace Dungeon_Crawl
             HideAll();
             Invalidate();
             string message = "You Died.\nHere are your stats:\nLevel: " + pc.getLevel() + "\nStrength: " + pc.getStrength() + "\nDefense: " + pc.getDefense() + "\nMagic: " + pc.getMagic() + "\nResistance: " + pc.getResistance() + "\nMoney: " + pc.getMoney() + "\n\nWould you like to restart?";
+            DialogResult result = MessageBox.Show(message, null, MessageBoxButtons.YesNo);
+
+            if (result == DialogResult.Yes)
+            {
+                StartGame();
+            }
+            else
+            {
+                HomeScreen();
+            }
+
+            Invalidate();
+        }
+        private void Win()
+        {
+            HideAll();
+            Invalidate();
+            string message = "You Won!\nHere are your stats:\nLevel: " + pc.getLevel() + "\nStrength: " + pc.getStrength() + "\nDefense: " + pc.getDefense() + "\nMagic: " + pc.getMagic() + "\nResistance: " + pc.getResistance() + "\nMoney: " + pc.getMoney() + "\n\nWould you like to restart?";
             DialogResult result = MessageBox.Show(message, null, MessageBoxButtons.YesNo);
 
             if (result == DialogResult.Yes)
@@ -1805,8 +1993,42 @@ namespace Dungeon_Crawl
         private void RandomRoom()
         {
             int roomType = ran.Next(0, 5);
+            if (numOfRoomsEntered >= numOfRoomsInArea && !bossRoom)
+            {
+                if (enteredFrom == 'n')
+                {
+                    roomType = ran.Next(0, 2);
 
-            if (roomType == 0)
+                    if (roomType == 0)
+                    {
+                        room = "WbFS";
+                    }
+                    else if (roomType == 1)
+                    {
+                        room = "bESF";
+                    }
+                }
+                else if (enteredFrom == 's')
+                {
+                    room = "WEWE";
+                    bossRoom = true;
+                }
+                else if (enteredFrom == 'e')
+                {
+                    room = "WbFS";
+                    bossRoom = true;
+                }
+                else if (enteredFrom == 'w')
+                {
+                    room = "bESF";
+                    bossRoom = true;
+                }
+            }
+            else if (bossRoom)
+            {
+                room = "FFWE";
+            }
+            else if (roomType == 0)
             {
                 room = "bbbb";
             }
