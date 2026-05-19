@@ -17,7 +17,7 @@ namespace Dungeon_Crawl
             itemType = "chest";
             this.location = location;
             IsOpen = false;
-            image = Image.FromFile("../../Image/Items/ChestTemp_DungeonCrawl.png");
+            image = Image.FromFile("../../Image/Items/Chest_DungeonCrawl.png");
 
             num = ran.Next(0, 4);
 
@@ -308,7 +308,7 @@ namespace Dungeon_Crawl
             if (!IsOpen)
             {
                 IsOpen = true;
-                image = Image.FromFile("../../Image/Items/ChestOpenTemp_DungeonCrawl.png");
+                image = Image.FromFile("../../Image/Items/ChestOpen_DungeonCrawl.png");
                 return chestContents;
             }
             else

@@ -13,27 +13,26 @@ namespace Dungeon_Crawl
 
         //Images for the game
         //Character sprites
-        readonly Image CS = Image.FromFile("../../Image/Character/PlaceholderCharacter_DungeonCrawl.png");
-        readonly Image CSU = Image.FromFile("../../Image/Character/PlaceHolderCharacterUp_DungeonCrawl.png");
-        readonly Image CSD = Image.FromFile("../../Image/Character/PlaceHolderCharacterDown_DungeonCrawl.png");
-        readonly Image CSL = Image.FromFile("../../Image/Character/PlaceHolderCharacterLeft_DungeonCrawl.png");
-        readonly Image CSR = Image.FromFile("../../Image/Character/PlaceHolderCharacterRight_DungeonCrawl.png");
+        Image CSU = Image.FromFile("../../Image/Character/CharacterUp_DungeonCrawl.png");
+        Image CSD = Image.FromFile("../../Image/Character/CharacterDown_DungeonCrawl.png");
+        Image CSL = Image.FromFile("../../Image/Character/CharacterLeft_DungeonCrawl.png");
+        Image CSR = Image.FromFile("../../Image/Character/CharacterRight_DungeonCrawl.png");
         //Inventory square sprite
-        readonly Image ISq = Image.FromFile("../../Image/Inventory/InventorySquareTemp_DungeonCrawl.png");
+        readonly Image ISq = Image.FromFile("../../Image/Inventory/InventorySquare_DungeonCrawl.png");
         //Inventory screen sprite
-        readonly Image ISc = Image.FromFile("../../Image/Inventory/InventoryScreenTemp_DungeonCrawl.png");
+        readonly Image ISc = Image.FromFile("../../Image/Inventory/InventoryScreen_DungeonCrawl.png");
         //Item sprites
-        readonly Image armor = Image.FromFile("../../Image/Items/ArmorTemp_DungeonCrawl.png");
-        readonly Image weapon = Image.FromFile("../../Image/Items/WeaponTemp_DungeonCrawl.png");
-        readonly Image staff = Image.FromFile("../../Image/Items/StaffTemp_DungeonCrawl.png");
-        readonly Image jewlery = Image.FromFile("../../Image/Items/JewleryTemp_DungeonCrawl.png");
-        readonly Image money = Image.FromFile("../../Image/Items/MoneyTemp_DungeonCrawl.png");
-        readonly Image chest = Image.FromFile("../../Image/Items/ChestTemp_DungeonCrawl.png");
+        readonly Image armor = Image.FromFile("../../Image/Items/Armor_DungeonCrawl.png");
+        readonly Image weapon = Image.FromFile("../../Image/Items/Weapon_DungeonCrawl.png");
+        readonly Image staff = Image.FromFile("../../Image/Items/Staff_DungeonCrawl.png");
+        readonly Image jewlery = Image.FromFile("../../Image/Items/Jewlery_DungeonCrawl.png");
+        readonly Image money = Image.FromFile("../../Image/Items/Money_DungeonCrawl.png");
+        readonly Image chest = Image.FromFile("../../Image/Items/Chest_DungeonCrawl.png");
         //Enemy sprites
-        readonly Image skeleton = Image.FromFile("../../Image/Enemies/SkeletonTemp_DungeonCrawl.png");
-        readonly Image goblin = Image.FromFile("../../Image/Enemies/GoblinTemp_DungeonCrawl.png");
-        readonly Image ogre = Image.FromFile("../../Image/Enemies/OgreTemp_DungeonCrawl.png");
-        readonly Image dragon = Image.FromFile("../../Image/Enemies/DragonTemp_DungeonCrawl.png");
+        readonly Image skeleton = Image.FromFile("../../Image/Enemies/Skeleton_DungeonCrawl.png");
+        readonly Image goblin = Image.FromFile("../../Image/Enemies/Goblin_DungeonCrawl.png");
+        readonly Image ogre = Image.FromFile("../../Image/Enemies/Ogre_DungeonCrawl.png");
+        readonly Image dragon = Image.FromFile("../../Image/Enemies/Dragon_DungeonCrawl.png");
         //Title text sprite
         readonly Image titleText = Image.FromFile("../../Image/Start_Screen/TitleTextTemp_DungeonCrawl.png");
         //Button sprites
@@ -74,6 +73,11 @@ namespace Dungeon_Crawl
         readonly Image preBossWallFBBR = Image.FromFile("../../Image/Walls/PreBossWallsFBBR_DungeonCrawl.png");
         readonly Image bossWallTL = Image.FromFile("../../Image/Walls/BossWallsTL_DungeonCrawl.png");
         readonly Image bossWallTR = Image.FromFile("../../Image/Walls/BossWallsTR_DungeonCrawl.png");
+        //Floor Sprites
+        readonly Image floorTL = Image.FromFile("../../Image/Floors/FloorTL_DungeonCrawl.png");
+        readonly Image floorTR = Image.FromFile("../../Image/Floors/FloorTR_DungeonCrawl.png");
+        readonly Image floorBL = Image.FromFile("../../Image/Floors/FloorBL_DungeonCrawl.png");
+        readonly Image floorBR = Image.FromFile("../../Image/Floors/FloorBR_DungeonCrawl.png");
 
         //General Variables
         bool inGame = false;
@@ -106,6 +110,10 @@ namespace Dungeon_Crawl
         bool DHeld = false;
         char lastHeld = 'w';
 
+        //Animation Variables
+        bool switcher = false;
+        bool switcher2 = false;
+
         Item[] equipedItems = new Item[5] { null, null, null, null, null };
 
         List<Item> itemsOnScreen = new List<Item>();
@@ -121,6 +129,9 @@ namespace Dungeon_Crawl
         bool turnOver = false;
         int whoseturn = 0;
 
+        //Animation Variables
+        int count = 0;
+
         public Form1()
         {
             InitializeComponent();
@@ -131,14 +142,14 @@ namespace Dungeon_Crawl
 
             //Sets the location and visibility of all the buttons and labels on the screen
             MonLabel.Location = new Point(1000, 462);
-            StrLabel.Location = new Point(670, 220);
-            DefLabel.Location = new Point(670, 270);
-            MagicLabel.Location = new Point(660, 320);
-            ResLabel.Location = new Point(670, 370);
-            HealthLabel.Location = new Point(640, 420);
-            HealLabel.Location = new Point(643, 445);
-            XPLabel.Location = new Point(640, 470);
-            LevelLabel.Location = new Point(670, 520);
+            StrLabel.Location = new Point(740, 285);
+            DefLabel.Location = new Point(740, 335);
+            MagicLabel.Location = new Point(740, 440);
+            ResLabel.Location = new Point(740, 383);
+            HealthLabel.Location = new Point(700, 485);
+            HealLabel.Location = new Point(690, 465);
+            XPLabel.Location = new Point(680, 521);
+            LevelLabel.Location = new Point(690, 205);
         }
         private void HomeScreen()
         {
@@ -325,71 +336,13 @@ namespace Dungeon_Crawl
         }
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
-            if (startScreen)
+            if (!startScreen && !inFight)
             {
-                //Draws the title text on the screen
-                e.Graphics.DrawImage(titleText, 396, 100);
-
-                if (startHover)
-                {
-                    e.Graphics.DrawImage(startH, 468, 300);
-                }
-                else
-                {
-                    e.Graphics.DrawImage(startB, 468, 300);
-                }
-
-                if (settingsHover)
-                {
-                    e.Graphics.DrawImage(settingsH, 468, 450);
-                }
-                else
-                {
-                    e.Graphics.DrawImage(settingsB, 468, 450);
-                }
-
-                if (quitHover)
-                {
-                    e.Graphics.DrawImage(quitH, 468, 600);
-                }
-                else
-                {
-                    e.Graphics.DrawImage(quitB, 468, 600);
-                }
-            }
-            else if (pauseScreen)
-            {
-                if (resumeHover)
-                {
-                    e.Graphics.DrawImage(resumeH, 468, 300);
-                }
-                else
-                {
-                    e.Graphics.DrawImage(resumeB, 468, 300);
-                }
-
-                if (settingsHover)
-                {
-                    e.Graphics.DrawImage(settingsH, 468, 450);
-                }
-                else
-                {
-                    e.Graphics.DrawImage(settingsB, 468, 450);
-                }
-
-                if (quitHover)
-                {
-                    e.Graphics.DrawImage(quitH, 468, 600);
-                }
-                else
-                {
-                    e.Graphics.DrawImage(quitB, 468, 600);
-                }
-            }
-            else if (inGame)
-            {
-                PCHealthLabel.Visible = false;
-                EnemyHealthLabel.Visible = false;
+                //Draws the floors around the edges of the screen
+                e.Graphics.DrawImage(floorTL, 0, 0);
+                e.Graphics.DrawImage(floorTR, 768, 0);
+                e.Graphics.DrawImage(floorBL, 0, 432);
+                e.Graphics.DrawImage(floorBR, 768, 432);
 
                 //Draws the walls around the edges of the screen
                 if (room[0] == 'b')
@@ -485,6 +438,12 @@ namespace Dungeon_Crawl
                     e.Graphics.DrawImage(preBossWallFBR, 768, 432);
                 }
 
+                //Draws the various items on the screen from the itemsOnScreen list in their respective locations
+                foreach (Item i in itemsOnScreen)
+                {
+                    e.Graphics.DrawImage(i.getImage(), i.getXLoc(), i.getYLoc());
+                }
+
                 //Draws the character sprite where the player is located on the screen and facing the correct direction
                 if (DHeld)
                 {
@@ -518,12 +477,73 @@ namespace Dungeon_Crawl
                 {
                     e.Graphics.DrawImage(CSU, pX, pY);
                 }
+            }
 
-                //Draws the various items on the screen from the itemsOnScreen list in their respective locations
-                foreach (Item i in itemsOnScreen)
+            if (startScreen)
+            {
+                //Draws the title text on the screen
+                e.Graphics.DrawImage(titleText, 396, 100);
+
+                if (startHover)
                 {
-                    e.Graphics.DrawImage(i.getImage(), i.getXLoc(), i.getYLoc());
+                    e.Graphics.DrawImage(startH, 468, 300);
                 }
+                else
+                {
+                    e.Graphics.DrawImage(startB, 468, 300);
+                }
+
+                if (settingsHover)
+                {
+                    e.Graphics.DrawImage(settingsH, 468, 450);
+                }
+                else
+                {
+                    e.Graphics.DrawImage(settingsB, 468, 450);
+                }
+
+                if (quitHover)
+                {
+                    e.Graphics.DrawImage(quitH, 468, 600);
+                }
+                else
+                {
+                    e.Graphics.DrawImage(quitB, 468, 600);
+                }
+            }
+            else if (pauseScreen)
+            {
+                if (resumeHover)
+                {
+                    e.Graphics.DrawImage(resumeH, 468, 300);
+                }
+                else
+                {
+                    e.Graphics.DrawImage(resumeB, 468, 300);
+                }
+
+                if (settingsHover)
+                {
+                    e.Graphics.DrawImage(settingsH, 468, 450);
+                }
+                else
+                {
+                    e.Graphics.DrawImage(settingsB, 468, 450);
+                }
+
+                if (quitHover)
+                {
+                    e.Graphics.DrawImage(quitH, 468, 600);
+                }
+                else
+                {
+                    e.Graphics.DrawImage(quitB, 468, 600);
+                }
+            }
+            else if (inGame)
+            {
+                PCHealthLabel.Visible = false;
+                EnemyHealthLabel.Visible = false;
             }
             else if (inventoryOpen && !pauseScreen)
             {
@@ -563,8 +583,8 @@ namespace Dungeon_Crawl
                 PCHealthLabel.Text = "PC Health: " + pc.getHealth() + "/" + pc.getMaxHealth();
                 EnemyHealthLabel.Text = "Enemy Health: " + enemy.getHealth() + "/" + enemy.getMaxHealth();
                 PCHealthLabel.Location = new Point(911, 205);
-                e.Graphics.DrawImage(CS, 911, 113);
-                
+                e.Graphics.DrawImage(CSD, 911, 113);
+
                 if (!bossRoom)
                 {
                     if (enemy.getEnemyType() == "skeleton")
@@ -1029,15 +1049,15 @@ namespace Dungeon_Crawl
         {
             //Sets the lables inside the inventory to the correct information, displays the labels and opens the inventory
             inGame = false;
-            StrLabel.Text = "Str: " + pc.getStrength();
-            DefLabel.Text = "Def: " + pc.getDefense();
-            MagicLabel.Text = "Magic: " + pc.getMagic();
-            ResLabel.Text = "Res: " + pc.getResistance();
-            MonLabel.Text = Convert.ToString(pc.getMoney());
-            HealthLabel.Text = "HP " + pc.getHealth() + "/" + pc.getMaxHealth();
-            HealLabel.Text = "Heal " + pc.getHeal();
-            XPLabel.Text = "XP " + pc.getXP() + "/" + (20 * pc.getLevel());
-            LevelLabel.Text = "Lv. " + pc.getLevel();
+            StrLabel.Text = pc.getStrength().ToString();
+            DefLabel.Text = pc.getDefense().ToString();
+            MagicLabel.Text = pc.getMagic().ToString();
+            ResLabel.Text = pc.getResistance().ToString();
+            MonLabel.Text = pc.getMoney().ToString();
+            HealthLabel.Text = pc.getHealth() + "/" + pc.getMaxHealth();
+            HealLabel.Text = "+" + pc.getHeal();
+            XPLabel.Text = pc.getXP() + "/" + (20 * pc.getLevel());
+            LevelLabel.Text = pc.getLevel().ToString();
             inventoryOpen = true;
             StrLabel.Visible = true;
             DefLabel.Visible = true;
@@ -2080,6 +2100,142 @@ namespace Dungeon_Crawl
                 else if (roomType == 3)
                 {
                     room = "bbbB";
+                }
+            }
+        }
+        private void Animation_Tick(object sender, EventArgs e)
+        {
+            //count++;
+            //if (count >= 10)
+            //{
+            //    if (!switcher2)
+            //    {
+            //        if (switcher)
+            //        {
+            //            CSU = Image.FromFile("../../Image/Character/Animation/CharacterUpWalk1_DungeonCrawl.png");
+            //            switcher = false;
+            //        }
+            //        else
+            //        {
+            //            CSU = Image.FromFile("../../Image/Character/Animation/CharacterUpWalk2_DungeonCrawl.png");
+            //            switcher = true;
+            //        }
+            //        switcher2 = true;
+            //    }
+            //    else
+            //    {
+            //        CSU = Image.FromFile("../../Image/Character/Animation/CharacterUpWalk3_DungeonCrawl.png");
+            //        switcher2 = false;
+            //    }
+            //    count = 0;
+            //}
+
+            if (WHeld)
+            {
+                count++;
+                if (count >= 10)
+                {
+                    if (!switcher2)
+                    {
+                        if (switcher)
+                        {
+                            CSU = Image.FromFile("../../Image/Character/Animation/CharacterUpWalk1_DungeonCrawl.png");
+                            switcher = false;
+                        }
+                        else
+                        {
+                            CSU = Image.FromFile("../../Image/Character/Animation/CharacterUpWalk2_DungeonCrawl.png");
+                            switcher = true;
+                        }
+                        switcher2 = true;
+                    }
+                    else
+                    {
+                        CSU = Image.FromFile("../../Image/Character/Animation/CharacterUpWalk3_DungeonCrawl.png");
+                        switcher2 = false;
+                    }
+                    count = 0;
+                }
+            }
+            else if (SHeld)
+            {
+                count++;
+                if (count >= 10)
+                {
+                    if (!switcher2)
+                    {
+                        if (switcher)
+                        {
+                            CSD = Image.FromFile("../../Image/Character/Animation/CharacterDownWalk1_DungeonCrawl.png");
+                            switcher = false;
+                        }
+                        else
+                        {
+                            CSD = Image.FromFile("../../Image/Character/Animation/CharacterDownWalk2_DungeonCrawl.png");
+                            switcher = true;
+                        }
+                        switcher2 = true;
+                    }
+                    else
+                    {
+                        CSD = Image.FromFile("../../Image/Character/Animation/CharacterDownWalk3_DungeonCrawl.png");
+                        switcher2 = false;
+                    }
+                    count = 0;
+                }
+            }
+            else if (AHeld)
+            {
+                count++;
+                if (count >= 10)
+                {
+                    if (!switcher2)
+                    {
+                        if (switcher)
+                        {
+                            CSL = Image.FromFile("../../Image/Character/Animation/CharacterLeftWalk1_DungeonCrawl.png");
+                            switcher = false;
+                        }
+                        else
+                        {
+                            CSL = Image.FromFile("../../Image/Character/Animation/CharacterLeftWalk2_DungeonCrawl.png");
+                            switcher = true;
+                        }
+                        switcher2 = true;
+                    }
+                    else
+                    {
+                        CSL = Image.FromFile("../../Image/Character/Animation/CharacterLeftWalk3_DungeonCrawl.png");
+                        switcher2 = false;
+                    }
+                    count = 0;
+                }
+            }
+            else if (DHeld)
+            {
+                count++;
+                if (count >= 10)
+                {
+                    if (!switcher2)
+                    {
+                        if (switcher)
+                        {
+                            CSR = Image.FromFile("../../Image/Character/Animation/CharacterRightWalk1_DungeonCrawl.png");
+                            switcher = false;
+                        }
+                        else
+                        {
+                            CSR = Image.FromFile("../../Image/Character/Animation/CharacterRightWalk2_DungeonCrawl.png");
+                            switcher = true;
+                        }
+                        switcher2 = true;
+                    }
+                    else
+                    {
+                        CSR = Image.FromFile("../../Image/Character/Animation/CharacterRightWalk3_DungeonCrawl.png");
+                        switcher2 = false;
+                    }
+                    count = 0;
                 }
             }
         }

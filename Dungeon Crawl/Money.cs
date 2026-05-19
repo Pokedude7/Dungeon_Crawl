@@ -15,7 +15,7 @@ namespace Dungeon_Crawl
             ran = new Random();
             itemType = "money";
             statIncreases = "mon";
-            image = Image.FromFile("../../Image/Items/MoneyTemp_DungeonCrawl.png");
+            image = Image.FromFile("../../Image/Items/Money_DungeonCrawl.png");
             if (rarity == 0)
             {
                 amountIncrease = ran.Next(1, 5);

@@ -15,7 +15,7 @@ namespace Dungeon_Crawl
             this.weaponType = weaponType;
             if(weaponType == "sword")
             {
-                image = Image.FromFile("../../Image/Items/WeaponTemp_DungeonCrawl.png");
+                image = Image.FromFile("../../Image/Items/Weapon_DungeonCrawl.png");
             }
 
             if (rarity == 0)
