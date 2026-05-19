@@ -100,62 +100,13 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Image\Character\PlaceholderCharacter_DungeonCrawl.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Image\Inventory\InventoryScreenTemp_DungeonCrawl.png" />
-    <EmbeddedResource Include="Image\Inventory\InventorySquareTemp_DungeonCrawl.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Image\Items\ArmorTemp_DungeonCrawl.png" />
-    <EmbeddedResource Include="Image\Items\JewleryTemp_DungeonCrawl.png" />
-    <EmbeddedResource Include="Image\Items\MoneyTemp_DungeonCrawl.png" />
-    <EmbeddedResource Include="Image\Items\StaffTemp_DungeonCrawl.png" />
-    <EmbeddedResource Include="Image\Items\WeaponTemp_DungeonCrawl.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Image\Enemies\SkeletonTemp_DungeonCrawl.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Image\Character\PlaceHolderCharacterDown_DungeonCrawl.png" />
-    <EmbeddedResource Include="Image\Character\PlaceHolderCharacterRight_DungeonCrawl.png" />
-    <EmbeddedResource Include="Image\Character\PlaceHolderCharacterUp_DungeonCrawl.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Image\Character\PlaceHolderCharacterLeft_DungeonCrawl.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Image\Enemies\GoblinTemp_DungeonCrawl.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Image\Enemies\OgreTemp_DungeonCrawl.png" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Image\Start_Screen\TitleTextTemp_DungeonCrawl.png" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Image\Buttons\QuitButtonHighlighted_DungeonCrawl.png" />
     <EmbeddedResource Include="Image\Buttons\QuitButton_DungeonCrawl.png" />
-    <EmbeddedResource Include="Image\Buttons\SettingsButtonHighlighted_DungeonCrawl.png" />
-    <EmbeddedResource Include="Image\Buttons\SettingsButton_DungeonCrawl.png" />
-    <EmbeddedResource Include="Image\Buttons\StartButtonHighlighted_DungeonCrawl.png" />
-    <EmbeddedResource Include="Image\Buttons\StartButton_DungeonCrawl.png" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Image\Buttons\ResumeButtonHighlighted_DungeonCrawl.png" />
-    <EmbeddedResource Include="Image\Buttons\ResumeButton_DungeonCrawl.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Image\Buttons\AttackButtonHighlighted_DungeonCrawl.png" />
-    <EmbeddedResource Include="Image\Buttons\MagicButtonHighlighted_DungeonCrawl.png" />
-    <EmbeddedResource Include="Image\Buttons\MagicButton_DungeonCrawl.png" />
-    <EmbeddedResource Include="Image\Buttons\RunButtonHighlighted_DungeonCrawl.png" />
-    <EmbeddedResource Include="Image\Buttons\RunButton_DungeonCrawl.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Image\Buttons\AttackButton_DungeonCrawl.png" />
-  </ItemGroup>
-  <ItemGroup>
+    <EmbeddedResource Include="Image\Items\Armor_DungeonCrawl.png" />
     <EmbeddedResource Include="Image\Walls\BaseWallsBL_DungeonCrawl.png" />
     <EmbeddedResource Include="Image\Walls\BaseWallsBR_DungeonCrawl.png" />
     <EmbeddedResource Include="Image\Walls\BaseWallsTL_DungeonCrawl.png" />
@@ -164,35 +115,73 @@
     <EmbeddedResource Include="Image\Walls\BigWallsBR_DungeonCrawl.png" />
     <EmbeddedResource Include="Image\Walls\BigWallsTL_DungeonCrawl.png" />
     <EmbeddedResource Include="Image\Walls\BigWallsTR_DungeonCrawl.png" />
+    <EmbeddedResource Include="Image\Character\Animation\CharacterDownWalk1_DungeonCrawl.png" />
+    <EmbeddedResource Include="Image\Character\Animation\CharacterLeftWalk1_DungeonCrawl.png" />
+    <EmbeddedResource Include="Image\Character\Animation\CharacterLeftWalk2_DungeonCrawl.png" />
+    <EmbeddedResource Include="Image\Character\CharacterLeft_DungeonCrawl.png" />
+    <EmbeddedResource Include="Image\Character\Animation\CharacterRightWalk1_DungeonCrawl.png" />
+    <EmbeddedResource Include="Image\Character\Animation\CharacterRightWalk2_DungeonCrawl.png" />
+    <EmbeddedResource Include="Image\Character\CharacterRight_DungeonCrawl.png" />
+    <EmbeddedResource Include="Image\Character\Animation\CharacterUpWalk1_DungeonCrawl.png" />
+    <EmbeddedResource Include="Image\Character\Animation\CharacterUpWalk2_DungeonCrawl.png" />
+    <EmbeddedResource Include="Image\Character\CharacterUp_DungeonCrawl.png" />
+    <EmbeddedResource Include="Image\Items\ChestOpen_DungeonCrawl.png" />
+    <EmbeddedResource Include="Image\Items\Chest_DungeonCrawl.png" />
+    <EmbeddedResource Include="Image\Enemies\Dragon_DungeonCrawl.png" />
+    <EmbeddedResource Include="Image\Floors\FloorBL_DungeonCrawl.png" />
+    <EmbeddedResource Include="Image\Floors\FloorBR_DungeonCrawl.png" />
+    <EmbeddedResource Include="Image\Floors\FloorTL_DungeonCrawl.png" />
+    <EmbeddedResource Include="Image\Floors\FloorTR_DungeonCrawl.png" />
+    <EmbeddedResource Include="Image\Enemies\Goblin_DungeonCrawl.png" />
+    <EmbeddedResource Include="Image\Inventory\InventoryScreen_DungeonCrawl.png" />
+    <EmbeddedResource Include="Image\Inventory\InventorySquare_DungeonCrawl.png" />
+    <EmbeddedResource Include="Image\Items\Jewlery_DungeonCrawl.png" />
+    <EmbeddedResource Include="Image\Enemies\Ogre_DungeonCrawl.png" />
     <EmbeddedResource Include="Image\Walls\PillarWallsBL_DungeonCrawl.png" />
     <EmbeddedResource Include="Image\Walls\PillarWallsBR_DungeonCrawl.png" />
     <EmbeddedResource Include="Image\Walls\PillarWallsTL_DungeonCrawl.png" />
     <EmbeddedResource Include="Image\Walls\PillarWallsTR_DungeonCrawl.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Image\Items\ChestTemp_DungeonCrawl.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Image\Items\ChestOpenTemp_DungeonCrawl.png" />
-  </ItemGroup>
-  <ItemGroup>
+    <EmbeddedResource Include="Image\Walls\PreBossWallsFBBL_DungeonCrawl.png" />
+    <EmbeddedResource Include="Image\Walls\PreBossWallsFBBR_DungeonCrawl.png" />
     <EmbeddedResource Include="Image\Walls\PreBossWallsFBL_DungeonCrawl.png" />
     <EmbeddedResource Include="Image\Walls\PreBossWallsFBR_DungeonCrawl.png" />
     <EmbeddedResource Include="Image\Walls\PreBossWallsFLBL_DungeonCrawl.png" />
     <EmbeddedResource Include="Image\Walls\PreBossWallsFLTL_DungeonCrawl.png" />
     <EmbeddedResource Include="Image\Walls\PreBossWallsFRBR_DungeonCrawl.png" />
     <EmbeddedResource Include="Image\Walls\PreBossWallsFRTR_DungeonCrawl.png" />
+    <EmbeddedResource Include="Image\Buttons\QuitButtonHighlighted_DungeonCrawl.png" />
+    <EmbeddedResource Include="Image\Buttons\SettingsButtonHighlighted_DungeonCrawl.png" />
+    <EmbeddedResource Include="Image\Buttons\SettingsButton_DungeonCrawl.png" />
+    <EmbeddedResource Include="Image\Enemies\Skeleton_DungeonCrawl.png" />
+    <EmbeddedResource Include="Image\Items\Staff_DungeonCrawl.png" />
+    <EmbeddedResource Include="Image\Buttons\StartButtonHighlighted_DungeonCrawl.png" />
+    <EmbeddedResource Include="Image\Buttons\StartButton_DungeonCrawl.png" />
+    <EmbeddedResource Include="Image\Items\Weapon_DungeonCrawl.png" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Image\Walls\PreBossWallsFBBL_DungeonCrawl.png" />
-    <EmbeddedResource Include="Image\Walls\PreBossWallsFBBR_DungeonCrawl.png" />
+    <EmbeddedResource Include="Image\Character\Animation\CharacterDownWalk2_DungeonCrawl.png" />
+    <EmbeddedResource Include="Image\Character\CharacterDown_DungeonCrawl.png" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Image\Walls\BossWallsTL_DungeonCrawl.png" />
     <EmbeddedResource Include="Image\Walls\BossWallsTR_DungeonCrawl.png" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Image\Enemies\DragonTemp_DungeonCrawl.png" />
+    <EmbeddedResource Include="Image\Buttons\AttackButtonHighlighted_DungeonCrawl.png" />
+    <EmbeddedResource Include="Image\Buttons\AttackButton_DungeonCrawl.png" />
+    <EmbeddedResource Include="Image\Buttons\MagicButtonHighlighted_DungeonCrawl.png" />
+    <EmbeddedResource Include="Image\Buttons\MagicButton_DungeonCrawl.png" />
+    <EmbeddedResource Include="Image\Items\Money_DungeonCrawl.png" />
+    <EmbeddedResource Include="Image\Buttons\ResumeButtonHighlighted_DungeonCrawl.png" />
+    <EmbeddedResource Include="Image\Buttons\ResumeButton_DungeonCrawl.png" />
+    <EmbeddedResource Include="Image\Buttons\RunButtonHighlighted_DungeonCrawl.png" />
+    <EmbeddedResource Include="Image\Buttons\RunButton_DungeonCrawl.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Image\Character\Animation\CharacterDownWalk3_DungeonCrawl.png" />
+    <EmbeddedResource Include="Image\Character\Animation\CharacterLeftWalk3_DungeonCrawl.png" />
+    <EmbeddedResource Include="Image\Character\Animation\CharacterRightWalk3_DungeonCrawl.png" />
+    <EmbeddedResource Include="Image\Character\Animation\CharacterUpWalk3_DungeonCrawl.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

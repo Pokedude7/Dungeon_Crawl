@@ -48,6 +48,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.SettingsMenu = new System.Windows.Forms.TableLayoutPanel();
             this.HealLabel = new System.Windows.Forms.Label();
+            this.Animation = new System.Windows.Forms.Timer(this.components);
             this.SettingsMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -62,12 +63,13 @@
             this.StrLabel.AutoSize = true;
             this.StrLabel.BackColor = System.Drawing.Color.Transparent;
             this.StrLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.StrLabel.ForeColor = System.Drawing.Color.White;
+            this.StrLabel.ForeColor = System.Drawing.Color.Black;
             this.StrLabel.Location = new System.Drawing.Point(72, 60);
             this.StrLabel.Name = "StrLabel";
             this.StrLabel.Size = new System.Drawing.Size(92, 32);
             this.StrLabel.TabIndex = 6;
             this.StrLabel.Text = "label5";
+            this.StrLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
             this.StrLabel.Visible = false;
             // 
             // DefLabel
@@ -75,12 +77,13 @@
             this.DefLabel.AutoSize = true;
             this.DefLabel.BackColor = System.Drawing.Color.Transparent;
             this.DefLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.DefLabel.ForeColor = System.Drawing.Color.White;
+            this.DefLabel.ForeColor = System.Drawing.Color.Black;
             this.DefLabel.Location = new System.Drawing.Point(75, 90);
             this.DefLabel.Name = "DefLabel";
             this.DefLabel.Size = new System.Drawing.Size(92, 32);
             this.DefLabel.TabIndex = 7;
             this.DefLabel.Text = "label6";
+            this.DefLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
             this.DefLabel.Visible = false;
             // 
             // MagicLabel
@@ -88,12 +91,13 @@
             this.MagicLabel.AutoSize = true;
             this.MagicLabel.BackColor = System.Drawing.Color.Transparent;
             this.MagicLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.MagicLabel.ForeColor = System.Drawing.Color.White;
+            this.MagicLabel.ForeColor = System.Drawing.Color.Black;
             this.MagicLabel.Location = new System.Drawing.Point(75, 110);
             this.MagicLabel.Name = "MagicLabel";
             this.MagicLabel.Size = new System.Drawing.Size(92, 32);
             this.MagicLabel.TabIndex = 8;
             this.MagicLabel.Text = "label7";
+            this.MagicLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
             this.MagicLabel.Visible = false;
             // 
             // ResLabel
@@ -101,12 +105,13 @@
             this.ResLabel.AutoSize = true;
             this.ResLabel.BackColor = System.Drawing.Color.Transparent;
             this.ResLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ResLabel.ForeColor = System.Drawing.Color.White;
+            this.ResLabel.ForeColor = System.Drawing.Color.Black;
             this.ResLabel.Location = new System.Drawing.Point(78, 132);
             this.ResLabel.Name = "ResLabel";
             this.ResLabel.Size = new System.Drawing.Size(92, 32);
             this.ResLabel.TabIndex = 9;
             this.ResLabel.Text = "label8";
+            this.ResLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
             this.ResLabel.Visible = false;
             // 
             // MonLabel
@@ -151,25 +156,27 @@
             this.HealthLabel.AutoSize = true;
             this.HealthLabel.BackColor = System.Drawing.Color.Transparent;
             this.HealthLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.HealthLabel.ForeColor = System.Drawing.Color.White;
+            this.HealthLabel.ForeColor = System.Drawing.Color.Black;
             this.HealthLabel.Location = new System.Drawing.Point(79, 164);
             this.HealthLabel.Name = "HealthLabel";
             this.HealthLabel.Size = new System.Drawing.Size(92, 32);
             this.HealthLabel.TabIndex = 16;
             this.HealthLabel.Text = "label8";
+            this.HealthLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
             this.HealthLabel.Visible = false;
             // 
             // XPLabel
             // 
             this.XPLabel.AutoSize = true;
             this.XPLabel.BackColor = System.Drawing.Color.Transparent;
-            this.XPLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.XPLabel.ForeColor = System.Drawing.Color.White;
+            this.XPLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.XPLabel.ForeColor = System.Drawing.Color.Black;
             this.XPLabel.Location = new System.Drawing.Point(79, 198);
             this.XPLabel.Name = "XPLabel";
-            this.XPLabel.Size = new System.Drawing.Size(92, 32);
+            this.XPLabel.Size = new System.Drawing.Size(64, 25);
             this.XPLabel.TabIndex = 17;
             this.XPLabel.Text = "label8";
+            this.XPLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
             this.XPLabel.Visible = false;
             // 
             // LevelLabel
@@ -177,7 +184,7 @@
             this.LevelLabel.AutoSize = true;
             this.LevelLabel.BackColor = System.Drawing.Color.Transparent;
             this.LevelLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LevelLabel.ForeColor = System.Drawing.Color.White;
+            this.LevelLabel.ForeColor = System.Drawing.Color.Black;
             this.LevelLabel.Location = new System.Drawing.Point(72, 230);
             this.LevelLabel.Name = "LevelLabel";
             this.LevelLabel.Size = new System.Drawing.Size(92, 32);
@@ -199,7 +206,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(218, 0);
+            this.label4.Location = new System.Drawing.Point(216, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(62, 16);
             this.label4.TabIndex = 5;
@@ -209,7 +216,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(160, 0);
+            this.label3.Location = new System.Drawing.Point(158, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(38, 29);
             this.label3.TabIndex = 3;
@@ -219,7 +226,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(74, 0);
+            this.label1.Location = new System.Drawing.Point(73, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(67, 29);
             this.label1.TabIndex = 0;
@@ -242,7 +249,7 @@
             this.SettingsMenu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 45.25547F));
             this.SettingsMenu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 54.74453F));
             this.SettingsMenu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 58F));
-            this.SettingsMenu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
+            this.SettingsMenu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 82F));
             this.SettingsMenu.Controls.Add(this.label2, 0, 0);
             this.SettingsMenu.Controls.Add(this.label1, 1, 0);
             this.SettingsMenu.Controls.Add(this.label3, 2, 0);
@@ -261,13 +268,19 @@
             this.HealLabel.AutoSize = true;
             this.HealLabel.BackColor = System.Drawing.Color.Transparent;
             this.HealLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.HealLabel.ForeColor = System.Drawing.Color.White;
+            this.HealLabel.ForeColor = System.Drawing.Color.Black;
             this.HealLabel.Location = new System.Drawing.Point(177, 188);
             this.HealLabel.Name = "HealLabel";
             this.HealLabel.Size = new System.Drawing.Size(53, 20);
             this.HealLabel.TabIndex = 19;
             this.HealLabel.Text = "label8";
             this.HealLabel.Visible = false;
+            // 
+            // Animation
+            // 
+            this.Animation.Enabled = true;
+            this.Animation.Interval = 10;
+            this.Animation.Tick += new System.EventHandler(this.Animation_Tick);
             // 
             // Form1
             // 
@@ -326,6 +339,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TableLayoutPanel SettingsMenu;
         private System.Windows.Forms.Label HealLabel;
+        private System.Windows.Forms.Timer Animation;
     }
 }
 

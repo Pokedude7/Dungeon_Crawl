@@ -15,7 +15,7 @@ namespace Dungeon_Crawl
             this.armorType = armorType;
             if (armorType == "plate")
             {
-                image = Image.FromFile("../../Image/Items/ArmorTemp_DungeonCrawl.png");
+                image = Image.FromFile("../../Image/Items/Armor_DungeonCrawl.png");
             }
 
             if (rarity == 0)
