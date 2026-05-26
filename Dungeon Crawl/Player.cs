@@ -10,12 +10,12 @@
 
         public Player()
         {
-            strength = 0;
+            strength = 1;
             defense = 0;
             magic = 0;
             resistance = 0;
-            health = 10;
-            maxHealth = 10;
+            health = 17;
+            maxHealth = 17;
             money = 0;
             level = 1;
             exp = 0;
@@ -76,17 +76,20 @@
         }
         public void levelUp()
         {
-            exp -= 20 * level;
-            maxHealth += 5 * level;
+            exp -= 30 * level;
+            maxHealth += 3 * level;
             health = maxHealth;
-            strength += 2 * level;
-            defense += 1 * level;
-            magic += 1 * level;
+            strength = level;
+            defense = level;
+            if (level % 4 == 0 && level != 1)
+            {
+                magic = level;
+            }
             level++;
         }
         public void checkLevelUp()
         {
-            if (exp >= 20 * level)
+            if (exp >= 30 * level)
             {
                 levelUp();
             }

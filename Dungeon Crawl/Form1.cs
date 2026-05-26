@@ -169,6 +169,7 @@ namespace Dungeon_Crawl
             inFight = false;
             inventoryOpen = false;
             startScreen = false;
+            bossRoom = false;
             pX = 730;
             pY = 789;
             difficulty = 1;
@@ -176,7 +177,7 @@ namespace Dungeon_Crawl
             room = "bbbb";
             encountersInRoom = 0;
             numOfRoomsEntered = 0;
-            numOfRoomsInArea = ran.Next(10, 16);
+            numOfRoomsInArea = ran.Next(15, 27);
             globalVariables.Area = 1;
             PlayerButtonsVisible();
             SpawnItems();
@@ -1056,7 +1057,7 @@ namespace Dungeon_Crawl
             MonLabel.Text = pc.getMoney().ToString();
             HealthLabel.Text = pc.getHealth() + "/" + pc.getMaxHealth();
             HealLabel.Text = "+" + pc.getHeal();
-            XPLabel.Text = pc.getXP() + "/" + (20 * pc.getLevel());
+            XPLabel.Text = pc.getXP() + "/" + (30 * pc.getLevel());
             LevelLabel.Text = pc.getLevel().ToString();
             inventoryOpen = true;
             StrLabel.Visible = true;
@@ -1788,7 +1789,7 @@ namespace Dungeon_Crawl
             }
             else if (enemy.getHealth() <= 0)
             {
-                if (ran.Next(1, 4) == 1)
+                if (ran.Next(1, 4) == 1 && enemy.getEnemyType() != "dragon")
                 {
                     MessageBox.Show("You won! You gained " + enemy.getXP() + " exp and $" + enemy.getMoney() + "\nYou also find a " + enemy.getItem().getType() + " on its corpse.");
                     pc.addExp(enemy.getXP());
@@ -1830,8 +1831,8 @@ namespace Dungeon_Crawl
         {
             HideAll();
             Invalidate();
-            string message = "You Died.\nHere are your stats:\nLevel: " + pc.getLevel() + "\nStrength: " + pc.getStrength() + "\nDefense: " + pc.getDefense() + "\nMagic: " + pc.getMagic() + "\nResistance: " + pc.getResistance() + "\nMoney: " + pc.getMoney() + "\n\nWould you like to restart?";
-            DialogResult result = MessageBox.Show(message, null, MessageBoxButtons.YesNo);
+            string message = "Here are your stats:\nLevel: " + pc.getLevel() + "\nStrength: " + pc.getStrength() + "\nDefense: " + pc.getDefense() + "\nMagic: " + pc.getMagic() + "\nResistance: " + pc.getResistance() + "\nMoney: " + pc.getMoney() + "\n\nWould you like to restart?";
+            DialogResult result = MessageBox.Show(message, "You Died", MessageBoxButtons.YesNo);
 
             if (result == DialogResult.Yes)
             {
@@ -2105,31 +2106,6 @@ namespace Dungeon_Crawl
         }
         private void Animation_Tick(object sender, EventArgs e)
         {
-            //count++;
-            //if (count >= 10)
-            //{
-            //    if (!switcher2)
-            //    {
-            //        if (switcher)
-            //        {
-            //            CSU = Image.FromFile("../../Image/Character/Animation/CharacterUpWalk1_DungeonCrawl.png");
-            //            switcher = false;
-            //        }
-            //        else
-            //        {
-            //            CSU = Image.FromFile("../../Image/Character/Animation/CharacterUpWalk2_DungeonCrawl.png");
-            //            switcher = true;
-            //        }
-            //        switcher2 = true;
-            //    }
-            //    else
-            //    {
-            //        CSU = Image.FromFile("../../Image/Character/Animation/CharacterUpWalk3_DungeonCrawl.png");
-            //        switcher2 = false;
-            //    }
-            //    count = 0;
-            //}
-
             if (WHeld)
             {
                 count++;
