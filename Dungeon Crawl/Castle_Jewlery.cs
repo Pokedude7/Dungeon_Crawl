@@ -19,17 +19,17 @@ namespace Dungeon_Crawl
                 image = Image.FromFile("../../Image/Items/Jewlery_DungeonCrawl.png");
             }
 
-            if (rarity == 0)
+            if (rarity <= 2)
             {
                 amountIncrease = ran.Next(1, 2);
                 healIncrease = ran.Next(1, 2);
             }
-            else if (rarity == 1)
+            else if (rarity <= 5)
             {
                 amountIncrease = ran.Next(2, 3);
                 healIncrease = ran.Next(2, 3);
             }
-            else if (rarity == 2)
+            else if (rarity <= 8)
             {
                 amountIncrease = ran.Next(3, 6);
                 healIncrease = ran.Next(3, 6);

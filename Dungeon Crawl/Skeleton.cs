@@ -9,14 +9,14 @@ namespace Dungeon_Crawl
         {
             enemyType = "skeleton";
             setLevel(enemyLevel);
-            setMaxHealth((int)(10 * (0.5 * enemyLevel)));
-            setHealth((int)(10 * (0.5 * enemyLevel)));
+            setMaxHealth((int)(6 * enemyLevel));
+            setHealth((int)(6 * enemyLevel));
             setStrength((int)(2 * (0.5 * enemyLevel)));
             setMagic(0);
-            setDefense((int)(1 * (0.5 * enemyLevel)));
-            setResistance((int)(1 * (0.5 * enemyLevel)));
+            setDefense((int)(0.5 * enemyLevel));
+            setResistance((int)(1 * enemyLevel));
             exp = ran.Next(5 * (int)enemyLevel, 10 * (int)enemyLevel + 1);
-            money = ran.Next(1 * (int)enemyLevel, 5 * (int)enemyLevel + 1);
+            money = ran.Next(1 * (int)enemyLevel, 4 * (int)enemyLevel + 1);
 
             randomItem = ran.Next(1, 4);
             if (randomItem == 1)
